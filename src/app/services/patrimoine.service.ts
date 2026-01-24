@@ -1,12 +1,8 @@
 import { Injectable, inject, signal, computed } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap, catchError, of } from 'rxjs';
-import {
-  Asset,
-  PatrimoineSummary,
-  AssetBreakdown,
-  ASSET_CATEGORIES,
-} from '../models/patrimoine.model';
+import { Asset, PatrimoineSummary, AssetBreakdown, ASSET_CATEGORIES } from '../models/patrimoine.model';
+import { environment } from '../../environments/environment';
 
 interface PatrimoineData {
   assets: Asset[];
@@ -19,7 +15,7 @@ interface PatrimoineData {
 export class PatrimoineService {
   private readonly http = inject(HttpClient);
 
-  // State avec signals
+  // State with signals
   private readonly _assets = signal<Asset[]>([]);
   private readonly _history = signal<{ date: string; totalValue: number }[]>([]);
   private readonly _loading = signal(false);
@@ -41,12 +37,12 @@ export class PatrimoineService {
     const history = this._history();
     const total = this.totalValue();
 
-    // Calcul de l'évolution
+    // Calculate evolution
     const previousValue = history.length > 1 ? history[history.length - 2].totalValue : total;
     const evolution = total - previousValue;
     const evolutionPercent = previousValue > 0 ? (evolution / previousValue) * 100 : 0;
 
-    // Calcul de la répartition
+    // Calculate breakdown
     const breakdown: AssetBreakdown[] = ASSET_CATEGORIES.map(category => {
       const categoryAssets = assets.filter(a => a.type === category.type);
       const value = categoryAssets.reduce((sum, a) => sum + a.value, 0);
@@ -81,38 +77,32 @@ export class PatrimoineService {
     return grouped;
   });
 
-  /**
-   * Charge les données depuis le fichier JSON statique
-   */
+  // Loads data from static JSON file
   loadPatrimoine(): Observable<PatrimoineData> {
     this._loading.set(true);
     this._error.set(null);
 
-    return this.http.get<PatrimoineData>('/data/patrimoine.json').pipe(
+    return this.http.get<PatrimoineData>(`${environment.dataPath}/patrimoine.json`).pipe(
       tap(data => {
         this._assets.set(data.assets);
         this._history.set(data.history);
         this._loading.set(false);
       }),
       catchError(err => {
-        console.error('Erreur chargement patrimoine:', err);
-        this._error.set('Impossible de charger les données du patrimoine');
+        console.error('Error loading patrimoine:', err);
+        this._error.set('Unable to load patrimoine data');
         this._loading.set(false);
         return of({ assets: [], history: [] });
       })
     );
   }
 
-  /**
-   * Récupère un actif par son ID
-   */
+  // Gets an asset by ID
   getAssetById(id: string): Asset | undefined {
     return this._assets().find(a => a.id === id);
   }
 
-  /**
-   * Calcule le total pour un type d'actif
-   */
+  // Calculates total for an asset type
   getTotalByType(type: string): number {
     return this._assets()
       .filter(a => a.type === type)

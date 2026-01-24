@@ -32,7 +32,7 @@ describe('HomeComponent', () => {
 
   it('should load patrimoine on init', () => {
     fixture.detectChanges();
-    const req = httpMock.expectOne('/data/patrimoine.json');
+    const req = httpMock.expectOne('data/patrimoine.json');
     req.flush(mockData);
 
     expect(component['patrimoineService'].assets().length).toBe(1);
