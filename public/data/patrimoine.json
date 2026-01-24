@@ -1,0 +1,118 @@
+{
+  "assets": [
+    {
+      "id": "1",
+      "name": "Résidence principale",
+      "type": "real_estate",
+      "value": 450000,
+      "currency": "EUR",
+      "acquisitionDate": "2018-06-15",
+      "description": "Appartement 4 pièces - Paris 15e"
+    },
+    {
+      "id": "2",
+      "name": "Studio locatif",
+      "type": "real_estate",
+      "value": 180000,
+      "currency": "EUR",
+      "acquisitionDate": "2020-03-01",
+      "description": "Studio 25m² - Lyon 3e"
+    },
+    {
+      "id": "3",
+      "name": "PEA Boursorama",
+      "type": "stocks",
+      "value": 45000,
+      "currency": "EUR",
+      "acquisitionDate": "2019-01-10",
+      "description": "ETF World + Actions européennes"
+    },
+    {
+      "id": "4",
+      "name": "CTO Degiro",
+      "type": "stocks",
+      "value": 28000,
+      "currency": "EUR",
+      "acquisitionDate": "2021-05-20",
+      "description": "Actions US tech"
+    },
+    {
+      "id": "5",
+      "name": "Livret A",
+      "type": "cash",
+      "value": 22950,
+      "currency": "EUR",
+      "acquisitionDate": "2015-01-01",
+      "description": "Épargne de précaution"
+    },
+    {
+      "id": "6",
+      "name": "LDDS",
+      "type": "cash",
+      "value": 12000,
+      "currency": "EUR",
+      "acquisitionDate": "2016-03-15",
+      "description": "Livret Développement Durable"
+    },
+    {
+      "id": "7",
+      "name": "Assurance-vie Linxea",
+      "type": "life_insurance",
+      "value": 85000,
+      "currency": "EUR",
+      "acquisitionDate": "2017-09-01",
+      "description": "Fonds euros + UC"
+    },
+    {
+      "id": "8",
+      "name": "PER Individuel",
+      "type": "retirement",
+      "value": 35000,
+      "currency": "EUR",
+      "acquisitionDate": "2020-11-01",
+      "description": "Plan Épargne Retraite"
+    },
+    {
+      "id": "9",
+      "name": "Bitcoin",
+      "type": "crypto",
+      "value": 15000,
+      "currency": "EUR",
+      "acquisitionDate": "2021-02-15",
+      "description": "0.18 BTC"
+    },
+    {
+      "id": "10",
+      "name": "Ethereum",
+      "type": "crypto",
+      "value": 8000,
+      "currency": "EUR",
+      "acquisitionDate": "2021-03-01",
+      "description": "3.2 ETH"
+    },
+    {
+      "id": "11",
+      "name": "Obligations vertes",
+      "type": "bonds",
+      "value": 20000,
+      "currency": "EUR",
+      "acquisitionDate": "2022-06-01",
+      "description": "Green Bonds via assurance-vie"
+    }
+  ],
+  "history": [
+    { "date": "2024-01-01", "totalValue": 850000 },
+    { "date": "2024-02-01", "totalValue": 858000 },
+    { "date": "2024-03-01", "totalValue": 862000 },
+    { "date": "2024-04-01", "totalValue": 870000 },
+    { "date": "2024-05-01", "totalValue": 865000 },
+    { "date": "2024-06-01", "totalValue": 878000 },
+    { "date": "2024-07-01", "totalValue": 885000 },
+    { "date": "2024-08-01", "totalValue": 890000 },
+    { "date": "2024-09-01", "totalValue": 895000 },
+    { "date": "2024-10-01", "totalValue": 905000 },
+    { "date": "2024-11-01", "totalValue": 915000 },
+    { "date": "2024-12-01", "totalValue": 920000 },
+    { "date": "2025-01-01", "totalValue": 900950 }
+  ]
+}

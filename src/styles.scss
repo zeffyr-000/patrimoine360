@@ -1,0 +1,83 @@
+@use '@angular/material' as mat;
+
+// Custom theme variables
+:root {
+  --primary-color: #e91e63;
+  --on-primary: #ffffff;
+  --surface: #fffbfe;
+  --on-surface: #1c1b1f;
+  --on-surface-variant: #49454f;
+  --outline: #79747e;
+  --error: #b3261e;
+
+  // Spacing
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+
+  // Border radius
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+}
+
+// Global styles
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  background-color: var(--surface);
+  color: var(--on-surface);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Material Design 3 overrides
+.mat-mdc-card {
+  --mdc-elevated-card-container-shape: var(--radius-lg);
+}
+
+.mat-mdc-button {
+  --mdc-text-button-container-shape: var(--radius-md);
+}
+
+// Utility classes
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--spacing-md);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+// Dark theme support
+@media (prefers-color-scheme: dark) {
+  :root {
+    --surface: #1c1b1f;
+    --on-surface: #e6e1e5;
+    --on-surface-variant: #cac4d0;
+  }
+}

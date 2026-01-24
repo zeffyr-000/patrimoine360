@@ -1,0 +1,59 @@
+You are an expert in TypeScript, Angular, and scalable web application development. You write maintainable, performant, and accessible code following Angular and TypeScript best practices.
+
+## TypeScript Best Practices
+
+- Use strict type checking
+- Prefer type inference when the type is obvious
+- Avoid the `any` type; use `unknown` when type is uncertain
+
+## Angular Best Practices
+
+- Always use standalone components over NgModules
+- Always explicitly set `standalone: true` in component decorator
+- Use signals for state management
+- Implement lazy loading for feature routes
+- Use `NgOptimizedImage` for all static images.
+
+## Components
+
+- Keep components small and focused on a single responsibility
+- Use `input()` and `output()` functions instead of decorators
+- Use `computed()` for derived state
+- Set `changeDetection: ChangeDetectionStrategy.OnPush` in `@Component` decorator
+- Prefer inline templates for small components
+- Prefer Reactive forms instead of Template-driven ones
+- Do NOT use `ngClass`, use `class` bindings instead
+- DO NOT use `ngStyle`, use `style` bindings instead
+
+## State Management
+
+- Use signals for local component state
+- Use computed() for derived values
+- Use effect() sparingly and only for side effects
+- Prefer services with signals for shared state
+
+## Services
+
+- Use `inject()` function instead of constructor injection
+- Mark services as `providedIn: 'root'` when they should be singletons
+- Use `readonly` for injected dependencies
+
+## Testing
+
+- Write unit tests with Vitest
+- Use `describe` and `it` blocks
+- Mock external dependencies
+- Test component behavior, not implementation
+
+## Naming Conventions
+
+- Use PascalCase for classes and interfaces
+- Use camelCase for variables, functions, and methods
+- Use UPPER_SNAKE_CASE for constants
+- Prefix interfaces with descriptive names (not `I`)
+
+## Project Structure
+
+- Group by feature, not by type
+- Keep related files close together
+- Use barrel exports (index.ts) for public APIs

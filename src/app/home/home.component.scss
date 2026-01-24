@@ -1,0 +1,154 @@
+.home-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  gap: var(--spacing-md);
+
+  p {
+    color: var(--on-surface-variant);
+  }
+}
+
+.error-card {
+  max-width: 400px;
+  margin: var(--spacing-xl) auto;
+  text-align: center;
+
+  mat-card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+
+    mat-icon {
+      font-size: 48px;
+      width: 48px;
+      height: 48px;
+      color: var(--error);
+    }
+  }
+}
+
+// Summary section
+.summary-section {
+  margin-bottom: var(--spacing-xl);
+}
+
+.total-card {
+  background: linear-gradient(135deg, var(--primary-color) 0%, #c2185b 100%);
+  color: white;
+
+  .total-icon {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+  }
+
+  mat-card-title {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .total-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: var(--spacing-md) 0 var(--spacing-sm);
+  }
+
+  .evolution {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 1.1rem;
+
+    mat-icon {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+    }
+
+    &.positive {
+      color: #a5d6a7;
+    }
+
+    &.negative {
+      color: #ef9a9a;
+    }
+  }
+}
+
+// Breakdown section
+.breakdown-section {
+  margin-bottom: var(--spacing-xl);
+
+  h2 {
+    margin-bottom: var(--spacing-md);
+    color: var(--on-surface);
+  }
+}
+
+.breakdown-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.breakdown-card {
+  .category-icon {
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+  }
+
+  .breakdown-value {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: var(--spacing-sm) 0;
+  }
+
+  .progress-bar {
+    height: 8px;
+    background-color: var(--outline);
+    border-radius: 4px;
+    overflow: hidden;
+
+    .progress-fill {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.3s ease;
+    }
+  }
+}
+
+// Assets section
+.assets-section {
+  h2 {
+    margin-bottom: var(--spacing-md);
+    color: var(--on-surface);
+  }
+
+  mat-list-item {
+    .asset-value {
+      font-weight: 600;
+      color: var(--primary-color);
+    }
+  }
+}
+
+// Responsive
+@media (max-width: 600px) {
+  .total-card .total-value {
+    font-size: 2rem;
+  }
+
+  .breakdown-grid {
+    grid-template-columns: 1fr;
+  }
+}
