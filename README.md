@@ -1,6 +1,6 @@
 # 💼 Patrimoine360
 
-> Application moderne Angular 21 de visualisation de patrimoine - POC
+> Modern Angular 21 application for patrimony visualization - Private Banking POC
 
 [![Angular](https://img.shields.io/badge/Angular-21.0-red.svg)](https://angular.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue.svg)](https://www.typescriptlang.org)
@@ -8,116 +8,215 @@
 [![Vitest](https://img.shields.io/badge/Vitest-3.0-yellow.svg)](https://vitest.dev)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-## 🚀 Démarrage rapide
+## 🌐 Live Application
 
-### Prérequis
+**View the deployed application:**
+[https://zeffyr-000.github.io/patrimoine360/](https://zeffyr-000.github.io/patrimoine360/)
 
-- **Node.js** 18.19+ ou 20.9+
+Patrimony visualization application for the Private Banking sector. This POC demonstrates Angular 21's zoneless architecture with signals for optimal performance.
+
+### 🎯 Specifications
+
+| Criteria           | Value                                                   |
+| ------------------ | ------------------------------------------------------- |
+| **Domain**         | Private Banking / Wealth Management                     |
+| **Target**         | Desktop only (1280px+)                                  |
+| **UI Language**    | French only                                             |
+| **UX Inspiration** | [Google Flights](https://www.google.com/travel/flights) |
+
+## ✨ Features
+
+### 📊 Patrimony Overview
+
+- **Asset Visualization**: Consolidated view of all assets
+- **Category Breakdown**: Real estate, stocks, cash, crypto, etc.
+- **Value Tracking**: Current values with acquisition costs
+
+### 🎨 Private Banking 2026 Design
+
+- **Material Design 3**: Elegant interface with smooth animations
+- **Elegant Palette**: Muted tones (navy, gold accents, white space)
+- **Card-based Layout**: Inspired by Google Flights
+- **Desktop only**: Optimized for 1280px+ screens
+
+### 🚀 Performance
+
+- **Zoneless Architecture**: No Zone.js for optimal change detection
+- **Signals**: Angular's reactivity API
+- **Lazy Loading**: On-demand route loading
+- **Local Fonts**: @fontsource/roboto
+
+## 📚 Documentation
+
+- 📖 **[Installation Guide](docs/SETUP.md)** - Complete project setup
+- 🏗️ **[Technical Architecture](docs/ARCHITECTURE.md)** - Code patterns and structure
+- 🧪 **[Testing Guide](docs/TESTING.md)** - Vitest best practices
+- 🤝 **[Contributing Guide](docs/CONTRIBUTING.md)** - Development standards
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- **Node.js** 18.19+ or 20.9+
 - **npm** 9+
 
 ### Installation
 
 ```bash
-# Cloner le projet
+# Clone the repository
+git clone https://github.com/zeffyr-000/patrimoine360.git
 cd patrimoine360
 
-# Installer les dépendances
+# Install dependencies
 npm install
 
-# Lancer le serveur de développement
+# Start development server
 npm start
 ```
 
-L'application sera disponible sur `http://localhost:4200`.
+The application will be available at `http://localhost:4200`.
 
-## 📦 Scripts disponibles
+## 🔧 Available Scripts
 
-| Commande | Description |
-|----------|-------------|
-| `npm start` | Lance le serveur de développement |
-| `npm run build` | Build de développement |
-| `npm run build:prod` | Build de production |
-| `npm run test` | Lance les tests unitaires (Vitest) |
-| `npm run test:ci` | Tests avec couverture de code |
-| `npm run lint` | Vérifie le code avec ESLint |
-| `npm run lint:fix` | Corrige automatiquement les erreurs ESLint |
-| `npm run e2e` | Lance les tests E2E (Playwright) |
-
-## 🏗️ Stack technique
-
-### Frontend
-
-- **Angular 21** - Framework principal avec standalone components
-- **TypeScript 5.9** - Typage strict
-- **Angular Material 21** - Composants UI Material Design 3
-- **RxJS 7.8** - Programmation réactive
-- **Signals** - API de réactivité Angular
-- **Transloco** - Internationalisation
-
-### Outils de développement
-
-- **Angular CLI 21** - Scaffolding et build
-- **ESLint** - Linting strict
-- **Prettier** - Formatage du code
-- **Vitest** - Tests unitaires
-- **Playwright** - Tests E2E
-
-## 📁 Structure du projet
-
-```
-src/
-├── app/
-│   ├── home/                 # Page d'accueil
-│   ├── i18n/                 # Traductions
-│   ├── interceptors/         # Intercepteurs HTTP
-│   ├── testing/              # Utilitaires de test
-│   ├── app.ts                # Composant racine
-│   ├── app.config.ts         # Configuration Angular
-│   └── app.routes.ts         # Routes
-├── environments/             # Configuration par environnement
-├── styles.scss               # Styles globaux
-└── main.ts                   # Point d'entrée
-```
-
-## 🎨 Architecture
-
-### Bonnes pratiques appliquées
-
-- **Standalone Components** - Migration complète depuis NgModules
-- **Signals API** - Gestion d'état réactive moderne
-- **Control Flow Syntax** - Nouvelle syntaxe `@if`, `@for`, `@switch`
-- **Zoneless** - Architecture sans Zone.js pour de meilleures performances
-- **OnPush Change Detection** - Détection de changement optimisée
-- **Lazy Loading** - Chargement différé des routes
-
-### Patterns utilisés
-
-- **Injection de dépendances** avec `inject()`
-- **Reactive state management** avec Signals
-- **HTTP Interceptors** pour l'authentification
-- **Route Guards** pour la protection des routes
-
-## 🧪 Tests
-
-### Tests unitaires (Vitest)
+### Development
 
 ```bash
-# Lancer les tests en mode watch
-npm run test
-
-# Lancer les tests avec couverture
-npm run test:ci
+npm start                   # Start dev server (port 4200)
+npm run build               # Development build
+npm run build:prod          # Production build with optimizations
 ```
 
-### Tests E2E (Playwright)
+### Code Quality
 
 ```bash
-# Lancer les tests E2E
-npm run e2e
-
-# Lancer les tests E2E avec UI
-npm run e2e:ui
+npm run lint                # ESLint with strict rules
+npm run lint:fix            # Auto-fix ESLint issues
+npm test                    # Unit tests with Vitest
+npm run test:ci             # Tests with coverage report
 ```
+
+## 🏗️ Technical Architecture
+
+### Core Stack
+
+- **Angular 21** with standalone components and modern control flow (`@if`, `@for`)
+- **Angular Material 21** with Material Design 3
+- **TypeScript 5.9** with strict ESLint configuration
+- **RxJS 7.8** for reactive programming
+- **Signals** for reactive state management
+
+### Project Structure
+
+```
+src/app/
+├── home/             # Home page with patrimoine overview
+├── services/         # Services (patrimoine)
+├── models/           # TypeScript types and interfaces
+├── i18n/             # Transloco translations
+└── testing/          # Test helpers
+```
+
+### Data Flow
+
+```
+Static JSON files → PatrimoineService → Signals → Components
+```
+
+This POC uses static JSON files in `public/data/` instead of a backend API.
+
+## 🎨 Design System
+
+### Private Banking 2026 Design
+
+Inspired by [Google Flights](https://www.google.com/travel/flights) - clean, data-rich, card-based layouts.
+
+- **Color Palette**: Elegant, muted tones (navy, gold accents, generous white space)
+- **Typography**: Roboto - professional fonts with clear hierarchy
+- **Layout**: Card-based design, data visualization focus
+- **Components**: Large data cards, interactive charts, clear CTAs
+- **Target Resolution**: 1280px+ (desktop only)
+
+### Material Design 3 Theme
+
+- **Primary Color**: Navy / Professional Blue
+- **Accent Color**: Gold accents
+- **Typography**: Roboto (300, 400, 500, 700)
+
+### Performance Optimizations
+
+- **Roboto**: Installed locally via `@fontsource/roboto`
+- **Zoneless**: No Zone.js for optimal change detection
+- **Lazy Loading**: On-demand route loading
+
+## 🧪 Testing
+
+### Testing Framework: Vitest
+
+This project uses **Vitest** (NOT Jasmine/Karma) for unit testing.
+
+#### Vitest API Reference
+
+```typescript
+import { vi } from 'vitest';
+
+// Create mocks
+const mockFn = vi.fn();
+mockFn.mockReturnValue(42);
+
+// Timers
+vi.useFakeTimers();
+vi.advanceTimersByTime(1000);
+vi.restoreAllMocks();
+```
+
+### Run Tests
+
+```bash
+npm test                    # Run all unit tests
+npm run test:ci             # Run tests with coverage report
+```
+
+### Coverage Goals
+
+- **Overall Target**: 80% coverage
+- **Services**: 70%+ (critical business logic)
+
+## 🌐 Internationalization
+
+The application uses **Transloco** for translations - **French UI only**.
+
+### Usage Example
+
+```typescript
+// i18n/fr.ts
+"home": {
+  "title": "Mon Patrimoine",
+  "total_value": "Valeur totale"
+}
+
+// Component template
+<h1>{{ 'home.title' | transloco }}</h1>
+```
+
+## 🏗️ Technical Highlights
+
+### Modern Angular 21 Architecture
+
+- **Standalone Components**: Using `standalone: true` API instead of NgModules
+- **Modern Control Flow**: `@if`, `@for`, `@switch` syntax
+- **Signals API**: Reactive state management
+- **TypeScript 5.9 Strict**: Enhanced type safety
+
+### Performance Optimizations
+
+- **Zoneless**: No Zone.js for optimal change detection
+- **Local Fonts**: @fontsource/roboto
+- **Code Splitting**: Lazy loading by route
+- **OnPush**: Change detection strategy
+
+---
+
+**Modern Angular 21 POC - Private Banking - TypeScript 5.9, Material Design 3, Vitest 3.0.**
 
 ## 📄 License
 

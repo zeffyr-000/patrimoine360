@@ -49,7 +49,7 @@ describe('PatrimoineService', () => {
   it('should load patrimoine data', () => {
     service.loadPatrimoine().subscribe();
 
-    const req = httpMock.expectOne('/data/patrimoine.json');
+    const req = httpMock.expectOne('data/patrimoine.json');
     expect(req.request.method).toBe('GET');
     req.flush(mockData);
 
@@ -60,7 +60,7 @@ describe('PatrimoineService', () => {
   it('should compute summary correctly', () => {
     service.loadPatrimoine().subscribe();
 
-    const req = httpMock.expectOne('/data/patrimoine.json');
+    const req = httpMock.expectOne('data/patrimoine.json');
     req.flush(mockData);
 
     const summary = service.summary();
@@ -71,7 +71,7 @@ describe('PatrimoineService', () => {
   it('should handle error gracefully', () => {
     service.loadPatrimoine().subscribe();
 
-    const req = httpMock.expectOne('/data/patrimoine.json');
+    const req = httpMock.expectOne('data/patrimoine.json');
     req.error(new ProgressEvent('error'), { status: 500, statusText: 'Server Error' });
 
     expect(service.error()).toBeTruthy();
