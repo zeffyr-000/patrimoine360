@@ -1,0 +1,128 @@
+{
+  "assets": [
+    {
+      "id": "1",
+      "name": "Résidence principale",
+      "type": "real_estate",
+      "value": 1250000,
+      "acquisitionCost": 850000,
+      "currency": "EUR",
+      "acquisitionDate": "2015-06-15",
+      "description": "Maison 180m² avec jardin",
+      "location": "Neuilly-sur-Seine (92)"
+    },
+    {
+      "id": "2",
+      "name": "Appartement locatif",
+      "type": "real_estate_rental",
+      "value": 420000,
+      "acquisitionCost": 380000,
+      "currency": "EUR",
+      "acquisitionDate": "2018-09-01",
+      "description": "Appartement 75m² loué en nom propre",
+      "location": "Lyon 6e (69)",
+      "rentalYield": 3.8
+    },
+    {
+      "id": "3",
+      "name": "TechSolutions SAS",
+      "type": "private_company",
+      "value": 2800000,
+      "acquisitionCost": 500000,
+      "currency": "EUR",
+      "acquisitionDate": "2010-01-15",
+      "description": "Société de services informatiques - 45 salariés",
+      "shares": 75
+    },
+    {
+      "id": "4",
+      "name": "Portefeuille actions PEA",
+      "type": "stocks",
+      "value": 185000,
+      "acquisitionCost": 145000,
+      "currency": "EUR",
+      "acquisitionDate": "2016-03-10",
+      "description": "ETF World (40%), Actions FR/EU (60%)"
+    },
+    {
+      "id": "5",
+      "name": "Portefeuille CTO international",
+      "type": "stocks",
+      "value": 95000,
+      "acquisitionCost": 80000,
+      "currency": "EUR",
+      "acquisitionDate": "2019-05-20",
+      "description": "Actions US tech et émergents"
+    },
+    {
+      "id": "6",
+      "name": "Assurance-vie multisupports",
+      "type": "life_insurance",
+      "value": 380000,
+      "acquisitionCost": 340000,
+      "currency": "EUR",
+      "acquisitionDate": "2014-11-01",
+      "description": "Fonds euros (40%) + UC diversifiées (60%)"
+    },
+    {
+      "id": "7",
+      "name": "PER Individuel",
+      "type": "retirement",
+      "value": 125000,
+      "acquisitionCost": 110000,
+      "currency": "EUR",
+      "acquisitionDate": "2019-10-01",
+      "description": "Plan Épargne Retraite - gestion profilée"
+    },
+    {
+      "id": "8",
+      "name": "Liquidités",
+      "type": "cash",
+      "value": 180000,
+      "acquisitionCost": 180000,
+      "currency": "EUR",
+      "acquisitionDate": "2023-01-01",
+      "description": "Comptes courants et livrets (trésorerie entreprise et personnelle)"
+    },
+    {
+      "id": "9",
+      "name": "Obligations d'entreprise",
+      "type": "bonds",
+      "value": 150000,
+      "acquisitionCost": 148000,
+      "currency": "EUR",
+      "acquisitionDate": "2022-06-15",
+      "description": "Obligations corporate investment grade"
+    },
+    {
+      "id": "10",
+      "name": "Collection d'art contemporain",
+      "type": "art",
+      "value": 95000,
+      "acquisitionCost": 65000,
+      "currency": "EUR",
+      "acquisitionDate": "2017-04-20",
+      "description": "5 œuvres d'artistes émergents français"
+    },
+    {
+      "id": "11",
+      "name": "Cave à vin d'investissement",
+      "type": "wine",
+      "value": 45000,
+      "acquisitionCost": 35000,
+      "currency": "EUR",
+      "acquisitionDate": "2019-11-10",
+      "description": "Grands crus classés Bordeaux"
+    },
+    {
+      "id": "12",
+      "name": "Crypto-actifs",
+      "type": "crypto",
+      "value": 28000,
+      "acquisitionCost": 40000,
+      "currency": "EUR",
+      "acquisitionDate": "2021-02-15",
+      "description": "Bitcoin (60%), Ethereum (40%)"
+    }
+  ]
+}

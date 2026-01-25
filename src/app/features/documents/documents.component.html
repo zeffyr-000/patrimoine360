@@ -1,0 +1,37 @@
+<div class="documents-page" *transloco="let t">
+  <header class="page-header">
+    <h1>{{ t('documents.title') }}</h1>
+    <p class="subtitle">{{ t('documents.subtitle') }}</p>
+  </header>
+
+  @if (loading()) {
+    <div class="loading-container">
+      <mat-spinner diameter="40"></mat-spinner>
+    </div>
+  } @else {
+    <div class="documents-list">
+      @for (doc of documents(); track doc.id) {
+        <mat-card class="document-card">
+          <div class="document-icon" [attr.data-type]="doc.type">
+            <mat-icon>{{ doc.icon }}</mat-icon>
+          </div>
+          <div class="document-info">
+            <h3>{{ doc.title }}</h3>
+            <div class="document-meta">
+              <span class="doc-type">{{ getTypeLabel(doc.type) }}</span>
+              <span class="doc-date">{{ doc.date | date: 'dd/MM/yyyy' }}</span>
+            </div>
+          </div>
+          <button mat-icon-button disabled [attr.aria-label]="t('documents.download')">
+            <mat-icon>download</mat-icon>
+          </button>
+        </mat-card>
+      }
+    </div>
+
+    <p class="poc-notice">
+      <mat-icon>info</mat-icon>
+      {{ t('documents.poc_notice') }}
+    </p>
+  }
+</div>

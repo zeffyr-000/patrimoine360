@@ -1,118 +1,378 @@
 {
+  "client": {
+    "id": "CL-2024-001",
+    "firstName": "Pierre",
+    "lastName": "Dubois",
+    "age": 52,
+    "profession": "Entrepreneur - Dirigeant de société",
+    "riskProfile": "équilibré",
+    "bankerName": "Sophie Martin",
+    "bankerEmail": "sophie.martin@banqueprivee.fr",
+    "clientSince": "2015-03-15"
+  },
   "assets": [
     {
       "id": "1",
       "name": "Résidence principale",
       "type": "real_estate",
-      "value": 450000,
+      "value": 1250000,
+      "acquisitionCost": 850000,
       "currency": "EUR",
-      "acquisitionDate": "2018-06-15",
-      "description": "Appartement 4 pièces - Paris 15e"
+      "acquisitionDate": "2015-06-15",
+      "description": "Maison 180m² avec jardin",
+      "location": "Neuilly-sur-Seine (92)"
     },
     {
       "id": "2",
-      "name": "Studio locatif",
-      "type": "real_estate",
-      "value": 180000,
+      "name": "Appartement locatif",
+      "type": "real_estate_rental",
+      "value": 420000,
+      "acquisitionCost": 380000,
       "currency": "EUR",
-      "acquisitionDate": "2020-03-01",
-      "description": "Studio 25m² - Lyon 3e"
+      "acquisitionDate": "2018-09-01",
+      "description": "Appartement 75m² loué en nom propre",
+      "location": "Lyon 6e (69)",
+      "rentalYield": 3.8
     },
     {
       "id": "3",
-      "name": "PEA Boursorama",
-      "type": "stocks",
-      "value": 45000,
+      "name": "TechSolutions SAS",
+      "type": "private_company",
+      "value": 2800000,
+      "acquisitionCost": 500000,
       "currency": "EUR",
-      "acquisitionDate": "2019-01-10",
-      "description": "ETF World + Actions européennes"
+      "acquisitionDate": "2010-01-15",
+      "description": "Société de services informatiques - 45 salariés",
+      "shares": 75
     },
     {
       "id": "4",
-      "name": "CTO Degiro",
+      "name": "Portefeuille actions PEA",
       "type": "stocks",
-      "value": 28000,
+      "value": 185000,
+      "acquisitionCost": 145000,
       "currency": "EUR",
-      "acquisitionDate": "2021-05-20",
-      "description": "Actions US tech"
+      "acquisitionDate": "2016-03-10",
+      "description": "ETF World (40%), Actions FR/EU (60%)"
     },
     {
       "id": "5",
-      "name": "Livret A",
-      "type": "cash",
-      "value": 22950,
+      "name": "Portefeuille CTO international",
+      "type": "stocks",
+      "value": 95000,
+      "acquisitionCost": 80000,
       "currency": "EUR",
-      "acquisitionDate": "2015-01-01",
-      "description": "Épargne de précaution"
+      "acquisitionDate": "2019-05-20",
+      "description": "Actions US tech et émergents"
     },
     {
       "id": "6",
-      "name": "LDDS",
-      "type": "cash",
-      "value": 12000,
+      "name": "Assurance-vie multisupports",
+      "type": "life_insurance",
+      "value": 380000,
+      "acquisitionCost": 340000,
       "currency": "EUR",
-      "acquisitionDate": "2016-03-15",
-      "description": "Livret Développement Durable"
+      "acquisitionDate": "2014-11-01",
+      "description": "Fonds euros (40%) + UC diversifiées (60%)"
     },
     {
       "id": "7",
-      "name": "Assurance-vie Linxea",
-      "type": "life_insurance",
-      "value": 85000,
+      "name": "PER Individuel",
+      "type": "retirement",
+      "value": 125000,
+      "acquisitionCost": 110000,
       "currency": "EUR",
-      "acquisitionDate": "2017-09-01",
-      "description": "Fonds euros + UC"
+      "acquisitionDate": "2019-10-01",
+      "description": "Plan Épargne Retraite - gestion profilée"
     },
     {
       "id": "8",
-      "name": "PER Individuel",
-      "type": "retirement",
-      "value": 35000,
+      "name": "Liquidités",
+      "type": "cash",
+      "value": 180000,
+      "acquisitionCost": 180000,
       "currency": "EUR",
-      "acquisitionDate": "2020-11-01",
-      "description": "Plan Épargne Retraite"
+      "acquisitionDate": "2023-01-01",
+      "description": "Comptes courants et livrets (trésorerie entreprise et personnelle)"
     },
     {
       "id": "9",
-      "name": "Bitcoin",
-      "type": "crypto",
-      "value": 15000,
+      "name": "Obligations d'entreprise",
+      "type": "bonds",
+      "value": 150000,
+      "acquisitionCost": 148000,
       "currency": "EUR",
-      "acquisitionDate": "2021-02-15",
-      "description": "0.18 BTC"
+      "acquisitionDate": "2022-06-15",
+      "description": "Obligations corporate investment grade"
     },
     {
       "id": "10",
-      "name": "Ethereum",
-      "type": "crypto",
-      "value": 8000,
+      "name": "Collection d'art contemporain",
+      "type": "art",
+      "value": 95000,
+      "acquisitionCost": 65000,
       "currency": "EUR",
-      "acquisitionDate": "2021-03-01",
-      "description": "3.2 ETH"
+      "acquisitionDate": "2017-04-20",
+      "description": "5 œuvres d'artistes émergents français"
     },
     {
       "id": "11",
-      "name": "Obligations vertes",
-      "type": "bonds",
-      "value": 20000,
+      "name": "Cave à vin d'investissement",
+      "type": "wine",
+      "value": 45000,
+      "acquisitionCost": 35000,
       "currency": "EUR",
-      "acquisitionDate": "2022-06-01",
-      "description": "Green Bonds via assurance-vie"
+      "acquisitionDate": "2019-11-10",
+      "description": "Grands crus classés Bordeaux"
+    },
+    {
+      "id": "12",
+      "name": "Crypto-actifs",
+      "type": "crypto",
+      "value": 28000,
+      "acquisitionCost": 40000,
+      "currency": "EUR",
+      "acquisitionDate": "2021-02-15",
+      "description": "Bitcoin (60%), Ethereum (40%)"
     }
   ],
-  "history": [
-    { "date": "2024-01-01", "totalValue": 850000 },
-    { "date": "2024-02-01", "totalValue": 858000 },
-    { "date": "2024-03-01", "totalValue": 862000 },
-    { "date": "2024-04-01", "totalValue": 870000 },
-    { "date": "2024-05-01", "totalValue": 865000 },
-    { "date": "2024-06-01", "totalValue": 878000 },
-    { "date": "2024-07-01", "totalValue": 885000 },
-    { "date": "2024-08-01", "totalValue": 890000 },
-    { "date": "2024-09-01", "totalValue": 895000 },
-    { "date": "2024-10-01", "totalValue": 905000 },
-    { "date": "2024-11-01", "totalValue": 915000 },
-    { "date": "2024-12-01", "totalValue": 920000 },
-    { "date": "2025-01-01", "totalValue": 900950 }
+  "performance": {
+    "period": "year",
+    "startDate": "2025-01-01",
+    "endDate": "2026-01-01",
+    "startValue": 5420000,
+    "endValue": 5753000,
+    "gain": 333000,
+    "gainPercent": 6.14,
+    "byCategory": [
+      {
+        "type": "private_company",
+        "label": "Société non cotée",
+        "startValue": 2600000,
+        "endValue": 2800000,
+        "gain": 200000,
+        "gainPercent": 7.69
+      },
+      {
+        "type": "real_estate",
+        "label": "Résidence principale",
+        "startValue": 1200000,
+        "endValue": 1250000,
+        "gain": 50000,
+        "gainPercent": 4.17
+      },
+      {
+        "type": "real_estate_rental",
+        "label": "Immobilier locatif",
+        "startValue": 410000,
+        "endValue": 420000,
+        "gain": 10000,
+        "gainPercent": 2.44
+      },
+      {
+        "type": "stocks",
+        "label": "Actions cotées",
+        "startValue": 250000,
+        "endValue": 280000,
+        "gain": 30000,
+        "gainPercent": 12.0
+      },
+      {
+        "type": "life_insurance",
+        "label": "Assurance-vie",
+        "startValue": 360000,
+        "endValue": 380000,
+        "gain": 20000,
+        "gainPercent": 5.56
+      },
+      {
+        "type": "retirement",
+        "label": "Épargne retraite",
+        "startValue": 115000,
+        "endValue": 125000,
+        "gain": 10000,
+        "gainPercent": 8.7
+      },
+      {
+        "type": "art",
+        "label": "Œuvres d'art",
+        "startValue": 85000,
+        "endValue": 95000,
+        "gain": 10000,
+        "gainPercent": 11.76
+      },
+      {
+        "type": "wine",
+        "label": "Vin d'investissement",
+        "startValue": 40000,
+        "endValue": 45000,
+        "gain": 5000,
+        "gainPercent": 12.5
+      },
+      {
+        "type": "crypto",
+        "label": "Crypto-actifs",
+        "startValue": 35000,
+        "endValue": 28000,
+        "gain": -7000,
+        "gainPercent": -20.0
+      }
+    ]
+  },
+  "recentActions": [
+    {
+      "id": "A1",
+      "date": "2025-12-15",
+      "type": "rebalance",
+      "title": "Rééquilibrage du portefeuille actions",
+      "description": "Réduction de l'exposition aux valeurs technologiques US (de 40% à 25%) et renforcement des ETF World pour améliorer la diversification géographique.",
+      "status": "completed",
+      "impact": "Réduction du risque de concentration géographique",
+      "impactValue": 0,
+      "category": "stocks"
+    },
+    {
+      "id": "A2",
+      "date": "2025-11-20",
+      "type": "tax_optimization",
+      "title": "Optimisation fiscale PER",
+      "description": "Versement de 20 000 € sur le PER pour bénéficier de la déduction fiscale maximale (10% des revenus d'activité). Économie d'impôt estimée : 9 000 €.",
+      "status": "completed",
+      "impact": "Économie d'impôt de 9 000 € pour l'année fiscale 2025",
+      "impactValue": 9000,
+      "category": "retirement"
+    },
+    {
+      "id": "A3",
+      "date": "2025-10-10",
+      "type": "buy",
+      "title": "Acquisition obligations corporate",
+      "description": "Ajout de 50 000 € d'obligations d'entreprises investment grade (rendement 4,2%) pour sécuriser une partie des liquidités tout en générant un revenu stable.",
+      "status": "completed",
+      "impact": "Rendement annuel de 2 100 €",
+      "impactValue": 2100,
+      "category": "bonds"
+    },
+    {
+      "id": "A4",
+      "date": "2025-09-05",
+      "type": "sell",
+      "title": "Allégement position crypto",
+      "description": "Vente partielle de crypto-actifs (30% de la position) suite à la forte volatilité. Sécurisation de la plus-value de 8 000 € et réduction de l'exposition aux actifs risqués.",
+      "status": "completed",
+      "impact": "Plus-value réalisée de 8 000 €",
+      "impactValue": 8000,
+      "category": "crypto"
+    },
+    {
+      "id": "A5",
+      "date": "2025-08-12",
+      "type": "advice",
+      "title": "Bilan patrimonial trimestriel",
+      "description": "Revue complète des performances et de l'allocation d'actifs. Analyse des opportunités de marché et ajustement de la stratégie d'investissement pour le T4 2025.",
+      "status": "completed",
+      "impact": "Alignement de la stratégie avec les objectifs long terme",
+      "impactValue": 0,
+      "category": "other"
+    },
+    {
+      "id": "A6",
+      "date": "2025-07-22",
+      "type": "advice",
+      "title": "Conseil sur la transmission patrimoniale",
+      "description": "Mise en place d'une stratégie de donation-partage progressive pour transmettre 100 000 € à vos deux enfants en optimisant les droits de succession.",
+      "status": "completed",
+      "impact": "Économie future de droits de succession estimée à 25 000 €",
+      "impactValue": 25000,
+      "category": "other"
+    },
+    {
+      "id": "A7",
+      "date": "2025-06-18",
+      "type": "rebalance",
+      "title": "Arbitrage assurance-vie vers fonds thématiques",
+      "description": "Réallocation de 30 000 € des fonds euros vers des UC thématiques (transition énergétique, IA, santé) pour dynamiser le rendement.",
+      "status": "completed",
+      "impact": "Gain de rendement potentiel de +2% par an",
+      "impactValue": 0,
+      "category": "life_insurance"
+    },
+    {
+      "id": "A8",
+      "date": "2025-05-25",
+      "type": "buy",
+      "title": "Acquisition œuvre d'art contemporain",
+      "description": "Achat d'une œuvre d'un artiste émergent français pour 22 000 €. Investissement patrimonial et diversification via l'art contemporain.",
+      "status": "completed",
+      "impact": "Plus-value estimée à horizon 5 ans : +40%",
+      "impactValue": 0,
+      "category": "art"
+    },
+    {
+      "id": "A9",
+      "date": "2025-04-10",
+      "type": "tax_optimization",
+      "title": "Optimisation IFI",
+      "description": "Restructuration du patrimoine immobilier via SCI pour optimiser l'Impôt sur la Fortune Immobilière. Gain fiscal annuel estimé : 4 500 €.",
+      "status": "completed",
+      "impact": "Économie IFI de 4 500 € par an",
+      "impactValue": 4500,
+      "category": "real_estate"
+    },
+    {
+      "id": "A10",
+      "date": "2025-03-15",
+      "type": "advice",
+      "title": "Préparation déclaration fiscale 2024",
+      "description": "Revue complète des revenus et optimisations fiscales : déductions PER, déficit foncier, crédit d'impôt. Préparation des justificatifs.",
+      "status": "completed",
+      "impact": "Optimisation de la déclaration fiscale",
+      "impactValue": 0,
+      "category": "other"
+    },
+    {
+      "id": "A11",
+      "date": "2025-02-20",
+      "type": "buy",
+      "title": "Renforcement portefeuille obligataire",
+      "description": "Achat de 50 000 € d'obligations souveraines européennes (rendement 3,8%) pour sécuriser une partie du patrimoine face à la volatilité des marchés actions.",
+      "status": "completed",
+      "impact": "Rendement annuel sécurisé de 1 900 €",
+      "impactValue": 1900,
+      "category": "bonds"
+    },
+    {
+      "id": "A12",
+      "date": "2025-01-15",
+      "type": "advice",
+      "title": "Bilan annuel 2024 et stratégie 2025",
+      "description": "Revue complète de l'année 2024 : performance +6,1%, objectifs atteints. Définition de la stratégie d'investissement pour 2025 avec focus sur la diversification internationale.",
+      "status": "completed",
+      "impact": "Validation des objectifs patrimoniaux 2025",
+      "impactValue": 0,
+      "category": "other"
+    },
+    {
+      "id": "A13",
+      "date": "2026-02-15",
+      "type": "rebalance",
+      "title": "Révision allocation assurance-vie",
+      "description": "Rééquilibrage de l'assurance-vie : passage de 40% fonds euros / 60% UC à 35% fonds euros / 65% UC pour améliorer le rendement long terme.",
+      "status": "planned",
+      "impact": "Gain de rendement estimé à +0,8% par an",
+      "impactValue": 0,
+      "category": "life_insurance"
+    },
+    {
+      "id": "A14",
+      "date": "2026-03-01",
+      "type": "advice",
+      "title": "Analyse opportunité investissement locatif",
+      "description": "Étude de faisabilité pour l'acquisition d'un second bien locatif via SCI familiale. Budget cible : 350 000 € avec financement bancaire.",
+      "status": "in_progress",
+      "impact": "Rendement locatif net estimé à 4,5%",
+      "impactValue": 0,
+      "category": "real_estate_rental"
+    }
   ]
 }

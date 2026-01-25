@@ -1,0 +1,183 @@
+// ═══════════════════════════════════════════════════════════════════════════════
+// HAUTE COUTURE FINANCIÈRE - Material Theme
+// Custom Navy & Gold theme for premium Private Banking experience
+// ═══════════════════════════════════════════════════════════════════════════════
+
+@use 'sass:map';
+@use '@angular/material' as mat;
+
+// ─────────────────────────────────────────────────────────────────────────────
+// NAVY PALETTE - Deep, sophisticated blue
+// ─────────────────────────────────────────────────────────────────────────────
+$navy-palette: (
+  50: #f5f6f9,
+  100: #e8ebf2,
+  200: #cdd4e3,
+  300: #a3b0c9,
+  400: #7387a8,
+  500: #4f6285,
+  600: #3b4a68,
+  700: #2a3650,
+  800: #1a2338,
+  900: #0d1420,
+  950: #070a10,
+  contrast: (
+    50: #0d1420,
+    100: #0d1420,
+    200: #0d1420,
+    300: #0d1420,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    950: #ffffff,
+  ),
+);
+
+// ─────────────────────────────────────────────────────────────────────────────
+// GOLD PALETTE - Warm, luxurious accent
+// ─────────────────────────────────────────────────────────────────────────────
+$gold-palette: (
+  50: #fffdf9,
+  100: #fef8ed,
+  200: #fcefd5,
+  300: #f7e0b3,
+  400: #e8c67a,
+  500: #d4a84a,
+  600: #c49536,
+  700: #a67b2c,
+  800: #875f22,
+  900: #6b4a1a,
+  contrast: (
+    50: #0d1420,
+    100: #0d1420,
+    200: #0d1420,
+    300: #0d1420,
+    400: #0d1420,
+    500: #0d1420,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+  ),
+);
+
+// ─────────────────────────────────────────────────────────────────────────────
+// THEME DEFINITION
+// ─────────────────────────────────────────────────────────────────────────────
+$patrimoine360-theme: mat.define-theme(
+  (
+    color: (
+      theme-type: light,
+      primary: mat.$blue-palette,
+      tertiary: mat.$orange-palette,
+    ),
+    typography: (
+      brand-family: 'Roboto',
+      plain-family: 'Roboto',
+    ),
+    density: (
+      scale: 0,
+    ),
+  )
+);
+
+@include mat.core();
+
+// ─────────────────────────────────────────────────────────────────────────────
+// MATERIAL CSS CUSTOM PROPERTIES - Luxe Overrides
+// ─────────────────────────────────────────────────────────────────────────────
+:root {
+  @include mat.all-component-themes($patrimoine360-theme);
+
+  // Toolbar - Deep navy with gold hints
+  --mat-toolbar-container-background-color: #0d1420;
+  --mat-toolbar-container-text-color: #ffffff;
+
+  // Sidenav - Warm ivory tones
+  --mat-sidenav-container-background-color: #fffffe;
+  --mat-sidenav-content-background-color: #faf8f4;
+  --mat-sidenav-container-divider-color: rgba(212, 168, 74, 0.12);
+
+  // Buttons - Navy primary
+  --mdc-filled-button-container-color: #1a2338;
+  --mdc-filled-button-label-text-color: #ffffff;
+  --mdc-protected-button-container-color: #1a2338;
+  --mdc-protected-button-label-text-color: #ffffff;
+
+  // Icon buttons
+  --mat-icon-button-state-layer-color: #1a2338;
+  --mat-icon-button-ripple-color: rgba(26, 35, 56, 0.08);
+
+  // Tabs - Gold accents
+  --mat-tab-header-active-focus-indicator-color: #d4a84a;
+  --mat-tab-header-active-hover-indicator-color: #d4a84a;
+  --mat-tab-header-active-ripple-color: rgba(212, 168, 74, 0.08);
+
+  // List - Subtle interactions
+  --mat-list-active-indicator-color: rgba(26, 35, 56, 0.06);
+  --mdc-list-list-item-hover-state-layer-color: rgba(26, 35, 56, 0.03);
+  --mdc-list-list-item-hover-state-layer-opacity: 1;
+
+  // Cards - Pure white
+  --mdc-elevated-card-container-color: #fffffe;
+
+  // Progress spinner - Navy
+  --mdc-circular-progress-active-indicator-color: #1a2338;
+
+  // Snackbar - Navy with gold
+  --mdc-snackbar-container-color: #1a2338;
+  --mdc-snackbar-supporting-text-color: #ffffff;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// TOOLBAR PREMIUM STYLING
+// ─────────────────────────────────────────────────────────────────────────────
+.mat-toolbar.mat-primary {
+  background: linear-gradient(135deg, #1a2338 0%, #0d1420 100%) !important;
+  box-shadow:
+    0 2px 12px rgba(13, 20, 32, 0.15),
+    0 1px 4px rgba(13, 20, 32, 0.1),
+    inset 0 -1px 0 rgba(212, 168, 74, 0.08);
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SIDENAV PREMIUM STYLING
+// ─────────────────────────────────────────────────────────────────────────────
+.mat-drawer {
+  background: linear-gradient(180deg, #fffffe 0%, #faf8f4 100%);
+  border-right: 1px solid rgba(212, 168, 74, 0.1) !important;
+}
+
+.mat-drawer-content {
+  background: #faf8f4;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// NAV LIST PREMIUM STYLING
+// ─────────────────────────────────────────────────────────────────────────────
+.mat-mdc-nav-list {
+  padding: 1.25rem 0;
+
+  .mat-mdc-list-item {
+    margin: 0.375rem 1rem;
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+
+    &:hover {
+      background: rgba(26, 35, 56, 0.03);
+    }
+
+    .mat-icon {
+      color: #4f6285;
+    }
+
+    .mdc-list-item__primary-text {
+      color: #1a2338;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+    }
+  }
+}

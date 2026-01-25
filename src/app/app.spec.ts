@@ -28,7 +28,7 @@ describe('AppComponent', () => {
   it('should have app title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.appTitle).toBe('Patrimoine360');
+    expect(app['appTitle']).toBe('Patrimoine360');
   });
 
   it('should toggle menu', () => {

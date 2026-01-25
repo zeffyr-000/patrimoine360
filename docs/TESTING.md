@@ -1,17 +1,20 @@
 # Testing Guide - Patrimoine360
 
-This document provides comprehensive testing guidelines for the Patrimoine360 project.
+Ce projet utilise **Vitest** avec le support natif Angular via `@angular/build:unit-test`.
 
-## Framework: Vitest
+## Commandes
 
-**CRITICAL**: This project uses **Vitest**, NOT Jasmine/Karma.
+```bash
+ng test                     # Mode watch
+ng test --no-watch          # Exécution unique
+ng test --code-coverage     # Avec couverture
+```
 
-### Why Vitest?
+## Pourquoi Vitest ?
 
-- **Modern**: Built for Vite, faster test execution
-- **Compatible**: Jest-like API, easier to learn
-- **Performance**: Faster than Karma with hot module replacement
-- **Developer Experience**: Better error messages and debugging
+- **Natif Angular** : Support officiel via `@angular/build:unit-test`
+- **Rapide** : Plus rapide que Karma
+- **Moderne** : API compatible Jest
 
 ## Common Patterns
 

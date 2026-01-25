@@ -1,0 +1,9 @@
+<div class="performance-badge" [class.positive]="isPositive()" [class.negative]="!isPositive()">
+  <div class="badge-icon">
+    <mat-icon>{{ icon() }}</mat-icon>
+  </div>
+  <div class="badge-values">
+    <div class="badge-amount">{{ amount() }}</div>
+    <div class="badge-percent">{{ percent() | number: '1.2-2' }}%</div>
+  </div>
+</div>

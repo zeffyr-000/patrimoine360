@@ -1,0 +1,179 @@
+@if (loading()) {
+  <div class="loading-container">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+} @else if (recentActions().length > 0) {
+  <section class="actions-section" *transloco="let t">
+    <!-- Template réutilisable pour les cartes d'action -->
+    <ng-template #actionCard let-action="action" let-t="t">
+      <mat-card class="action-card" [class]="'status-' + action.status">
+        <div class="status-ribbon" [class]="'status-' + action.status">
+          <mat-icon>{{ getActionStatusIcon(action.status) }}</mat-icon>
+          <span>{{ t('home.action_status.' + action.status) }}</span>
+        </div>
+        <div class="card-body">
+          <div class="card-header">
+            <div class="card-icon" [style.background-color]="getAssetCategory(action.category).color">
+              <mat-icon>{{ getActionTypeIcon(action.type) }}</mat-icon>
+            </div>
+            <div class="card-title-group">
+              <h3 class="card-title">{{ action.title }}</h3>
+              <div class="card-tags">
+                <span class="tag category-tag">
+                  <mat-icon [style.color]="getAssetCategory(action.category).color">
+                    {{ getAssetCategory(action.category).icon }}
+                  </mat-icon>
+                  {{ getAssetCategory(action.category).label }}
+                </span>
+                <span class="tag type-tag">{{ t('home.action_types.' + action.type) }}</span>
+              </div>
+            </div>
+          </div>
+          <p class="card-description">{{ action.description }}</p>
+          @if (action.impact) {
+            <div class="impact-box" [class.has-value]="action.impactValue && action.impactValue > 0">
+              <div class="impact-icon">
+                <mat-icon>{{ action.impactValue && action.impactValue > 0 ? 'trending_up' : 'insights' }}</mat-icon>
+              </div>
+              <div class="impact-details">
+                <span class="impact-title">{{ t('home.impact_label') }}</span>
+                <p class="impact-description">{{ action.impact }}</p>
+                @if (action.impactValue && action.impactValue > 0) {
+                  <div class="impact-amount">
+                    <mat-icon>add_circle</mat-icon>
+                    <strong>{{ formatCurrency(action.impactValue) }}</strong>
+                  </div>
+                }
+              </div>
+            </div>
+          }
+        </div>
+      </mat-card>
+    </ng-template>
+
+    <!-- Header condensé -->
+    <div class="timeline-header-compact">
+      <div class="header-left">
+        <div class="header-badge">
+          <mat-icon>workspace_premium</mat-icon>
+        </div>
+        <div class="header-text">
+          <h1>{{ t('actions.year_review_title') }}</h1>
+          <span class="header-meta">{{ completedCount() }} {{ t('home.actions_completed') }}</span>
+        </div>
+      </div>
+
+      <div class="header-stats-compact">
+        <div class="stat-main">
+          <span class="stat-value">{{ formatCurrency(totalImpact()) }}</span>
+          <span class="stat-label">{{ t('actions.total_value_created') }}</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-breakdown">
+          <div
+            class="mini-stat"
+            [matTooltip]="t('actions.tooltip_tax_savings')"
+            matTooltipClass="premium-tooltip"
+            matTooltipPosition="below"
+          >
+            <mat-icon>savings</mat-icon>
+            <span>{{ formatCurrency(taxSavings()) }}</span>
+          </div>
+          <div
+            class="mini-stat"
+            [matTooltip]="t('actions.tooltip_realized_gains')"
+            matTooltipClass="premium-tooltip"
+            matTooltipPosition="below"
+          >
+            <mat-icon>trending_up</mat-icon>
+            <span>{{ formatCurrency(realizedGains()) }}</span>
+          </div>
+          <div
+            class="mini-stat"
+            [matTooltip]="t('actions.tooltip_transmission')"
+            matTooltipClass="premium-tooltip"
+            matTooltipPosition="below"
+          >
+            <mat-icon>family_restroom</mat-icon>
+            <span>{{ formatCurrency(transmissionSavings()) }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="header-legend">
+        <div class="legend-item"><span class="dot completed"></span>{{ t('home.action_status.completed') }}</div>
+        <div class="legend-item"><span class="dot in_progress"></span>{{ t('home.action_status.in_progress') }}</div>
+        <div class="legend-item"><span class="dot planned"></span>{{ t('home.action_status.planned') }}</div>
+      </div>
+    </div>
+
+    <!-- Timeline pleine largeur - grille unique -->
+    <div class="journey-timeline">
+      <div class="timeline-spine"></div>
+
+      @for (action of recentActions(); track action.id; let i = $index; let isEven = $even) {
+        <!-- Entrée de timeline : 3 colonnes sur une même ligne -->
+        <div class="timeline-entry" [class.left]="isEven" [class.right]="!isEven">
+          <!-- Colonne gauche -->
+          <div class="entry-col entry-col-left">
+            @if (isEven) {
+              <div class="card-wrapper">
+                <ng-container *ngTemplateOutlet="actionCard; context: { action: action, t: t }"></ng-container>
+                <div class="card-connector" [class]="'status-' + action.status"></div>
+              </div>
+            }
+          </div>
+
+          <!-- Colonne centrale : marker -->
+          <div class="entry-col entry-col-center">
+            <div class="timeline-marker" [class]="'status-' + action.status">
+              <div class="marker-icon-ring">
+                <mat-icon>{{ getActionTypeIcon(action.type) }}</mat-icon>
+              </div>
+              <div class="marker-date">
+                <span class="date-day">{{ action.date | date: 'd' }}</span>
+                <span class="date-month">{{ action.date | date: 'MMM' }}</span>
+                <span class="date-year">{{ action.date | date: 'yyyy' }}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Colonne droite -->
+          <div class="entry-col entry-col-right">
+            @if (!isEven) {
+              <div class="card-wrapper">
+                <div class="card-connector" [class]="'status-' + action.status"></div>
+                <ng-container *ngTemplateOutlet="actionCard; context: { action: action, t: t }"></ng-container>
+              </div>
+            }
+          </div>
+        </div>
+      }
+
+      <!-- Footer -->
+      <div class="timeline-entry timeline-footer-entry">
+        <div class="entry-col entry-col-left"></div>
+        <div class="entry-col entry-col-center">
+          <div class="footer-icon">
+            <mat-icon>flag</mat-icon>
+          </div>
+        </div>
+        <div class="entry-col entry-col-right"></div>
+      </div>
+    </div>
+
+    <!-- Footer message -->
+    <div class="timeline-footer-message">
+      <p>{{ t('home.journey_continues') }}</p>
+    </div>
+  </section>
+} @else {
+  <!-- Empty state quand aucune action -->
+  <div class="empty-state" *transloco="let t">
+    <div class="empty-state-icon">
+      <mat-icon>event_note</mat-icon>
+    </div>
+    <h2>{{ t('actions.empty_state_title') }}</h2>
+    <p>{{ t('actions.empty_state_description') }}</p>
+  </div>
+}

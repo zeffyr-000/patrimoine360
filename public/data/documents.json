@@ -1,0 +1,46 @@
+{
+  "documents": [
+    {
+      "id": "1",
+      "title": "Compte rendu patrimonial T4 2025",
+      "type": "report",
+      "date": "2026-01-15",
+      "icon": "assessment"
+    },
+    {
+      "id": "2",
+      "title": "Relevé de portefeuille - Décembre 2025",
+      "type": "statement",
+      "date": "2026-01-05",
+      "icon": "receipt_long"
+    },
+    {
+      "id": "3",
+      "title": "Attestation fiscale 2025",
+      "type": "tax",
+      "date": "2026-01-10",
+      "icon": "description"
+    },
+    {
+      "id": "4",
+      "title": "Avenant assurance-vie n°42",
+      "type": "contract",
+      "date": "2025-12-20",
+      "icon": "gavel"
+    },
+    {
+      "id": "5",
+      "title": "Compte rendu patrimonial T3 2025",
+      "type": "report",
+      "date": "2025-10-15",
+      "icon": "assessment"
+    },
+    {
+      "id": "6",
+      "title": "Relevé de portefeuille - Septembre 2025",
+      "type": "statement",
+      "date": "2025-10-05",
+      "icon": "receipt_long"
+    }
+  ]
+}

@@ -38,9 +38,9 @@ jobs:
       - name: Check build size
         run: |
           echo "Checking bundle sizes..."
-          if [ -d "dist/patrimoine360" ]; then
+          if [ -d "dist/patrimoine360/browser" ]; then
             echo "✅ Build successful"
-            du -sh dist/patrimoine360
+            du -sh dist/patrimoine360/browser
           else
             echo "❌ Build failed"
             exit 1

@@ -1,0 +1,21 @@
+<mat-card class="stat-card">
+  <mat-card-content>
+    <div class="stat-header">
+      <mat-icon class="stat-icon" [style.color]="iconColor()">
+        {{ icon() }}
+      </mat-icon>
+      @if (percent(); as pct) {
+        <span class="stat-percent">{{ pct | number: '1.1-1' }}%</span>
+      }
+    </div>
+
+    <h3 class="stat-label">{{ label() }}</h3>
+    <p class="stat-value">{{ value() }}</p>
+
+    @if (showProgress() && percent(); as pct) {
+      <div class="progress-bar">
+        <div class="progress-fill" [style.width.%]="pct" [style.background-color]="iconColor()"></div>
+      </div>
+    }
+  </mat-card-content>
+</mat-card>

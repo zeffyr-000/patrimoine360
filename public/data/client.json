@@ -1,0 +1,13 @@
+{
+  "client": {
+    "id": "CL-2024-001",
+    "firstName": "Pierre",
+    "lastName": "Dubois",
+    "age": 52,
+    "profession": "Entrepreneur - Dirigeant de société",
+    "riskProfile": "équilibré",
+    "bankerName": "Sophie Martin",
+    "bankerEmail": "sophie.martin@banqueprivee.fr",
+    "clientSince": "2015-03-15"
+  }
+}

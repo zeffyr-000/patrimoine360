@@ -1,11 +1,11 @@
 # 💼 Patrimoine360
 
-> Modern Angular 21 application for patrimony visualization - Private Banking POC
+> POC de compte rendu patrimonial pour la Banque Privée - Angular 21
 
-[![Angular](https://img.shields.io/badge/Angular-21.0-red.svg)](https://angular.dev)
+[![Angular](https://img.shields.io/badge/Angular-21-red.svg)](https://angular.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue.svg)](https://www.typescriptlang.org)
-[![Material](https://img.shields.io/badge/Material-21.0-purple.svg)](https://material.angular.io)
-[![Vitest](https://img.shields.io/badge/Vitest-3.0-yellow.svg)](https://vitest.dev)
+[![Material](https://img.shields.io/badge/Material-21-purple.svg)](https://material.angular.io)
+[![Vitest](https://img.shields.io/badge/Vitest-4-yellow.svg)](https://vitest.dev)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 ## 🌐 Live Application
@@ -13,30 +13,85 @@
 **View the deployed application:**
 [https://zeffyr-000.github.io/patrimoine360/](https://zeffyr-000.github.io/patrimoine360/)
 
-Patrimony visualization application for the Private Banking sector. This POC demonstrates Angular 21's zoneless architecture with signals for optimal performance.
+**POC de compte rendu patrimonial** pour la Banque Privée. Application de visualisation et de suivi du patrimoine d'un client type, avec affichage des performances et des actions prises par les gestionnaires.
 
-### 🎯 Specifications
+### 🎯 Spécifications du POC
 
-| Criteria           | Value                                                   |
-| ------------------ | ------------------------------------------------------- |
-| **Domain**         | Private Banking / Wealth Management                     |
-| **Target**         | Desktop only (1280px+)                                  |
-| **UI Language**    | French only                                             |
-| **UX Inspiration** | [Google Flights](https://www.google.com/travel/flights) |
+| Critère         | Valeur                                             |
+| --------------- | -------------------------------------------------- |
+| **Domaine**     | Banque Privée / Gestion de patrimoine              |
+| **Client type** | Entrepreneur français (52 ans) - Patrimoine 5,75M€ |
+| **Cible**       | Desktop uniquement (1280px+)                       |
+| **Langue**      | Français uniquement                                |
+| **Design**      | Private Banking 2026 - Élégant et data-driven      |
 
-## ✨ Features
+### 👤 Profil client POC
 
-### 📊 Patrimony Overview
+**Pierre Dubois** - Entrepreneur, 52 ans
 
-- **Asset Visualization**: Consolidated view of all assets
-- **Category Breakdown**: Real estate, stocks, cash, crypto, etc.
-- **Value Tracking**: Current values with acquisition costs
+- **Profession** : Dirigeant de société (TechSolutions SAS)
+- **Patrimoine total** : 5 753 000 €
+- **Performance annuelle** : +333 000 € (+6,14%)
+- **Profil de risque** : Équilibré
+- **Gestionnaire** : Sophie Martin
 
-### 🎨 Private Banking 2026 Design
+## ✨ Fonctionnalités
+
+### 📊 Vue d'ensemble du patrimoine
+
+- **Carte hero** : Patrimoine total avec performance annuelle en temps réel
+- **Profil client** : Informations du client et de son gestionnaire
+- **Répartition graphique** : Distribution par catégorie d'actifs (12 types)
+
+### 📈 Performances détaillées
+
+- **Performance globale** : +6,14% sur 12 mois (+333 000 €)
+- **Performance par catégorie** :
+  - Société non cotée : +7,69% (2,8M€)
+  - Actions cotées : +12,0% (280k€)
+  - Immobilier : +4,17% et +2,44%
+  - Assurance-vie : +5,56% (380k€)
+  - Art et vin : +11,76% et +12,5%
+  - Crypto : -20,0% (28k€)
+
+### 🎯 Actions des gestionnaires
+
+**7 actions tracées** (réalisées, en cours, planifiées) :
+
+- ✅ Rééquilibrage portefeuille actions (réduction risque US tech)
+- ✅ Optimisation fiscale PER (9 000€ d'économie d'impôt)
+- ✅ Acquisition obligations corporate (rendement 4,2%)
+- ✅ Allégement position crypto (sécurisation +8 000€)
+- ✅ Conseil transmission patrimoniale (25 000€ d'économie future)
+- 📅 Révision allocation assurance-vie (planifiée)
+- 🔄 Analyse investissement locatif (en cours)
+
+### 💼 Détail des actifs (12 actifs)
+
+1. **Immobilier** (1,67M€ - 29%)
+   - Résidence principale Neuilly (1,25M€)
+   - Appartement locatif Lyon (420k€, rendement 3,8%)
+
+2. **Société non cotée** (2,8M€ - 48,7%)
+   - TechSolutions SAS (75% des parts)
+
+3. **Placements financiers** (1,16M€ - 20%)
+   - Actions PEA + CTO (280k€)
+   - Assurance-vie (380k€)
+   - PER (125k€)
+   - Obligations (150k€)
+   - Liquidités (180k€)
+
+4. **Actifs alternatifs** (168k€ - 2,3%)
+   - Collection art contemporain (95k€)
+   - Cave à vin (45k€)
+   - Crypto-actifs (28k€)
+
+### 🎨 Design Private Banking 2026
 
 - **Material Design 3**: Elegant interface with smooth animations
 - **Elegant Palette**: Muted tones (navy, gold accents, white space)
-- **Card-based Layout**: Inspired by Google Flights
+- **Card-based Layout**: Clean data cards with generous whitespace
 - **Desktop only**: Optimized for 1280px+ screens
 
 ### 🚀 Performance
@@ -52,6 +107,9 @@ Patrimony visualization application for the Private Banking sector. This POC dem
 - 🏗️ **[Technical Architecture](docs/ARCHITECTURE.md)** - Code patterns and structure
 - 🧪 **[Testing Guide](docs/TESTING.md)** - Vitest best practices
 - 🤝 **[Contributing Guide](docs/CONTRIBUTING.md)** - Development standards
+- 📋 **[Improvement Plan](docs/IMPROVEMENT_PLAN.md)** - Roadmap and architecture improvements
+- ✅ **[Refactoring Summary](docs/REFACTORING_SUMMARY.md)** - Phase 1 improvements
+- 🎉 **[Phases 2 & 3 Complete](docs/PHASES_2_3_COMPLETE.md)** - Final implementation (18/20)
 
 ## 🚀 Quick Start
 
@@ -109,6 +167,11 @@ npm run test:ci             # Tests with coverage report
 
 ```
 src/app/
+├── core/             # Core utilities and constants
+│   ├── constants/    # Business constants and icon mappings
+│   └── utils/        # Utility functions and formatters
+├── shared/           # Shared reusable components
+│   └── components/   # StatCard, PerformanceBadge, etc.
 ├── home/             # Home page with patrimoine overview
 ├── services/         # Services (patrimoine)
 ├── models/           # TypeScript types and interfaces
@@ -128,7 +191,7 @@ This POC uses static JSON files in `public/data/` instead of a backend API.
 
 ### Private Banking 2026 Design
 
-Inspired by [Google Flights](https://www.google.com/travel/flights) - clean, data-rich, card-based layouts.
+Modern Private Banking design with clean, data-rich, card-based layouts.
 
 - **Color Palette**: Elegant, muted tones (navy, gold accents, generous white space)
 - **Typography**: Roboto - professional fonts with clear hierarchy
@@ -150,30 +213,14 @@ Inspired by [Google Flights](https://www.google.com/travel/flights) - clean, dat
 
 ## 🧪 Testing
 
-### Testing Framework: Vitest
+### Vitest (natif Angular 21)
 
-This project uses **Vitest** (NOT Jasmine/Karma) for unit testing.
-
-#### Vitest API Reference
-
-```typescript
-import { vi } from 'vitest';
-
-// Create mocks
-const mockFn = vi.fn();
-mockFn.mockReturnValue(42);
-
-// Timers
-vi.useFakeTimers();
-vi.advanceTimersByTime(1000);
-vi.restoreAllMocks();
-```
-
-### Run Tests
+Ce projet utilise **Vitest** avec le support natif Angular via `@angular/build:unit-test`.
 
 ```bash
-npm test                    # Run all unit tests
-npm run test:ci             # Run tests with coverage report
+ng test                     # Mode watch
+ng test --no-watch          # Exécution unique
+ng test --code-coverage     # Avec couverture
 ```
 
 ### Coverage Goals
@@ -202,7 +249,7 @@ The application uses **Transloco** for translations - **French UI only**.
 
 ### Modern Angular 21 Architecture
 
-- **Standalone Components**: Using `standalone: true` API instead of NgModules
+- **Standalone Components**: Default in Angular 21 (no `standalone: true` needed)
 - **Modern Control Flow**: `@if`, `@for`, `@switch` syntax
 - **Signals API**: Reactive state management
 - **TypeScript 5.9 Strict**: Enhanced type safety
@@ -216,7 +263,7 @@ The application uses **Transloco** for translations - **French UI only**.
 
 ---
 
-**Modern Angular 21 POC - Private Banking - TypeScript 5.9, Material Design 3, Vitest 3.0.**
+**POC Angular 21 - Private Banking - Material Design 3, Vitest.**
 
 ## 📄 License
 

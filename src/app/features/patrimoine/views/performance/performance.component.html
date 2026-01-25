@@ -1,0 +1,183 @@
+@if (loading()) {
+  <div class="loading-container">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+} @else if (performance(); as perf) {
+  <div class="performance-page" *transloco="let t">
+    <!-- Hero Section -->
+    <header class="performance-hero">
+      <div class="hero-content">
+        <div class="hero-icon">
+          <mat-icon>trending_up</mat-icon>
+        </div>
+        <div class="hero-text">
+          <h1>{{ t('performance.hero_title') }}</h1>
+          <p class="hero-period">{{ formatPeriod(perf.startDate) }} → {{ formatPeriod(perf.endDate) }}</p>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat main">
+          <span class="stat-value positive">+{{ formatCurrency(perf.gain) }}</span>
+          <span class="stat-label">{{ t('performance.total_gain') }}</span>
+        </div>
+        <div class="hero-stat">
+          <span class="stat-value" [class.positive]="perf.gainPercent >= 0"
+            >+{{ perf.gainPercent | number: '1.1-1' }}%</span
+          >
+          <span class="stat-label">
+            {{ t('performance.return_rate') }}
+            <mat-icon class="hint-icon" [matTooltip]="t('hints.return_rate')" matTooltipClass="premium-tooltip"
+              >help_outline</mat-icon
+            >
+          </span>
+        </div>
+        <div class="hero-stat">
+          <span class="stat-value">{{ formatCurrency(perf.endValue) }}</span>
+          <span class="stat-label">{{ t('performance.current_total') }}</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Explication pédagogique -->
+    <section class="explanation-card">
+      <mat-icon class="explanation-icon">lightbulb</mat-icon>
+      <div class="explanation-content">
+        <h3>{{ t('performance.what_it_means') }}</h3>
+        <p>{{ t('performance.explanation_text', { gain: formatCurrency(perf.gain), percent: perf.gainPercent }) }}</p>
+      </div>
+    </section>
+
+    <!-- Comparaison marché -->
+    <section class="benchmark-section">
+      <h2 class="section-title">
+        <mat-icon>compare_arrows</mat-icon>
+        {{ t('performance.vs_market') }}
+        <mat-icon class="hint-icon" [matTooltip]="t('hints.benchmark')" matTooltipClass="premium-tooltip"
+          >help_outline</mat-icon
+        >
+      </h2>
+      <div class="benchmark-comparison">
+        <div class="benchmark-item your-perf">
+          <div class="benchmark-bar-container">
+            <div class="benchmark-bar" [style.width.%]="(perf.gainPercent / 15) * 100"></div>
+          </div>
+          <div class="benchmark-info">
+            <span class="benchmark-label">{{ t('performance.your_portfolio') }}</span>
+            <span class="benchmark-value positive">+{{ perf.gainPercent | number: '1.1-1' }}%</span>
+          </div>
+        </div>
+        <div class="benchmark-item market">
+          <div class="benchmark-bar-container">
+            <div class="benchmark-bar" [style.width.%]="(marketBenchmark / 15) * 100"></div>
+          </div>
+          <div class="benchmark-info">
+            <span class="benchmark-label">{{ t('performance.market_avg') }}</span>
+            <span class="benchmark-value">+{{ marketBenchmark }}%</span>
+          </div>
+        </div>
+        <div class="benchmark-verdict" [class.positive]="perf.gainPercent > marketBenchmark">
+          @if (perf.gainPercent > marketBenchmark) {
+            <mat-icon>emoji_events</mat-icon>
+            <span>{{
+              t('performance.beating_market', { diff: perf.gainPercent - marketBenchmark | number: '1.1-1' })
+            }}</span>
+          } @else {
+            <mat-icon>info</mat-icon>
+            <span>{{ t('performance.below_market') }}</span>
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- Top performers -->
+    <section class="performers-section">
+      <h2 class="section-title">
+        <mat-icon>star</mat-icon>
+        {{ t('performance.top_performers') }}
+      </h2>
+      <div class="performers-grid">
+        @for (category of topPerformers(); track category.type; let i = $index) {
+          <div class="performer-card" [class.gold]="i === 0" [class.silver]="i === 1" [class.bronze]="i === 2">
+            <div class="performer-rank">{{ i + 1 }}</div>
+            <div class="performer-icon" [style.background-color]="getAssetCategory(category.type).color">
+              <mat-icon>{{ getAssetCategory(category.type).icon }}</mat-icon>
+            </div>
+            <div class="performer-info">
+              <span class="performer-name">{{ category.label }}</span>
+              <span class="performer-gain positive">+{{ category.gainPercent | number: '1.1-1' }}%</span>
+            </div>
+            <div class="performer-amount">+{{ formatCurrency(category.gain) }}</div>
+          </div>
+        }
+      </div>
+    </section>
+
+    <!-- Détail par catégorie -->
+    <section class="categories-section">
+      <h2 class="section-title">
+        <mat-icon>pie_chart</mat-icon>
+        {{ t('performance.by_category') }}
+      </h2>
+      <div class="categories-list">
+        @for (category of perf.byCategory; track category.type) {
+          <div class="category-row" [class.negative]="category.gain < 0">
+            <div class="category-left">
+              <div class="category-icon" [style.background-color]="getAssetCategory(category.type).color">
+                <mat-icon>{{ getAssetCategory(category.type).icon }}</mat-icon>
+              </div>
+              <div class="category-info">
+                <span class="category-name">{{ category.label }}</span>
+                <span class="category-values"
+                  >{{ formatCurrency(category.startValue) }} → {{ formatCurrency(category.endValue) }}</span
+                >
+              </div>
+            </div>
+            <div class="category-middle">
+              <div class="progress-container">
+                <div
+                  class="progress-bar"
+                  [class.positive]="category.gain >= 0"
+                  [class.negative]="category.gain < 0"
+                  [style.width.%]="getProgressWidth(category.gainPercent)"
+                ></div>
+              </div>
+              <span class="category-emoji" [matTooltip]="getPerformanceMessage(category)">
+                {{ getPerformanceEmoji(category.gainPercent) }}
+              </span>
+            </div>
+            <div class="category-right">
+              <span class="category-percent" [class.positive]="category.gain >= 0" [class.negative]="category.gain < 0">
+                {{ category.gain >= 0 ? '+' : '' }}{{ category.gainPercent | number: '1.1-1' }}%
+              </span>
+              <span class="category-amount" [class.positive]="category.gain >= 0" [class.negative]="category.gain < 0">
+                {{ category.gain >= 0 ? '+' : '' }}{{ formatCurrency(category.gain) }}
+              </span>
+            </div>
+          </div>
+        }
+      </div>
+    </section>
+
+    <!-- Alertes si pertes -->
+    @if (flopPerformers().length > 0) {
+      <section class="alerts-section">
+        <h2 class="section-title warning">
+          <mat-icon>warning</mat-icon>
+          {{ t('performance.watch_list') }}
+        </h2>
+        <div class="alert-card">
+          <p>{{ t('performance.loss_explanation') }}</p>
+          <ul>
+            @for (flop of flopPerformers(); track flop.type) {
+              <li>
+                <strong>{{ flop.label }}</strong> : {{ flop.gainPercent | number: '1.1-1' }}% ({{
+                  formatCurrency(flop.gain)
+                }})
+              </li>
+            }
+          </ul>
+        </div>
+      </section>
+    }
+  </div>
+}

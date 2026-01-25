@@ -1,0 +1,146 @@
+.documents-page {
+  padding: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  padding: 3rem 0;
+}
+
+.page-header {
+  margin-bottom: 2rem;
+
+  h1 {
+    font-size: 1.75rem;
+    font-weight: 500;
+    color: var(--navy-900);
+    margin: 0 0 0.5rem;
+  }
+
+  .subtitle {
+    color: var(--text-secondary);
+    margin: 0;
+  }
+}
+
+.documents-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.document-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--outline-subtle);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+
+  &:hover {
+    border-color: var(--gold-300);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+}
+
+.document-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  mat-icon {
+    font-size: 1.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  &[data-type='report'] {
+    background: rgba(45, 106, 79, 0.1);
+    mat-icon {
+      color: var(--success);
+    }
+  }
+
+  &[data-type='statement'] {
+    background: rgba(26, 54, 93, 0.1);
+    mat-icon {
+      color: var(--navy-700);
+    }
+  }
+
+  &[data-type='tax'] {
+    background: rgba(212, 168, 74, 0.15);
+    mat-icon {
+      color: var(--gold-600);
+    }
+  }
+
+  &[data-type='contract'] {
+    background: rgba(124, 58, 237, 0.1);
+    mat-icon {
+      color: #7c3aed;
+    }
+  }
+}
+
+.document-info {
+  flex: 1;
+  min-width: 0;
+
+  h3 {
+    margin: 0 0 0.25rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.document-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+
+  .doc-type {
+    padding: 0.125rem 0.5rem;
+    background: var(--ivory-300);
+    border-radius: 100px;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+}
+
+.poc-notice {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  padding: 1rem;
+  background: var(--ivory-200);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+
+  mat-icon {
+    color: var(--gold-600);
+    font-size: 1.25rem;
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+}
