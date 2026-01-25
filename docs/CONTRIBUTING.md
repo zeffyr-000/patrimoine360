@@ -14,7 +14,7 @@ npm start
 
 # Before committing
 npm run lint
-npm test -- --run
+ng test --no-watch
 ```
 
 ## 📝 Code Standards
@@ -24,16 +24,15 @@ npm test -- --run
 ```typescript
 @Component({
   selector: 'app-example',
-  standalone: true,
   imports: [TranslocoModule, MatCardModule],
   templateUrl: './example.component.html',
   styleUrl: './example.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ExampleComponent {
-  readonly data = input.required<Data>(); // input() not @Input()
+  readonly data = input.required<Data>();
   protected readonly derived = computed(() => this.data().value);
-  private readonly service = inject(MyService); // inject() not constructor
+  private readonly service = inject(MyService);
 }
 ```
 
@@ -75,6 +74,10 @@ All user-facing text MUST use translation keys:
 ```
 
 ## 🧪 Testing (Vitest)
+
+```bash
+ng test --no-watch          # Avant commit
+```
 
 ```typescript
 import { vi, expect } from 'vitest';

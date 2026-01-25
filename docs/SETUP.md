@@ -83,14 +83,9 @@ npm run build:prod
 ### Testing
 
 ```bash
-# Run unit tests
-npm test
-
-# Run tests in watch mode
-npm run test:watch
-
-# Run tests with coverage
-npm run test:ci
+ng test                     # Mode watch
+ng test --no-watch          # Exécution unique
+ng test --code-coverage     # Avec couverture
 ```
 
 ### Code Quality

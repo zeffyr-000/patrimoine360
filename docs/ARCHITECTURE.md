@@ -2,16 +2,16 @@
 
 ## 🏗️ Overview
 
-Patrimoine360 is a modern Angular 21 POC application for patrimony visualization in the **Private Banking** sector. Built with current best practices and a zoneless architecture using signals.
+Patrimoine360 is a modern **Angular 21** POC application for patrimony visualization in the **Private Banking** sector. Built with current best practices and a zoneless architecture using signals.
 
 ### Project Specifications
 
-| Criteria           | Value                                                   |
-| ------------------ | ------------------------------------------------------- |
-| **Domain**         | Private Banking / Wealth Management                     |
-| **Target**         | Desktop only (1280px+)                                  |
-| **Language**       | French only (single locale)                             |
-| **UX Inspiration** | [Google Flights](https://www.google.com/travel/flights) |
+| Criteria           | Value                                             |
+| ------------------ | ------------------------------------------------- |
+| **Domain**         | Private Banking / Wealth Management               |
+| **Target**         | Desktop only (1280px+)                            |
+| **Language**       | French only (single locale)                       |
+| **UX Inspiration** | Private Banking 2026 - Navy & Gold elegant design |
 
 ## 📱 Technology Stack
 
@@ -19,17 +19,17 @@ Patrimoine360 is a modern Angular 21 POC application for patrimony visualization
 
 - **Angular 21** - Main framework with standalone components
 - **TypeScript 5.9** - Strict typing and modern features
-- **Angular Material 21** - UI components with Material Design 3
-- **RxJS 7** - Reactive programming
+- **Angular Material** - UI components with Material Design 3
+- **RxJS** - Reactive programming
 - **Signals** - Angular's new reactivity API for state management
 - **Transloco** - French translations with MessageFormat
 
 ### Development Tools
 
-- **Angular CLI 21** - Scaffolding and build system (with esbuild)
+- **Angular CLI** - Scaffolding and build system (with esbuild)
 - **ESLint** - Linting with strict Angular configuration
 - **Prettier** - Consistent code formatting
-- **Vitest** - Unit testing
+- **Vitest** - Unit testing with native Angular support
 
 ## 🏛️ Component Architecture
 
@@ -72,8 +72,7 @@ src/app/
 ```typescript
 @Component({
   selector: 'app-home',
-  standalone: true,
-  imports: [TranslocoModule, MatCardModule],
+  imports: [TranslocoModule, MatCardModule], // standalone by default in Angular 21
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -229,7 +228,7 @@ html {
 
 ### Design Tokens - Private Banking 2026
 
-Design inspired by [Google Flights](https://www.google.com/travel/flights):
+Modern Private Banking design principles:
 
 - **Color Palette**: Elegant, muted tones (navy, gold accents, white space)
 - **Typography**: Roboto (local via @fontsource) with clear hierarchy

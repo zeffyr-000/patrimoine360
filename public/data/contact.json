@@ -1,0 +1,14 @@
+{
+  "advisor": {
+    "name": "Sophie Martin",
+    "title": "Directrice de clientèle privée",
+    "phone": "+33 1 42 68 90 00",
+    "email": "sophie.martin@patrimoine360.fr",
+    "availability": "Lun-Ven 9h-18h"
+  },
+  "agency": {
+    "name": "Agence Paris Montaigne",
+    "address": "42 Avenue Montaigne, 75008 Paris",
+    "hours": "Lundi - Vendredi : 9h - 18h"
+  }
+}

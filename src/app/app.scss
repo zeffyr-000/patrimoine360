@@ -1,27 +1,149 @@
+// ═══════════════════════════════════════════════════════════════════════════════
+// APP SHELL - Style Haute Couture
+// ═══════════════════════════════════════════════════════════════════════════════
+
 .sidenav-container {
   height: 100vh;
 }
 
 .sidenav {
   width: 280px;
+  background: linear-gradient(180deg, var(--navy-950) 0%, var(--navy-900) 100%);
+  border-right: 1px solid rgba(212, 168, 74, 0.15);
+
+  .sidenav-header {
+    padding: 1.5rem 1.25rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+    .sidenav-title {
+      font-size: 1.25rem;
+      font-weight: 500;
+      background: linear-gradient(90deg, #ffffff 0%, var(--gold-400) 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 0.02em;
+    }
+  }
+
+  mat-nav-list {
+    padding-top: 0.5rem;
+
+    a.mat-mdc-list-item {
+      margin: 0 0.5rem;
+      border-radius: var(--radius-md);
+      height: 44px;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      &.active {
+        background: rgba(212, 168, 74, 0.25) !important;
+
+        .mdc-list-item__primary-text {
+          color: var(--gold-300) !important;
+        }
+
+        mat-icon {
+          color: var(--gold-400) !important;
+        }
+      }
+
+      .mdc-list-item__primary-text {
+        color: #ffffff !important;
+        font-size: 0.875rem;
+        font-weight: 500;
+      }
+
+      mat-icon {
+        color: rgba(255, 255, 255, 0.9) !important;
+        font-size: 1.25rem;
+        width: 1.25rem;
+        height: 1.25rem;
+      }
+    }
+  }
+
+  mat-divider {
+    margin: 0.75rem 1rem;
+    border-color: rgba(255, 255, 255, 0.08);
+  }
 }
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// TOOLBAR - Style premium navy avec finitions dorées
+// ═══════════════════════════════════════════════════════════════════════════════
 
 .app-toolbar {
   position: sticky;
   top: 0;
   z-index: 1000;
+  background: linear-gradient(135deg, var(--navy-900) 0%, var(--navy-950) 100%);
+  border-bottom: 1px solid rgba(212, 168, 74, 0.15);
+  box-shadow:
+    0 2px 12px rgba(13, 20, 32, 0.15),
+    0 1px 4px rgba(13, 20, 32, 0.1),
+    inset 0 -1px 0 rgba(212, 168, 74, 0.1);
+
+  // Subtle texture
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 2px,
+      rgba(255, 255, 255, 0.005) 2px,
+      rgba(255, 255, 255, 0.005) 4px
+    );
+    pointer-events: none;
+  }
+
+  // Logo avec gradient or subtil
+  .app-title {
+    background: linear-gradient(90deg, #ffffff 0%, rgba(232, 198, 122, 0.95) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: var(--font-weight-medium);
+    font-size: 1.125rem;
+    letter-spacing: var(--tracking-wide);
+  }
+
+  // Boutons avec hover doré
+  .mat-mdc-icon-button {
+    color: rgba(255, 255, 255, 0.85);
+    transition: all var(--transition-fast);
+
+    &:hover {
+      color: var(--gold-300);
+      background: rgba(212, 168, 74, 0.1);
+    }
+  }
 }
 
 .app-title {
-  margin-left: var(--spacing-sm);
-  font-weight: 500;
+  margin-left: var(--spacing-md);
+  font-weight: var(--font-weight-medium);
 }
 
 .spacer {
   flex: 1;
 }
 
+// ═══════════════════════════════════════════════════════════════════════════════
+// MAIN CONTENT AREA
+// ═══════════════════════════════════════════════════════════════════════════════
+
 .main-content {
-  padding: var(--spacing-md);
+  padding: 0;
   min-height: calc(100vh - 64px);
+  background: var(--surface);
+
+  // Subtle warm gradient from top
+  background-image:
+    radial-gradient(ellipse at 50% 0%, rgba(212, 168, 74, 0.025) 0%, transparent 50%),
+    linear-gradient(180deg, var(--ivory-200) 0%, var(--surface) 300px);
 }

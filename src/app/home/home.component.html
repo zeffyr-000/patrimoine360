@@ -1,10 +1,5 @@
 <div class="home-container" *transloco="let t">
-  @if (loading()) {
-    <div class="loading-container">
-      <mat-spinner diameter="48"></mat-spinner>
-      <p>{{ t('common.loading') }}</p>
-    </div>
-  } @else if (error()) {
+  @if (error()) {
     <mat-card class="error-card">
       <mat-card-content>
         <mat-icon>error</mat-icon>
@@ -12,68 +7,36 @@
       </mat-card-content>
     </mat-card>
   } @else {
-    <!-- Résumé du patrimoine -->
-    <section class="summary-section">
-      <mat-card class="total-card">
-        <mat-card-header>
-          <mat-icon mat-card-avatar class="total-icon">account_balance_wallet</mat-icon>
-          <mat-card-title>{{ t('home.total_patrimoine') }}</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <p class="total-value">{{ formatCurrency(summary().totalValue) }}</p>
-          <p class="evolution" [class.positive]="summary().evolution >= 0" [class.negative]="summary().evolution < 0">
-            <mat-icon>{{ summary().evolution >= 0 ? 'trending_up' : 'trending_down' }}</mat-icon>
-            {{ formatCurrency(summary().evolution) }}
-            ({{ summary().evolutionPercent | number: '1.1-1' }}%)
-          </p>
-        </mat-card-content>
-      </mat-card>
-    </section>
-
-    <!-- Répartition par catégorie -->
-    <section class="breakdown-section">
-      <h2>{{ t('home.breakdown_title') }}</h2>
-      <div class="breakdown-grid">
-        @for (item of summary().breakdown; track item.type) {
-          <mat-card class="breakdown-card">
-            <mat-card-header>
-              <mat-icon mat-card-avatar class="category-icon" [style.background-color]="item.color">{{
-                getAssetCategory(item.type).icon
-              }}</mat-icon>
-              <mat-card-title>{{ item.label }}</mat-card-title>
-              <mat-card-subtitle>{{ item.percent | number: '1.1-1' }}%</mat-card-subtitle>
-            </mat-card-header>
-            <mat-card-content>
-              <p class="breakdown-value">{{ formatCurrency(item.value) }}</p>
-              <div class="progress-bar">
-                <div class="progress-fill" [style.width.%]="item.percent" [style.background-color]="item.color"></div>
-              </div>
-            </mat-card-content>
-          </mat-card>
-        }
+    <!-- En-tête client avec son propre loading -->
+    @if (loadingClient()) {
+      <div class="header-loading">
+        <mat-spinner diameter="32"></mat-spinner>
       </div>
-    </section>
+    } @else if (client(); as clientData) {
+      <app-client-header [client]="clientData" />
+    }
 
-    <!-- Liste des actifs -->
-    <section class="assets-section">
-      <h2>{{ t('home.assets_title') }}</h2>
-      <mat-card>
-        <mat-list>
-          @for (asset of assets(); track asset.id; let last = $last) {
-            <mat-list-item>
-              <mat-icon matListItemIcon [style.color]="getAssetCategory(asset.type).color">
-                {{ getAssetCategory(asset.type).icon }}
-              </mat-icon>
-              <span matListItemTitle>{{ asset.name }}</span>
-              <span matListItemLine>{{ asset.description }}</span>
-              <span class="asset-value">{{ formatCurrency(asset.value) }}</span>
-            </mat-list-item>
-            @if (!last) {
-              <mat-divider></mat-divider>
-            }
-          }
-        </mat-list>
-      </mat-card>
-    </section>
+    <!-- Navigation par onglets avec routing -->
+    <nav mat-tab-nav-bar class="content-tabs" [tabPanel]="tabPanel">
+      <a mat-tab-link routerLink="/overview" routerLinkActive #rla1="routerLinkActive" [active]="rla1.isActive">
+        <mat-icon class="tab-icon">dashboard</mat-icon>
+        {{ t('home.tab_overview') }}
+      </a>
+      <a mat-tab-link routerLink="/performance" routerLinkActive #rla2="routerLinkActive" [active]="rla2.isActive">
+        <mat-icon class="tab-icon">show_chart</mat-icon>
+        {{ t('home.tab_performance') }}
+      </a>
+      <a mat-tab-link routerLink="/assets" routerLinkActive #rla3="routerLinkActive" [active]="rla3.isActive">
+        <mat-icon class="tab-icon">folder_open</mat-icon>
+        {{ t('home.tab_assets') }}
+      </a>
+      <a mat-tab-link routerLink="/actions" routerLinkActive #rla4="routerLinkActive" [active]="rla4.isActive">
+        <mat-icon class="tab-icon">history</mat-icon>
+        {{ t('home.tab_actions') }}
+      </a>
+    </nav>
+    <mat-tab-nav-panel #tabPanel>
+      <router-outlet />
+    </mat-tab-nav-panel>
   }
 </div>

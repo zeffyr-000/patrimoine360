@@ -1,0 +1,83 @@
+{
+  "period": "year",
+  "startDate": "2025-01-01",
+  "endDate": "2026-01-01",
+  "startValue": 5420000,
+  "endValue": 5753000,
+  "gain": 333000,
+  "gainPercent": 6.14,
+  "byCategory": [
+    {
+      "type": "private_company",
+      "label": "Société non cotée",
+      "startValue": 2600000,
+      "endValue": 2800000,
+      "gain": 200000,
+      "gainPercent": 7.69
+    },
+    {
+      "type": "real_estate",
+      "label": "Résidence principale",
+      "startValue": 1200000,
+      "endValue": 1250000,
+      "gain": 50000,
+      "gainPercent": 4.17
+    },
+    {
+      "type": "real_estate_rental",
+      "label": "Immobilier locatif",
+      "startValue": 410000,
+      "endValue": 420000,
+      "gain": 10000,
+      "gainPercent": 2.44
+    },
+    {
+      "type": "stocks",
+      "label": "Actions cotées",
+      "startValue": 250000,
+      "endValue": 280000,
+      "gain": 30000,
+      "gainPercent": 12.0
+    },
+    {
+      "type": "life_insurance",
+      "label": "Assurance-vie",
+      "startValue": 360000,
+      "endValue": 380000,
+      "gain": 20000,
+      "gainPercent": 5.56
+    },
+    {
+      "type": "retirement",
+      "label": "Épargne retraite",
+      "startValue": 115000,
+      "endValue": 125000,
+      "gain": 10000,
+      "gainPercent": 8.7
+    },
+    {
+      "type": "art",
+      "label": "Œuvres d'art",
+      "startValue": 85000,
+      "endValue": 95000,
+      "gain": 10000,
+      "gainPercent": 11.76
+    },
+    {
+      "type": "wine",
+      "label": "Vin d'investissement",
+      "startValue": 40000,
+      "endValue": 45000,
+      "gain": 5000,
+      "gainPercent": 12.5
+    },
+    {
+      "type": "crypto",
+      "label": "Crypto-actifs",
+      "startValue": 35000,
+      "endValue": 28000,
+      "gain": -7000,
+      "gainPercent": -20.0
+    }
+  ]
+}

@@ -7,7 +7,7 @@ following Angular and TypeScript best practices.
 **Domain**: Private Banking / Wealth Management (Banque Privée)
 **Target**: Desktop only (no mobile/responsive)
 **Language**: French only (single locale: fr)
-**UX Inspiration**: Google Flights (https://www.google.com/travel/flights) - clean, data-rich, card-based layouts
+**UX Inspiration**: Private Banking 2026 - clean, data-rich, card-based layouts with elegant navy-gold palette
 
 ### Design Guidelines (Private Banking 2026)
 
@@ -51,13 +51,14 @@ return this.http.get<Response>(`${environment.dataPath}/file.json`).pipe(
 
 ```
 npm start          # Dev server (http://localhost:4200)
-npm test           # Vitest unit tests
+ng test            # Vitest unit tests (watch mode)
+ng test --no-watch # Vitest unit tests (single run)
 npm run lint       # ESLint
 ```
 
-## Testing Framework: Vitest (NOT Jasmine)
+## Testing Framework: Vitest 4.0 (Angular 21 Native)
 
-CRITICAL: This project uses Vitest, NOT Jasmine/Karma.
+CRITICAL: Ce projet utilise Vitest 4.0 avec le support natif Angular via `@angular/build:unit-test`.
 
 ### Vitest Patterns
 
@@ -113,8 +114,7 @@ expect(element.textContent).toContain('home.total_patrimoine');
 ```typescript
 @Component({
   selector: 'app-example',
-  standalone: true,
-  imports: [TranslocoModule, MatButtonModule],
+  imports: [TranslocoModule, MatButtonModule], // Standalone by default in v21
   templateUrl: './example.component.html', // ALWAYS separate files
   styleUrl: './example.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -127,7 +127,7 @@ export class ExampleComponent {
 
 ### Component Rules
 
-- Use `standalone: true` for all components
+- Must NOT set `standalone: true` - it's the default in Angular v21+
 - Use `input()`, `output()` functions instead of decorators; `computed()` for derived state
 - ALWAYS separate files for templates/styles - never inline
 - Use `host` object in decorator instead of `@HostBinding`/`@HostListener`
@@ -171,7 +171,7 @@ All user-facing text MUST use translation keys via `TranslocoModule`.
 
 - Desktop only: min-width 1280px, no mobile media queries
 - Use CSS Grid and Flexbox for layouts
-- Follow Google Flights UX patterns: clean cards, data tables, filters sidebar
+- Follow Private Banking UX patterns: clean cards, data tables, elegant whitespace
 
 ## Key Files
 

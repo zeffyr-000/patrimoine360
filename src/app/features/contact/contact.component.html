@@ -1,0 +1,82 @@
+<div class="contact-page" *transloco="let t">
+  <header class="page-header">
+    <h1>{{ t('contact.title') }}</h1>
+    <p class="subtitle">{{ t('contact.subtitle') }}</p>
+  </header>
+
+  @if (loading()) {
+    <div class="loading-container">
+      <mat-spinner diameter="40"></mat-spinner>
+    </div>
+  } @else if (advisor(); as advisorData) {
+    <div class="contact-grid">
+      <!-- Carte conseiller -->
+      <mat-card class="advisor-card">
+        <mat-card-header>
+          <div mat-card-avatar class="advisor-avatar">
+            <mat-icon>person</mat-icon>
+          </div>
+          <mat-card-title>{{ advisorData.name }}</mat-card-title>
+          <mat-card-subtitle>{{ advisorData.title }}</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+          <div class="contact-info">
+            <div class="info-row">
+              <mat-icon>phone</mat-icon>
+              <span>{{ advisorData.phone }}</span>
+            </div>
+            <div class="info-row">
+              <mat-icon>email</mat-icon>
+              <span>{{ advisorData.email }}</span>
+            </div>
+            <div class="info-row">
+              <mat-icon>schedule</mat-icon>
+              <span>{{ advisorData.availability }}</span>
+            </div>
+          </div>
+        </mat-card-content>
+
+        <mat-card-actions>
+          <button mat-flat-button color="primary" disabled>
+            <mat-icon>videocam</mat-icon>
+            {{ t('contact.schedule_call') }}
+          </button>
+          <button mat-stroked-button disabled>
+            <mat-icon>mail</mat-icon>
+            {{ t('contact.send_message') }}
+          </button>
+        </mat-card-actions>
+      </mat-card>
+
+      <!-- Carte agence -->
+      @if (agency(); as agencyData) {
+        <mat-card class="agency-card">
+          <mat-card-header>
+            <mat-icon mat-card-avatar>location_on</mat-icon>
+            <mat-card-title>{{ agencyData.name }}</mat-card-title>
+            <mat-card-subtitle>{{ t('contact.agency_subtitle') }}</mat-card-subtitle>
+          </mat-card-header>
+
+          <mat-card-content>
+            <div class="contact-info">
+              <div class="info-row">
+                <mat-icon>business</mat-icon>
+                <span>{{ agencyData.address }}</span>
+              </div>
+              <div class="info-row">
+                <mat-icon>access_time</mat-icon>
+                <span>{{ agencyData.hours }}</span>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      }
+    </div>
+  }
+
+  <p class="poc-notice">
+    <mat-icon>info</mat-icon>
+    {{ t('contact.poc_notice') }}
+  </p>
+</div>

@@ -1,0 +1,317 @@
+@if (loading()) {
+  <div class="loading-container">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+} @else {
+  <div class="overview-dashboard" *transloco="let t">
+    <!-- Hero Strip - Key Metrics -->
+    <section class="hero-strip">
+      <!-- Patrimoine Net (principal) -->
+      <div class="metric-block primary">
+        <span class="metric-label">
+          {{ t('home.net_patrimoine') }}
+          <mat-icon class="hint-icon" [matTooltip]="t('hints.net_patrimoine')" matTooltipClass="premium-tooltip"
+            >help_outline</mat-icon
+          >
+        </span>
+        <span class="metric-value">{{ formatCurrency(netValue()) }}</span>
+      </div>
+
+      <div class="separator"></div>
+
+      <!-- Patrimoine Brut -->
+      <div class="metric-block">
+        <span class="metric-label">
+          {{ t('home.gross_patrimoine') }}
+          <mat-icon class="hint-icon" [matTooltip]="t('hints.gross_patrimoine')" matTooltipClass="premium-tooltip"
+            >help_outline</mat-icon
+          >
+        </span>
+        <span class="metric-value">{{ formatCurrency(grossValue()) }}</span>
+      </div>
+
+      <!-- Passifs -->
+      <div class="metric-block">
+        <span class="metric-label">
+          {{ t('home.liabilities') }}
+          <mat-icon class="hint-icon" [matTooltip]="t('hints.liabilities')" matTooltipClass="premium-tooltip"
+            >help_outline</mat-icon
+          >
+        </span>
+        <span class="metric-value negative">-{{ formatCurrency(liabilities()) }}</span>
+      </div>
+
+      <div class="separator"></div>
+
+      <!-- Performance -->
+      @if (headerPerformance(); as perf) {
+        <div class="metric-block" [class.positive]="perf.gainPercent >= 0" [class.negative]="perf.gainPercent < 0">
+          <span class="metric-label">
+            {{ t('home.performance_12m') }}
+            <mat-icon class="hint-icon" [matTooltip]="t('hints.performance_12m')" matTooltipClass="premium-tooltip"
+              >help_outline</mat-icon
+            >
+          </span>
+          <span class="metric-value with-icon">
+            <mat-icon>{{ perf.gainPercent >= 0 ? 'trending_up' : 'trending_down' }}</mat-icon>
+            {{ perf.gainPercent >= 0 ? '+' : '' }}{{ perf.gainPercent.toFixed(1) }}%
+          </span>
+        </div>
+      }
+
+      <div class="separator"></div>
+
+      <!-- Diversification -->
+      <div class="metric-block" [class]="getDiversificationClass(diversificationScore())">
+        <span class="metric-label">
+          {{ t('home.diversification') }}
+          <mat-icon class="hint-icon" [matTooltip]="t('hints.diversification')" matTooltipClass="premium-tooltip"
+            >help_outline</mat-icon
+          >
+        </span>
+        <span class="metric-value">{{ diversificationScore() }}/100</span>
+      </div>
+
+      <!-- Risque -->
+      <div class="metric-block" [class]="getRiskClass(riskLevel())">
+        <span class="metric-label">
+          {{ t('home.risk_level') }}
+          <mat-icon class="hint-icon" [matTooltip]="t('hints.risk_level')" matTooltipClass="premium-tooltip"
+            >help_outline</mat-icon
+          >
+        </span>
+        <span class="metric-value">{{ getRiskLabel(riskLevel()) }}</span>
+      </div>
+
+      <!-- AI Button -->
+      <button class="ai-analysis-btn" mat-flat-button (click)="launchAiAnalysis()" [disabled]="aiPanelOpen()">
+        <mat-icon>auto_awesome</mat-icon>
+        <span>{{ t('home.ai_analysis_btn') }}</span>
+      </button>
+    </section>
+
+    <!-- AI Panel -->
+    @if (aiPanelOpen()) {
+      <div
+        class="ai-panel-overlay"
+        role="button"
+        tabindex="0"
+        (click)="closeAiPanel()"
+        (keydown.enter)="closeAiPanel()"
+        (keydown.escape)="closeAiPanel()"
+      ></div>
+      <div class="ai-panel">
+        <div class="ai-panel-header">
+          <div class="ai-panel-title">
+            <mat-icon class="ai-icon">psychology</mat-icon>
+            <span>{{ t('home.ai_panel_title') }}</span>
+          </div>
+          <button mat-icon-button (click)="closeAiPanel()" [attr.aria-label]="t('common.close')">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+        <div class="ai-panel-content">
+          @if (aiAnalyzing() && !aiContent()) {
+            <div class="ai-loading">
+              <mat-spinner diameter="32"></mat-spinner>
+              <span>{{ t('home.ai_analyzing') }}</span>
+            </div>
+          }
+          <div class="ai-text markdown-content" [innerHTML]="aiContent() | markdown"></div>
+          @if (aiAnalyzing() && aiContent()) {
+            <span class="ai-cursor"></span>
+          }
+        </div>
+        @if (aiComplete()) {
+          <div class="ai-panel-footer">
+            <button mat-stroked-button (click)="closeAiPanel()">
+              <mat-icon>check</mat-icon>
+              {{ t('home.ai_understood') }}
+            </button>
+          </div>
+        }
+      </div>
+    }
+
+    <!-- Header -->
+    <header class="dashboard-header">
+      <div class="header-content">
+        <div class="header-icon">
+          <mat-icon>dashboard</mat-icon>
+        </div>
+        <div class="header-text">
+          <h1>{{ t('overview.title') }}</h1>
+          <p class="header-subtitle">{{ t('overview.subtitle') }}</p>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main content: Chart + KPIs -->
+    <div class="dashboard-content">
+      <!-- Left: Donut Chart -->
+      <section class="chart-section">
+        <div class="chart-container">
+          <canvas baseChart type="doughnut" [data]="chartData()" [options]="chartOptions"></canvas>
+          <!-- Center text -->
+          <div class="chart-center">
+            @if (selectedCategory(); as cat) {
+              <span class="center-value" [style.color]="cat.color">{{ formatCurrency(cat.value) }}</span>
+              <span class="center-label">{{ cat.label }}</span>
+              <span class="center-percent">{{ cat.percent | number: '1.1-1' }}%</span>
+            } @else {
+              <span class="center-value">{{ formatCurrency(summary().totalValue) }}</span>
+              <span class="center-label">{{ t('overview.total_patrimoine') }}</span>
+            }
+          </div>
+        </div>
+
+        <!-- Custom Legend -->
+        <div class="chart-legend">
+          @for (item of summary().breakdown; track item.type) {
+            <button
+              type="button"
+              class="legend-item"
+              [class.selected]="selectedCategory()?.type === item.type"
+              (click)="onLegendClick(item)"
+            >
+              <span class="legend-color" [style.background-color]="item.color"></span>
+              <span class="legend-label">{{ item.label }}</span>
+              <span class="legend-percent">{{ item.percent | number: '1.0-0' }}%</span>
+            </button>
+          }
+        </div>
+      </section>
+
+      <!-- Right: KPIs + Alerts -->
+      <aside class="kpi-section">
+        <!-- KPI Cards -->
+        <div class="kpi-grid">
+          <!-- Diversification Score -->
+          <div class="kpi-card">
+            <div class="kpi-header">
+              <mat-icon>diversity_3</mat-icon>
+              <span class="kpi-title">
+                {{ t('overview.kpi_diversification') }}
+                <mat-icon
+                  class="hint-icon"
+                  [matTooltip]="t('hints.diversification')"
+                  matTooltipClass="premium-tooltip"
+                  matTooltipPosition="right"
+                  >help_outline</mat-icon
+                >
+              </span>
+            </div>
+            <div class="kpi-value">
+              <span
+                class="kpi-number"
+                [class.good]="calculatedDiversificationScore() >= 60"
+                [class.warning]="calculatedDiversificationScore() < 40"
+              >
+                {{ calculatedDiversificationScore() }}/100
+              </span>
+            </div>
+            <div class="kpi-bar">
+              <div
+                class="kpi-bar-fill"
+                [style.width.%]="calculatedDiversificationScore()"
+                [class.good]="calculatedDiversificationScore() >= 60"
+                [class.warning]="calculatedDiversificationScore() < 40"
+              ></div>
+            </div>
+          </div>
+
+          <!-- Max Concentration -->
+          <div class="kpi-card">
+            <div class="kpi-header">
+              <mat-icon>pie_chart</mat-icon>
+              <span class="kpi-title">
+                {{ t('overview.kpi_concentration') }}
+                <mat-icon
+                  class="hint-icon"
+                  [matTooltip]="t('hints.concentration')"
+                  matTooltipClass="premium-tooltip"
+                  matTooltipPosition="right"
+                  >help_outline</mat-icon
+                >
+              </span>
+            </div>
+            <div class="kpi-value">
+              <span class="kpi-number" [class.warning]="maxConcentration().percent > 40">
+                {{ maxConcentration().percent | number: '1.0-0' }}%
+              </span>
+            </div>
+            <span class="kpi-detail">{{ maxConcentration().category }}</span>
+          </div>
+
+          <!-- Liquidity Ratio -->
+          <div class="kpi-card">
+            <div class="kpi-header">
+              <mat-icon>water_drop</mat-icon>
+              <span class="kpi-title">
+                {{ t('overview.kpi_liquidity') }}
+                <mat-icon
+                  class="hint-icon"
+                  [matTooltip]="t('hints.liquidity')"
+                  matTooltipClass="premium-tooltip"
+                  matTooltipPosition="right"
+                  >help_outline</mat-icon
+                >
+              </span>
+            </div>
+            <div class="kpi-value">
+              <span class="kpi-number" [class.warning]="liquidityRatio() < 15" [class.good]="liquidityRatio() >= 20">
+                {{ liquidityRatio() | number: '1.0-0' }}%
+              </span>
+            </div>
+            <span class="kpi-detail">{{ t('overview.kpi_liquidity_detail') }}</span>
+          </div>
+
+          <!-- Real Estate Ratio -->
+          <div class="kpi-card">
+            <div class="kpi-header">
+              <mat-icon>home</mat-icon>
+              <span class="kpi-title">
+                {{ t('overview.kpi_real_estate') }}
+                <mat-icon
+                  class="hint-icon"
+                  [matTooltip]="t('hints.real_estate')"
+                  matTooltipClass="premium-tooltip"
+                  matTooltipPosition="right"
+                  >help_outline</mat-icon
+                >
+              </span>
+            </div>
+            <div class="kpi-value">
+              <span class="kpi-number">{{ realEstateRatio() | number: '1.0-0' }}%</span>
+            </div>
+            <span class="kpi-detail">{{ t('overview.kpi_real_estate_detail') }}</span>
+          </div>
+        </div>
+
+        <!-- Strategic Alerts -->
+        @if (alerts().length > 0) {
+          <div class="alerts-section">
+            <h3 class="alerts-title">
+              <mat-icon>lightbulb</mat-icon>
+              {{ t('overview.alerts_title') }}
+            </h3>
+            <div class="alerts-list">
+              @for (alert of alerts(); track alert.titleKey) {
+                <div class="alert-card" [class]="alert.type">
+                  <mat-icon class="alert-icon">{{ alert.icon }}</mat-icon>
+                  <div class="alert-content">
+                    <span class="alert-title">{{ t(alert.titleKey) }}</span>
+                    <span class="alert-description">{{ t(alert.descriptionKey, { value: alert.value }) }}</span>
+                  </div>
+                  @if (alert.value) {
+                    <span class="alert-value">{{ alert.value }}</span>
+                  }
+                </div>
+              }
+            </div>
+          </div>
+        }
+      </aside>
+    </div>
+  </div>
+}

@@ -1,0 +1,169 @@
+{
+  "actions": [
+    {
+      "id": "A9",
+      "date": "2026-02-15",
+      "type": "rebalance",
+      "title": "Révision allocation assurance-vie",
+      "description": "Rééquilibrage prévu : passage de 35% fonds euros / 65% UC à 30% fonds euros / 70% UC pour capter la reprise des marchés actions attendue au T1 2026.",
+      "status": "planned",
+      "impact": "Optimisation du couple rendement/risque",
+      "impactValue": 0,
+      "category": "life_insurance"
+    },
+    {
+      "id": "A1",
+      "date": "2026-01-15",
+      "type": "advice",
+      "title": "Bilan patrimonial annuel",
+      "description": "Réunion de synthèse avec révision de votre stratégie globale. Validation des objectifs 2026 : préparation de la transmission, optimisation fiscale et diversification internationale.",
+      "status": "in_progress",
+      "impact": "Définition du cap stratégique pour les 12 prochains mois",
+      "impactValue": 0,
+      "category": "other"
+    },
+    {
+      "id": "A2",
+      "date": "2025-12-15",
+      "type": "rebalance",
+      "title": "Rééquilibrage du portefeuille actions",
+      "description": "Réduction de l'exposition aux valeurs technologiques US (de 40% à 25%) et renforcement des ETF World pour améliorer la diversification géographique suite à la correction des marchés.",
+      "status": "completed",
+      "impact": "Réduction du risque de concentration géographique",
+      "impactValue": 0,
+      "category": "stocks"
+    },
+    {
+      "id": "A3",
+      "date": "2025-11-20",
+      "type": "tax_optimization",
+      "title": "Optimisation fiscale PER",
+      "description": "Versement de 20 000 € sur votre PER avant la clôture fiscale pour bénéficier de la déduction maximale. Arbitrage vers un support en unités de compte diversifiées.",
+      "status": "completed",
+      "impact": "Économie d'impôt de 9 000 € pour l'année fiscale 2025",
+      "impactValue": 9000,
+      "category": "retirement"
+    },
+    {
+      "id": "A4",
+      "date": "2025-10-10",
+      "type": "buy",
+      "title": "Acquisition obligations corporate",
+      "description": "Ajout de 50 000 € d'obligations d'entreprises investment grade (rendement 4,2%) pour sécuriser une partie des liquidités tout en générant un revenu stable et prévisible.",
+      "status": "completed",
+      "impact": "Rendement annuel garanti de 2 100 €",
+      "impactValue": 2100,
+      "category": "bonds"
+    },
+    {
+      "id": "A5",
+      "date": "2025-09-05",
+      "type": "sell",
+      "title": "Allégement position crypto",
+      "description": "Vente partielle de 30% de la position crypto suite à la forte hausse. Cristallisation de la plus-value et transfert vers des actifs moins volatils pour protéger les gains.",
+      "status": "completed",
+      "impact": "Plus-value réalisée et sécurisée",
+      "impactValue": 8000,
+      "category": "crypto"
+    },
+    {
+      "id": "A6",
+      "date": "2025-07-22",
+      "type": "advice",
+      "title": "Stratégie de transmission patrimoniale",
+      "description": "Mise en place d'une donation-partage progressive de 100 000 € à vos deux enfants. Utilisation des abattements tous les 15 ans pour optimiser les droits de succession.",
+      "status": "completed",
+      "impact": "Économie future de droits de succession estimée",
+      "impactValue": 25000,
+      "category": "other"
+    },
+    {
+      "id": "A7",
+      "date": "2025-06-01",
+      "type": "rebalance",
+      "title": "Arbitrage assurance-vie Sélection Premium",
+      "description": "Transfert de 80 000 € du fonds euros vers des unités de compte (SCPI, fonds flexibles) pour améliorer le rendement à long terme tout en maintenant une garantie partielle.",
+      "status": "completed",
+      "impact": "Gain de rendement espéré de +1,2% par an",
+      "impactValue": 960,
+      "category": "life_insurance"
+    },
+    {
+      "id": "A10",
+      "date": "2025-05-15",
+      "type": "buy",
+      "title": "Renforcement SCPI européennes",
+      "description": "Acquisition de 30 000 € de parts SCPI Pierval Santé et Corum Origin pour diversifier le patrimoine immobilier vers l'Europe et le secteur santé, moins corrélé aux cycles économiques.",
+      "status": "completed",
+      "impact": "Diversification géographique et rendement de 5,2%",
+      "impactValue": 1560,
+      "category": "real_estate_rental"
+    },
+    {
+      "id": "A11",
+      "date": "2025-04-08",
+      "type": "tax_optimization",
+      "title": "Déclaration revenus fonciers optimisée",
+      "description": "Passage au régime réel pour vos revenus locatifs avec déduction des travaux de rénovation énergétique (15 000 €) réalisés sur l'appartement de Lyon.",
+      "status": "completed",
+      "impact": "Économie d'impôt sur revenus fonciers",
+      "impactValue": 4500,
+      "category": "real_estate_rental"
+    },
+    {
+      "id": "A12",
+      "date": "2025-03-20",
+      "type": "rebalance",
+      "title": "Sécurisation des gains actions",
+      "description": "Suite à la performance exceptionnelle du portefeuille actions (+18% depuis janvier), prise de bénéfices partielle de 40 000 € et transfert vers le fonds euros de l'assurance-vie.",
+      "status": "completed",
+      "impact": "Plus-value cristallisée de 7 200 €",
+      "impactValue": 7200,
+      "category": "stocks"
+    },
+    {
+      "id": "A13",
+      "date": "2025-02-14",
+      "type": "advice",
+      "title": "Audit du patrimoine immobilier",
+      "description": "Évaluation complète de vos 3 biens immobiliers avec estimation par expert. Recommandations : travaux de rénovation énergétique sur le locatif et optimisation du financement de la résidence principale.",
+      "status": "completed",
+      "impact": "Identification de 35 000 € de plus-value latente supplémentaire",
+      "impactValue": 0,
+      "category": "real_estate"
+    },
+    {
+      "id": "A14",
+      "date": "2025-02-01",
+      "type": "buy",
+      "title": "Versement programmé assurance-vie",
+      "description": "Mise en place d'un versement mensuel de 2 000 € sur votre contrat Sélection Premium avec répartition 40% fonds euros / 60% UC pour lisser les points d'entrée sur les marchés.",
+      "status": "completed",
+      "impact": "Capitalisation annuelle de 24 000 € avec effet de lissage",
+      "impactValue": 0,
+      "category": "life_insurance"
+    },
+    {
+      "id": "A15",
+      "date": "2025-01-10",
+      "type": "advice",
+      "title": "Définition de la stratégie 2025",
+      "description": "Réunion de cadrage annuel : objectifs validés - renforcement de la diversification, préparation de la transmission, et maintien d'une liquidité de 15% minimum.",
+      "status": "completed",
+      "impact": "Feuille de route claire pour l'année",
+      "impactValue": 0,
+      "category": "other"
+    },
+    {
+      "id": "A16",
+      "date": "2025-01-05",
+      "type": "rebalance",
+      "title": "Repositionnement début d'année",
+      "description": "Ajustement tactique : renforcement des actions européennes (+20 000 €) et réduction des liquidités excédentaires suite aux versements de fin d'année.",
+      "status": "completed",
+      "impact": "Exposition optimisée aux marchés européens",
+      "impactValue": 0,
+      "category": "stocks"
+    }
+  ]
+}
