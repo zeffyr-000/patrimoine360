@@ -1,6 +1,17 @@
 import { Translation } from '@jsverse/transloco';
 
 export const frTranslations: Translation = {
+  app: {
+    title: 'Patrimoine360',
+  },
+  pages: {
+    overview: "Vue d'ensemble",
+    performance: 'Performances',
+    assets: 'Actifs',
+    actions: 'Actions',
+    contact: 'Mon conseiller',
+    documents: 'Mes documents',
+  },
   nav: {
     home: 'Mon patrimoine',
     contact: 'Mon conseiller',
