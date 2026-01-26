@@ -5,7 +5,7 @@ import {
   isDevMode,
   Injectable,
 } from '@angular/core';
-import { provideRouter, withPreloading, PreloadAllModules } from '@angular/router';
+import { provideRouter, withPreloading, PreloadAllModules, TitleStrategy } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideTransloco, TranslocoLoader, Translation } from '@jsverse/transloco';
@@ -14,6 +14,7 @@ import { Observable, of } from 'rxjs';
 
 import { routes } from './app.routes';
 import { frTranslations } from './i18n/fr';
+import { TranslocoTitleStrategy } from './core/transloco-title.strategy';
 
 @Injectable({ providedIn: 'root' })
 export class TranslocoInlineLoader implements TranslocoLoader {
@@ -43,5 +44,7 @@ export const appConfig: ApplicationConfig = {
       loader: TranslocoInlineLoader,
     }),
     provideTranslocoMessageformat(),
+    // Custom title strategy with Transloco translations
+    { provide: TitleStrategy, useClass: TranslocoTitleStrategy },
   ],
 };

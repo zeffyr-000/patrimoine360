@@ -1,105 +1,52 @@
+@use '../../../../_mixins' as *;
+
 // ═══════════════════════════════════════════════════════════════════════════════
 // ASSETS - Style Rapport Banque Privée
 // ═══════════════════════════════════════════════════════════════════════════════
 
 .loading-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 400px;
-
-  ::ng-deep .mat-mdc-progress-spinner circle {
-    stroke: var(--gold-500);
-  }
+  @include loading-container(400px);
 }
 
 .assets-page {
-  padding: 0;
+  @include full-page;
 }
 
 // ========== HEADER ==========
 .assets-header {
-  background: linear-gradient(135deg, var(--navy-800), var(--navy-900));
-  padding: 2rem 2.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 2rem;
+  @include navy-header;
 }
 
 .header-content {
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
+  @include header-content;
 }
 
 .header-icon {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, rgba(212, 168, 74, 0.2), rgba(212, 168, 74, 0.1));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(212, 168, 74, 0.3);
-
-  mat-icon {
-    font-size: 1.75rem;
-    width: 1.75rem;
-    height: 1.75rem;
-    color: var(--gold-400);
-  }
+  @include header-icon;
 }
 
 .header-text {
-  h1 {
-    font-size: 1.5rem;
-    font-weight: var(--font-weight-semibold);
-    color: white;
-    margin: 0 0 0.25rem;
-  }
-
-  .header-subtitle {
-    font-size: 0.875rem;
-    color: rgba(255, 255, 255, 0.6);
-    margin: 0;
-  }
+  @include header-text-white;
 }
 
 .header-summary {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: var(--radius-lg);
-  padding: 1rem 1.5rem;
+  @include header-stats-container;
 }
 
 .summary-stat {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  min-width: 100px;
-
-  .summary-value {
-    font-size: 1.25rem;
-    font-weight: var(--font-weight-semibold);
-    color: white;
-  }
+  @include stat-item;
 
   .summary-label {
-    font-size: 0.6875rem;
-    color: rgba(255, 255, 255, 0.6);
-    text-transform: uppercase;
-    letter-spacing: var(--tracking-wide);
-    margin-top: 0.25rem;
+    @include stat-label;
+  }
+
+  .summary-value {
+    @include stat-value;
   }
 
   &.highlight .summary-value {
-    color: var(--gold-300);
     font-size: 1.375rem;
+    color: var(--gold-300);
   }
 
   &.positive .summary-value {
@@ -112,9 +59,7 @@
 }
 
 .summary-divider {
-  width: 1px;
-  height: 40px;
-  background: rgba(255, 255, 255, 0.15);
+  @include stat-divider;
 }
 
 // ========== TABLE SECTION ==========

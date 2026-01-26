@@ -1,0 +1,629 @@
+// ═══════════════════════════════════════════════════════════════════════════════
+// MIXINS & UTILITIES - Design System Patrimoine360
+// Centralized patterns for maintainability
+// ═══════════════════════════════════════════════════════════════════════════════
+
+// ─────────────────────────────────────────────────────────────────────────────
+// LAYOUT MIXINS
+// ─────────────────────────────────────────────────────────────────────────────
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin flex-column-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin flex-start {
+  display: flex;
+  align-items: flex-start;
+}
+
+@mixin flex-align-center {
+  display: flex;
+  align-items: center;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// LOADING CONTAINER - Gold spinner pattern
+// ─────────────────────────────────────────────────────────────────────────────
+
+@mixin loading-container($min-height: 300px, $background: transparent) {
+  @include flex-center;
+  min-height: $min-height;
+
+  @if $background != transparent {
+    background: $background;
+  }
+
+  ::ng-deep .mat-mdc-progress-spinner circle {
+    stroke: var(--gold-500);
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// PAGE LAYOUTS - Consistent page structure
+// ─────────────────────────────────────────────────────────────────────────────
+
+// Standard content page (documents, contact, etc.)
+@mixin content-page($max-width: 900px) {
+  padding: 2rem;
+  max-width: $max-width;
+  margin: 0 auto;
+}
+
+// Full-width page with no padding
+@mixin full-page {
+  padding: 0;
+}
+
+// Page with side padding
+@mixin padded-page($padding: 2rem) {
+  padding: 0 $padding $padding;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// PAGE HEADER - Consistent header styling
+// ─────────────────────────────────────────────────────────────────────────────
+
+// Simple page header (documents, contact style)
+@mixin simple-page-header {
+  margin-bottom: 2rem;
+
+  h1 {
+    font-size: 1.75rem;
+    font-weight: 500;
+    color: var(--navy-900);
+    margin: 0 0 0.5rem;
+  }
+
+  .subtitle {
+    color: var(--on-surface-muted);
+    margin: 0;
+  }
+}
+
+// Navy gradient header (assets, performance style)
+@mixin navy-header($padding: 2rem 2.5rem) {
+  background: linear-gradient(135deg, var(--navy-800), var(--navy-900));
+  padding: $padding;
+  @include flex-between;
+  gap: 2rem;
+}
+
+// Compact navy header
+@mixin navy-header-compact {
+  background: linear-gradient(135deg, var(--navy-900) 0%, var(--navy-800) 100%);
+  padding: 1rem 2rem;
+  @include flex-between;
+  gap: 2rem;
+  position: relative;
+}
+
+// Aliases for backward compatibility
+@mixin page-header($padding: 2rem 2.5rem) {
+  @include navy-header($padding);
+}
+
+@mixin page-header-compact {
+  @include navy-header-compact;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// HEADER CONTENT - Icon + text patterns
+// ─────────────────────────────────────────────────────────────────────────────
+
+@mixin header-content {
+  @include flex-align-center;
+  gap: 1.25rem;
+}
+
+@mixin header-icon($size: 56px, $icon-size: 1.75rem) {
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(212, 168, 74, 0.2), rgba(212, 168, 74, 0.1));
+  @include flex-center;
+  border: 1px solid rgba(212, 168, 74, 0.3);
+
+  mat-icon {
+    font-size: $icon-size;
+    width: $icon-size;
+    height: $icon-size;
+    color: var(--gold-400);
+  }
+}
+
+// Solid gold icon (for hero sections)
+@mixin header-icon-solid($size: 64px, $icon-size: 2rem) {
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold-400), var(--gold-600));
+  @include flex-center;
+
+  mat-icon {
+    font-size: $icon-size;
+    width: $icon-size;
+    height: $icon-size;
+    color: var(--navy-900);
+  }
+}
+
+@mixin header-text-white {
+  h1 {
+    font-size: 1.5rem;
+    font-weight: var(--font-weight-semibold);
+    color: white;
+    margin: 0 0 0.25rem;
+  }
+
+  .header-subtitle,
+  .subtitle {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// HEADER STATS - Stats container in headers
+// ─────────────────────────────────────────────────────────────────────────────
+
+@mixin header-stats-container {
+  @include flex-align-center;
+  gap: 1.5rem;
+  @include glass-dark;
+  padding: 1rem 1.5rem;
+}
+
+@mixin header-stats-compact {
+  @include flex-align-center;
+  gap: 1.25rem;
+  @include glass-dark;
+  padding: 0.625rem 1.25rem;
+}
+
+@mixin stat-item {
+  @include flex-column;
+  align-items: center;
+  text-align: center;
+  min-width: 100px;
+}
+
+@mixin stat-item-end {
+  @include flex-column;
+  align-items: flex-end;
+  text-align: right;
+}
+
+@mixin stat-value($size: 1.25rem) {
+  font-size: $size;
+  font-weight: var(--font-weight-semibold);
+  color: white;
+
+  &.highlight,
+  &.gold {
+    color: var(--gold-300);
+  }
+
+  &.positive {
+    color: var(--success-400);
+  }
+
+  &.negative {
+    color: var(--error-400);
+  }
+}
+
+@mixin stat-label {
+  font-size: 0.6875rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  margin-top: 0.25rem;
+}
+
+@mixin stat-divider {
+  width: 1px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// EMPTY STATE - Centered message with icon
+// ─────────────────────────────────────────────────────────────────────────────
+
+@mixin empty-state {
+  @include flex-column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  padding: 3rem;
+  text-align: center;
+  background: var(--surface);
+
+  h2 {
+    font-size: 1.25rem;
+    font-weight: var(--font-weight-medium);
+    color: var(--navy-800);
+    margin: 0 0 0.5rem;
+  }
+
+  p {
+    font-size: 0.9375rem;
+    color: var(--on-surface-muted);
+    margin: 0;
+    max-width: 400px;
+  }
+}
+
+@mixin empty-state-icon($size: 80px, $icon-size: 2.5rem) {
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--navy-100), var(--navy-50));
+  @include flex-center;
+  margin-bottom: 1.5rem;
+
+  mat-icon {
+    font-size: $icon-size;
+    width: $icon-size;
+    height: $icon-size;
+    color: var(--navy-400);
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// CARD PATTERNS
+// ─────────────────────────────────────────────────────────────────────────────
+
+@mixin card-base {
+  background: var(--surface-card);
+  border: 1px solid var(--outline-subtle);
+  border-radius: var(--radius-lg);
+}
+
+@mixin card-interactive {
+  @include card-base;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+
+  &:hover {
+    border-color: var(--gold-300);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+}
+
+@mixin card-row {
+  @include flex-align-center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  @include card-interactive;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// LIST PATTERNS
+// ─────────────────────────────────────────────────────────────────────────────
+
+@mixin list-column($gap: 0.75rem) {
+  @include flex-column;
+  gap: $gap;
+}
+
+@mixin list-item-icon($size: 48px) {
+  width: $size;
+  height: $size;
+  border-radius: var(--radius-md);
+  @include flex-center;
+  flex-shrink: 0;
+}
+
+@mixin list-item-info {
+  flex: 1;
+  min-width: 0;
+
+  h3 {
+    margin: 0 0 0.25rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--navy-900);
+    @include text-truncate;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// ICON VARIANTS
+// ─────────────────────────────────────────────────────────────────────────────
+
+@mixin icon-size($size: 1.5rem) {
+  font-size: $size;
+  width: $size;
+  height: $size;
+}
+
+// Icon box - colored square/circle with centered icon
+// Note: mat-icon styling should be applied separately for flexibility
+@mixin icon-box($size: 40px, $radius: var(--radius-md)) {
+  width: $size;
+  height: $size;
+  border-radius: $radius;
+  @include flex-center;
+  flex-shrink: 0;
+}
+
+// Circular badge (rank indicators)
+@mixin rank-badge($size: 28px) {
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  background: var(--navy-100);
+  color: var(--navy-700);
+  font-weight: var(--font-weight-bold);
+  font-size: 0.875rem;
+  @include flex-center;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SECTION PATTERNS
+// ─────────────────────────────────────────────────────────────────────────────
+
+@mixin section-title {
+  @include flex-align-center;
+  gap: 0.75rem;
+  font-size: 1.25rem;
+  font-weight: var(--font-weight-semibold);
+  color: var(--navy-800);
+  margin: 0 0 1.25rem;
+
+  mat-icon {
+    color: var(--gold-600);
+  }
+}
+
+@mixin section-margin {
+  margin-bottom: 2rem;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// CARD SURFACE - Standard surface styling
+// ─────────────────────────────────────────────────────────────────────────────
+
+@mixin surface-card {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// INFO COLUMN - Stacked label/value pattern
+// ─────────────────────────────────────────────────────────────────────────────
+
+@mixin info-column($gap: 0.125rem) {
+  @include flex-column;
+  gap: $gap;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// NOTICE / INFO BOX
+// ─────────────────────────────────────────────────────────────────────────────
+
+@mixin notice-box {
+  @include flex-align-center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  padding: 1rem;
+  background: var(--ivory-200);
+  border-radius: var(--radius-md);
+  color: var(--on-surface-muted);
+  font-size: 0.875rem;
+
+  mat-icon {
+    color: var(--gold-600);
+    @include icon-size(1.25rem);
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// DECORATIVE ELEMENTS
+// ─────────────────────────────────────────────────────────────────────────────
+
+@mixin gold-border-bottom {
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold-500) 50%, transparent);
+  }
+}
+
+@mixin separator-vertical($height: 2.5rem) {
+  width: 1px;
+  height: $height;
+  background: linear-gradient(180deg, transparent 0%, rgba(212, 168, 74, 0.3) 50%, transparent 100%);
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// GLASS EFFECT (for dark backgrounds)
+// ─────────────────────────────────────────────────────────────────────────────
+
+@mixin glass-dark($opacity: 0.05) {
+  background: rgba(255, 255, 255, $opacity);
+  border: 1px solid rgba(255, 255, 255, calc($opacity * 2));
+  border-radius: var(--radius-lg);
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// RESPONSIVE UTILITIES (Desktop only - 1280px+)
+// ─────────────────────────────────────────────────────────────────────────────
+
+@mixin large-screen {
+  @media (min-width: 1600px) {
+    @content;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// TRUNCATION
+// ─────────────────────────────────────────────────────────────────────────────
+
+@mixin text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// METRIC BLOCK - Hero strip metrics
+// ─────────────────────────────────────────────────────────────────────────────
+
+@mixin metric-block {
+  @include flex-column;
+  gap: 0.25rem;
+}
+
+@mixin metric-label-hero {
+  @include stat-label;
+  font-size: 0.625rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+@mixin metric-value-hero($size: 1rem, $color: white) {
+  @include stat-value($size);
+  color: $color;
+  white-space: nowrap;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// ALERT PATTERNS - Warning/Success/Info cards
+// ─────────────────────────────────────────────────────────────────────────────
+
+@mixin alert-card-base {
+  @include flex-start;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  border-left: 4px solid;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// TIMELINE MARKER - Central node
+// ─────────────────────────────────────────────────────────────────────────────
+
+@mixin timeline-marker-ring($size: 52px, $icon-size: 1.375rem) {
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  @include flex-center;
+  box-shadow:
+    0 0 0 4px var(--surface),
+    0 0 0 6px currentColor,
+    0 6px 20px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+
+  mat-icon {
+    @include icon-size($icon-size);
+    color: white;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// KPI CARD - Dashboard metrics
+// ─────────────────────────────────────────────────────────────────────────────
+
+@mixin kpi-card {
+  @include card-base;
+  padding: 1.25rem;
+  transition: all var(--transition-fast);
+
+  &:hover {
+    border-color: var(--gold-200);
+    box-shadow: var(--shadow-sm);
+  }
+}
+
+@mixin kpi-header {
+  @include flex-align-center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+
+  mat-icon {
+    @include icon-size(1.125rem);
+    color: var(--gold-600);
+  }
+}
+
+@mixin kpi-title {
+  font-size: 0.6875rem;
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--on-surface-muted);
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// LEGEND ITEM - Chart legend chips
+// ─────────────────────────────────────────────────────────────────────────────
+
+@mixin legend-chip {
+  @include flex-align-center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--surface-card);
+  border: 1px solid var(--outline-subtle);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: inherit;
+  font-size: 0.8125rem;
+
+  &:hover {
+    border-color: var(--gold-300);
+    background: rgba(212, 168, 74, 0.05);
+  }
+
+  &.selected {
+    border-color: var(--gold-500);
+    background: rgba(212, 168, 74, 0.1);
+    box-shadow: 0 0 0 2px rgba(212, 168, 74, 0.2);
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// ACTION CARD - Timeline card
+// ─────────────────────────────────────────────────────────────────────────────
+
+@mixin action-card-base {
+  position: relative;
+  width: 100%;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: 1px solid var(--navy-100);
+  background: var(--surface);
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-xl);
+  }
+}

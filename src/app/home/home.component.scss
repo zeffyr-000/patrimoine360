@@ -1,3 +1,5 @@
+@use '../_mixins' as *;
+
 .home-container {
   max-width: 1600px;
   margin: 0 auto;
@@ -5,15 +7,13 @@
   background: transparent;
   min-height: calc(100vh - 64px);
 
-  @media (min-width: 1600px) {
+  @include large-screen {
     padding: 24px 64px;
   }
 }
 
 .loading-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  @include flex-column-center;
   justify-content: center;
   min-height: 500px;
   gap: 32px;
@@ -26,15 +26,8 @@
 }
 
 .header-loading {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 80px;
+  @include loading-container(80px);
   margin-bottom: 1rem;
-
-  ::ng-deep .mat-mdc-progress-spinner circle {
-    stroke: var(--primary-color);
-  }
 }
 
 .error-card {
@@ -44,16 +37,13 @@
   border-radius: var(--radius-lg);
 
   mat-card-content {
-    display: flex;
-    align-items: center;
+    @include flex-align-center;
     gap: 20px;
     color: var(--error);
     padding: 24px;
 
     mat-icon {
-      font-size: 32px;
-      width: 32px;
-      height: 32px;
+      @include icon-size(32px);
     }
   }
 }
@@ -63,8 +53,7 @@
 // ═══════════════════════════════════════════════════════════════════════════════
 
 .section-title {
-  display: flex;
-  align-items: center;
+  @include flex-align-center;
   gap: 1rem;
   margin: 0 0 2.5rem;
   font-size: 1.5rem;
@@ -73,9 +62,7 @@
   letter-spacing: var(--tracking-normal);
 
   mat-icon {
-    font-size: 1.75rem;
-    width: 1.75rem;
-    height: 1.75rem;
+    @include icon-size(1.75rem);
     color: var(--gold-600);
   }
 }
@@ -182,9 +169,7 @@
 }
 
 .tab-icon {
-  font-size: 1.25rem;
-  width: 1.25rem;
-  height: 1.25rem;
+  @include icon-size(1.25rem);
   color: var(--on-surface-muted);
   transition: color var(--transition-normal);
 }

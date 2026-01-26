@@ -78,23 +78,62 @@
   // ─────────────────────────────────────────────────────────────────────────────
   // ÉTATS - Performance élégante (tons désaturés luxe)
   // ─────────────────────────────────────────────────────────────────────────────
+
+  // Success - Green palette
+  --success-50: #f0f7f4;
+  --success-100: #d1fae5;
+  --success-200: #a7f3d0;
+  --success-300: #6ee7b7;
+  --success-400: #34d399;
+  --success-500: #10b981;
+  --success-600: #059669;
+  --success-700: #047857;
+  --success-800: #065f46;
   --success: #2d6a4f;
   --success-light: #40916c;
-  --success-400: #4ade80;
   --success-muted: #95d5b2;
   --success-bg: rgba(45, 106, 79, 0.06);
 
+  // Error - Red palette
+  --error-50: #fef2f2;
+  --error-100: #fee2e2;
+  --error-200: #fecaca;
+  --error-300: #fca5a5;
+  --error-400: #f87171;
+  --error-500: #ef4444;
+  --error-600: #dc2626;
+  --error-700: #b91c1c;
+  --error-800: #991b1b;
   --error: #9d4444;
   --error-light: #c25757;
-  --error-400: #f87171;
   --error-muted: #e8a5a5;
   --error-bg: rgba(157, 68, 68, 0.06);
 
+  // Warning - Amber palette
+  --warning-50: #fffbeb;
+  --warning-100: #fef3c7;
+  --warning-200: #fde68a;
+  --warning-300: #fcd34d;
+  --warning-400: #fbbf24;
+  --warning-500: #f59e0b;
+  --warning-600: #d97706;
+  --warning-700: #b45309;
+  --warning-800: #92400e;
+  --warning-900: #78350f;
   --warning: #c17f24;
   --warning-light: #dba032;
-  --warning-400: #fbbf24;
+
+  // Info - Blue palette
+  --info-50: #eff6ff;
+  --info-100: #dbeafe;
+  --info-400: #60a5fa;
+  --info-500: #3b82f6;
   --info: #3a6ea5;
   --info-light: #5090c9;
+
+  // Neutral - For medals/badges
+  --silver-400: #94a3b8;
+  --bronze-500: #d97706;
 
   // ─────────────────────────────────────────────────────────────────────────────
   // SPACING - Respiration généreuse style maison de luxe
