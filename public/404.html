@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Redirection…</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+      (function () {
+        // For GitHub Pages: redirect any 404 to the SPA entry while keeping the original path
+        const l = window.location;
+        const segments = l.pathname.split('/').filter(Boolean);
+        const repo = segments.length > 0 ? '/' + segments[0] : '';
+        const path = l.pathname.slice(repo.length) || '/';
+        const redirectTarget = repo + '/index.html';
+        const fullPath = path + (l.search || '') + (l.hash || '');
+        try {
+          sessionStorage.setItem('spa_redirect_path', fullPath);
+        } catch (err) {
+          console.error('Unable to store redirect path', err);
+        }
+        l.replace(redirectTarget);
+      })();
+    </script>
+  </head>
+  <body>
+    <p>Redirection…</p>
+  </body>
+</html>

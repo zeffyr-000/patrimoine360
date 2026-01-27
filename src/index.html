@@ -10,6 +10,49 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <!-- Material Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <script>
+      (function () {
+        // Restore the original path if we were redirected from 404.html on GitHub Pages
+        let redirectPath = null;
+        let storage = null;
+        try {
+          storage = window.sessionStorage;
+        } catch (err) {
+          console.error('sessionStorage is not available', err);
+        }
+        if (storage) {
+          try {
+            redirectPath = storage.getItem('spa_redirect_path');
+            if (redirectPath) {
+              storage.removeItem('spa_redirect_path');
+            }
+          } catch (err) {
+            console.error('Unable to read redirect path', err);
+          }
+        }
+        if (redirectPath) {
+          try {
+            let target = redirectPath;
+            // Try to parse as URL to safely extract path, query and hash
+            try {
+              const url = new URL(redirectPath, window.location.origin);
+              // Only use same-origin URLs to avoid open redirects
+              if (url.origin === window.location.origin) {
+                target = url.pathname + url.search + url.hash;
+              }
+            } catch (_parseErr) {
+              // If parsing fails, fall back to treating redirectPath as a path-like string
+            }
+            if (!target.startsWith('/')) {
+              target = '/' + target;
+            }
+            window.history.replaceState(null, '', target);
+          } catch (err) {
+            console.error('Unable to normalize redirect path', err);
+          }
+        }
+      })();
+    </script>
   </head>
   <body>
     <app-root></app-root>
