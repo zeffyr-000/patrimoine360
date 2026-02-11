@@ -264,26 +264,6 @@ body {
   }
 }
 
-@keyframes pulseGlow {
-  0%,
-  100% {
-    box-shadow: var(--shadow-gold);
-  }
-  50% {
-    box-shadow: var(--shadow-gold-glow);
-  }
-}
-
-@keyframes breathe {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.02);
-  }
-}
-
 .fade-in-up {
   animation: fadeInUp 0.7s var(--ease-luxe);
 }

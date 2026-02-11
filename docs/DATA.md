@@ -1,273 +1,273 @@
-# 📊 Données du POC - Pierre Dubois
+# 📊 POC Mock Data — Pierre Dubois
 
-## 👤 Profil Client
+## 👤 Client Profile
 
 ```
-Nom             : Pierre Dubois
-Âge             : 52 ans
-Profession      : Entrepreneur - Dirigeant de société
-Société         : TechSolutions SAS (services informatiques, 45 salariés)
-Profil risque   : Équilibré
-Client depuis   : 15 mars 2015 (11 ans)
-Gestionnaire    : Sophie Martin (sophie.martin@banqueprivee.fr)
+Name            : Pierre Dubois
+Age             : 52
+Occupation      : Entrepreneur — Company Director
+Company         : TechSolutions SAS (IT services, 45 employees)
+Risk Profile    : Balanced
+Client Since    : March 15, 2015 (11 years)
+Manager         : Sophie Martin (sophie.martin@banqueprivee.fr)
 ```
 
-## 💰 Patrimoine Total : 5 753 000 €
+## 💰 Total Wealth: €5,753,000
 
-### Répartition globale
+### Global Breakdown
 
 ```
 ┌──────────────────────────────────────────────────────────┐
-│ Société non cotée           2 800 000 €    48,7%  ████████████████
-│ Résidence principale        1 250 000 €    21,7%  ███████
-│ Immobilier locatif            420 000 €     7,3%  ██
-│ Assurance-vie                 380 000 €     6,6%  ██
-│ Actions cotées                280 000 €     4,9%  █
-│ Liquidités                    180 000 €     3,1%  █
-│ Obligations                   150 000 €     2,6%  █
-│ PER                           125 000 €     2,2%  █
-│ Collection art                 95 000 €     1,7%  █
-│ Cave à vin                     45 000 €     0,8%
-│ Crypto-actifs                  28 000 €     0,5%
+│ Unlisted company            €2,800,000    48.7%  ████████████████
+│ Primary residence           €1,250,000    21.7%  ███████
+│ Rental real estate            €420,000     7.3%  ██
+│ Life insurance                €380,000     6.6%  ██
+│ Listed shares                 €280,000     4.9%  █
+│ Cash                          €180,000     3.1%  █
+│ Bonds                         €150,000     2.6%  █
+│ Retirement plan (PER)         €125,000     2.2%  █
+│ Art collection                 €95,000     1.7%  █
+│ Wine cellar                    €45,000     0.8%
+│ Crypto assets                  €28,000     0.5%
 └──────────────────────────────────────────────────────────┘
 ```
 
-## 📈 Performance 2025 : +333 000 € (+6,14%)
+## 📈 2025 Performance: +€333,000 (+6.14%)
 
-### Par catégorie
+### By Category
 
 ```
-Catégorie                 Début 2025    Fin 2025    Gain        %
+Category                  Start 2025    End 2025      Gain        %
 ─────────────────────────────────────────────────────────────────
-Société non cotée         2 600 000 €  2 800 000 €  +200 000 €  +7,69% ↗
-Résidence principale      1 200 000 €  1 250 000 €   +50 000 €  +4,17% ↗
-Immobilier locatif          410 000 €    420 000 €   +10 000 €  +2,44% ↗
-Actions cotées              250 000 €    280 000 €   +30 000 €  +12,0% ↗↗
-Assurance-vie               360 000 €    380 000 €   +20 000 €  +5,56% ↗
-PER                         115 000 €    125 000 €   +10 000 €  +8,7%  ↗
-Obligations                 148 000 €    150 000 €    +2 000 €  +1,35% →
-Liquidités                  180 000 €    180 000 €         0 €   0,0%  →
-Collection art               85 000 €     95 000 €   +10 000 €  +11,76% ↗
-Cave à vin                   40 000 €     45 000 €    +5 000 €  +12,5% ↗
-Crypto-actifs                35 000 €     28 000 €    -7 000 €  -20,0% ↘↘
+Unlisted company          €2,600,000   €2,800,000   +€200,000   +7.69% ↗
+Primary residence         €1,200,000   €1,250,000    +€50,000   +4.17% ↗
+Rental real estate          €410,000     €420,000    +€10,000   +2.44% ↗
+Listed shares               €250,000     €280,000    +€30,000   +12.0% ↗↗
+Life insurance              €360,000     €380,000    +€20,000   +5.56% ↗
+Retirement plan (PER)       €115,000     €125,000    +€10,000   +8.7%  ↗
+Bonds                       €148,000     €150,000     +€2,000   +1.35% →
+Cash                        €180,000     €180,000          €0    0.0%  →
+Art collection               €85,000      €95,000    +€10,000   +11.76% ↗
+Wine cellar                  €40,000      €45,000     +€5,000   +12.5% ↗
+Crypto assets                €35,000      €28,000     -€7,000   -20.0% ↘↘
 ─────────────────────────────────────────────────────────────────
-TOTAL                     5 420 000 €  5 753 000 €  +333 000 €  +6,14%
+TOTAL                     €5,420,000   €5,753,000   +€333,000   +6.14%
 ```
 
-## 🏠 Immobilier (1 670 000 € - 29%)
+## 🏠 Real Estate (€1,670,000 — 29%)
 
-### Résidence principale - Neuilly-sur-Seine
-
-```
-Type              : Maison individuelle 180m² avec jardin
-Localisation      : Neuilly-sur-Seine (92)
-Acquisition       : 15 juin 2015
-Coût acquisition  : 850 000 €
-Valeur actuelle   : 1 250 000 €
-Plus-value        : +400 000 € (+47,1%)
-```
-
-### Appartement locatif - Lyon 6e
+### Primary Residence — Neuilly-sur-Seine
 
 ```
-Type              : Appartement 75m² loué en nom propre
-Localisation      : Lyon 6e (69)
-Acquisition       : 1 septembre 2018
-Coût acquisition  : 380 000 €
-Valeur actuelle   : 420 000 €
-Plus-value        : +40 000 € (+10,5%)
-Rendement locatif : 3,8% net/an
+Type              : Detached house 180m² with garden
+Location          : Neuilly-sur-Seine (92)
+Acquired          : June 15, 2015
+Acquisition cost  : €850,000
+Current value     : €1,250,000
+Capital gain      : +€400,000 (+47.1%)
 ```
 
-## 🏢 Société non cotée (2 800 000 € - 48,7%)
+### Rental Apartment — Lyon 6e
+
+```
+Type              : 75m² apartment, rented individually
+Location          : Lyon 6e (69)
+Acquired          : September 1, 2018
+Acquisition cost  : €380,000
+Current value     : €420,000
+Capital gain      : +€40,000 (+10.5%)
+Rental yield      : 3.8% net/year
+```
+
+## 🏢 Unlisted Company (€2,800,000 — 48.7%)
 
 ### TechSolutions SAS
 
 ```
-Secteur           : Services informatiques
-Effectif          : 45 salariés
-Création          : 15 janvier 2010
-Parts détenues    : 75%
-Coût acquisition  : 500 000 € (capital initial)
-Valeur actuelle   : 2 800 000 €
-Plus-value        : +2 300 000 € (+460%)
-Performance 2025  : +7,69%
+Sector            : IT Services
+Employees         : 45
+Founded           : January 15, 2010
+Shares held       : 75%
+Acquisition cost  : €500,000 (initial capital)
+Current value     : €2,800,000
+Capital gain      : +€2,300,000 (+460%)
+2025 performance  : +7.69%
 ```
 
-## 💼 Placements financiers (1 160 000 € - 20%)
+## 💼 Financial Investments (€1,160,000 — 20%)
 
-### Actions cotées (280 000 €)
-
-```
-PEA - Boursorama               185 000 €
-  • ETF World (40%)             74 000 €
-  • Actions FR/EU (60%)        111 000 €
-  Acquisition : mars 2016
-  Coût : 145 000 €
-  Gain : +40 000 € (+27,6%)
-
-CTO - International             95 000 €
-  • Actions US tech (50%)       47 500 €
-  • Marchés émergents (50%)     47 500 €
-  Acquisition : mai 2019
-  Coût : 80 000 €
-  Gain : +15 000 € (+18,8%)
-```
-
-### Assurance-vie multisupports (380 000 €)
+### Listed Shares (€280,000)
 
 ```
-Répartition actuelle :
-  • Fonds euros (40%)          152 000 €
-  • UC diversifiées (60%)      228 000 €
+PEA — Boursorama               €185,000
+  • World ETF (40%)             €74,000
+  • FR/EU Shares (60%)        €111,000
+  Acquired: March 2016
+  Cost: €145,000
+  Gain: +€40,000 (+27.6%)
 
-Acquisition : novembre 2014
-Coût : 340 000 €
-Gain : +40 000 € (+11,8%)
-Performance 2025 : +5,56%
+CTO — International             €95,000
+  • US tech shares (50%)        €47,500
+  • Emerging markets (50%)      €47,500
+  Acquired: May 2019
+  Cost: €80,000
+  Gain: +€15,000 (+18.8%)
 ```
 
-### PER Individuel (125 000 €)
+### Multi-Support Life Insurance (€380,000)
 
 ```
-Type : Plan Épargne Retraite - gestion profilée
-Acquisition : octobre 2019
-Versements cumulés : 110 000 €
-Valeur actuelle : 125 000 €
-Gain : +15 000 € (+13,6%)
-Performance 2025 : +8,7%
-Déduction fiscale 2025 : 9 000 €
+Current allocation:
+  • Euro funds (40%)           €152,000
+  • Diversified units (60%)    €228,000
+
+Acquired: November 2014
+Cost: €340,000
+Gain: +€40,000 (+11.8%)
+2025 performance: +5.56%
 ```
 
-### Obligations d'entreprise (150 000 €)
+### Individual Retirement Plan — PER (€125,000)
 
 ```
-Type : Obligations corporate investment grade
-Rendement : 4,2% par an
-Acquisition : juin 2022
-Coût : 148 000 €
-Valeur actuelle : 150 000 €
-Revenu annuel : 2 100 €
+Type: Retirement savings plan — profiled management
+Acquired: October 2019
+Cumulative contributions: €110,000
+Current value: €125,000
+Gain: +€15,000 (+13.6%)
+2025 performance: +8.7%
+2025 tax deduction: €9,000
 ```
 
-### Liquidités (180 000 €)
+### Corporate Bonds (€150,000)
 
 ```
-Comptes courants et livrets
-  • Trésorerie entreprise      100 000 €
-  • Épargne personnelle         80 000 €
+Type: Investment grade corporate bonds
+Yield: 4.2% per year
+Acquired: June 2022
+Cost: €148,000
+Current value: €150,000
+Annual income: €2,100
 ```
 
-## 🎨 Actifs alternatifs (168 000 € - 2,3%)
-
-### Collection art contemporain (95 000 €)
+### Cash (€180,000)
 
 ```
-Composition : 5 œuvres d'artistes émergents français
-Acquisition : avril 2017
-Coût : 65 000 €
-Valeur actuelle : 95 000 €
-Plus-value : +30 000 € (+46,2%)
-Performance 2025 : +11,76%
+Current accounts and savings
+  • Business cash              €100,000
+  • Personal savings            €80,000
 ```
 
-### Cave à vin d'investissement (45 000 €)
+## 🎨 Alternative Assets (€168,000 — 2.3%)
+
+### Contemporary Art Collection (€95,000)
 
 ```
-Type : Grands crus classés Bordeaux
-Acquisition : novembre 2019
-Coût : 35 000 €
-Valeur actuelle : 45 000 €
-Plus-value : +10 000 € (+28,6%)
-Performance 2025 : +12,5%
+Composition: 5 works by emerging French artists
+Acquired: April 2017
+Cost: €65,000
+Current value: €95,000
+Capital gain: +€30,000 (+46.2%)
+2025 performance: +11.76%
 ```
 
-### Crypto-actifs (28 000 €)
+### Investment Wine Cellar (€45,000)
 
 ```
-Répartition :
-  • Bitcoin (60%)              16 800 €
-  • Ethereum (40%)             11 200 €
-
-Acquisition : février 2021
-Coût : 40 000 €
-Perte : -12 000 € (-30%)
-Performance 2025 : -20%
-Note : Position allégée de 30% en sept 2025 (sécurisation +8k€)
+Type: Bordeaux classified grand crus
+Acquired: November 2019
+Cost: €35,000
+Current value: €45,000
+Capital gain: +€10,000 (+28.6%)
+2025 performance: +12.5%
 ```
 
-## 🎯 Actions du gestionnaire 2025-2026
-
-### ✅ Réalisées (5)
-
-**1. Rééquilibrage portefeuille actions** - 15 déc 2025
+### Crypto Assets (€28,000)
 
 ```
-Action : Réduction exposition tech US (40% → 25%)
-       + Renforcement ETF World
-Impact : Réduction risque concentration géographique
+Allocation:
+  • Bitcoin (60%)              €16,800
+  • Ethereum (40%)             €11,200
+
+Acquired: February 2021
+Cost: €40,000
+Loss: -€12,000 (-30%)
+2025 performance: -20%
+Note: Position reduced by 30% in Sept 2025 (secured +€8k)
 ```
 
-**2. Optimisation fiscale PER** - 20 nov 2025
+## 🎯 Manager Actions 2025-2026
+
+### ✅ Completed (5)
+
+**1. Portfolio Rebalancing** — December 15, 2025
 
 ```
-Action : Versement 20 000 € sur PER
-Impact : Économie d'impôt 9 000 € (année fiscale 2025)
+Action: Reduced US tech exposure (40% → 25%)
+       + Increased World ETF allocation
+Impact: Reduced geographic concentration risk
 ```
 
-**3. Acquisition obligations corporate** - 10 oct 2025
+**2. Retirement Tax Optimization** — November 20, 2025
 
 ```
-Action : Ajout 50 000 € obligations (rendement 4,2%)
-Impact : Revenu annuel 2 100 €
+Action: €20,000 contribution to PER
+Impact: Tax savings of €9,000 (fiscal year 2025)
 ```
 
-**4. Allégement position crypto** - 5 sept 2025
+**3. Corporate Bond Acquisition** — October 10, 2025
 
 ```
-Action : Vente partielle 30% crypto-actifs
-Impact : Sécurisation +8 000 € de plus-value
+Action: Added €50,000 in bonds (4.2% yield)
+Impact: Annual income €2,100
 ```
 
-**5. Conseil transmission patrimoniale** - 22 juil 2025
+**4. Crypto Position Reduction** — September 5, 2025
 
 ```
-Action : Stratégie donation-partage progressive (100k€)
-Impact : Économie future droits succession 25 000 €
+Action: Partial sale of 30% crypto assets
+Impact: Secured +€8,000 in capital gains
 ```
 
-### 📅 Planifiées (1)
-
-**6. Révision allocation assurance-vie** - 15 fév 2026
+**5. Estate Planning Advice** — July 22, 2025
 
 ```
-Action : Rééquilibrage 40/60 → 35/65 (fonds euros/UC)
-Impact : Gain rendement estimé +0,8%/an
+Action: Progressive gift-sharing strategy (€100k)
+Impact: Future estate tax savings of €25,000
 ```
 
-### 🔄 En cours (1)
+### 📅 Planned (1)
 
-**7. Analyse opportunité investissement locatif** - 1 mars 2026
-
-```
-Action : Étude acquisition second bien via SCI familiale
-Budget : 350 000 € avec financement bancaire
-Impact : Rendement locatif net estimé 4,5%
-```
-
-## 📊 Récapitulatif chiffres clés
+**6. Life Insurance Reallocation** — February 15, 2026
 
 ```
-Patrimoine total         : 5 753 000 €
-Performance annuelle     : +333 000 € (+6,14%)
-Nombre d'actifs          : 12
-Actions gestionnaire     : 7 (5 réalisées, 1 en cours, 1 planifiée)
-Économies fiscales 2025  : 9 000 €
-Plus-values réalisées    : 8 000 € (crypto)
-Économie future          : 25 000 € (transmission)
-Client depuis            : 11 ans
+Action: Rebalancing 40/60 → 35/65 (euro funds/units)
+Impact: Estimated yield improvement +0.8%/year
+```
+
+### 🔄 In Progress (1)
+
+**7. Rental Investment Opportunity Analysis** — March 1, 2026
+
+```
+Action: Study acquisition of second property via family SCI
+Budget: €350,000 with bank financing
+Impact: Estimated net rental yield 4.5%
+```
+
+## 📊 Key Figures Summary
+
+```
+Total wealth             : €5,753,000
+Annual performance       : +€333,000 (+6.14%)
+Number of assets         : 12
+Manager actions          : 7 (5 completed, 1 in progress, 1 planned)
+2025 tax savings         : €9,000
+Realized capital gains   : €8,000 (crypto)
+Future savings           : €25,000 (estate planning)
+Client since             : 11 years
 ```
 
 ---
 
-**Données à jour au 24 janvier 2026**
+**Data as of January 24, 2026**

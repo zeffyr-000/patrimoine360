@@ -35,7 +35,6 @@ export class AppComponent {
   protected readonly menuOpen = signal(false);
   protected readonly appTitle = 'Patrimoine360';
 
-  // Track current URL pour le menu
   private readonly currentUrl = toSignal(
     this.router.events.pipe(
       filter((event): event is NavigationEnd => event instanceof NavigationEnd),
@@ -44,7 +43,7 @@ export class AppComponent {
     { initialValue: this.router.url }
   );
 
-  // Pages patrimoine (routes enfants de /)
+  // Patrimoine pages (child routes of /)
   protected readonly isPatrimoineActive = computed(() => {
     const url = this.currentUrl();
     return ['/overview', '/performance', '/assets', '/actions'].some(route => url.startsWith(route));

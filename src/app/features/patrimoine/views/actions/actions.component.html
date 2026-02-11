@@ -3,13 +3,12 @@
     <mat-spinner diameter="40"></mat-spinner>
   </div>
 } @else if (recentActions().length > 0) {
-  <section class="actions-section" *transloco="let t">
-    <!-- Template réutilisable pour les cartes d'action -->
-    <ng-template #actionCard let-action="action" let-t="t">
+  <section class="actions-section">
+    <ng-template #actionCard let-action="action">
       <mat-card class="action-card" [class]="'status-' + action.status">
         <div class="status-ribbon" [class]="'status-' + action.status">
           <mat-icon>{{ getActionStatusIcon(action.status) }}</mat-icon>
-          <span>{{ t('home.action_status.' + action.status) }}</span>
+          <span>{{ 'home.action_status.' + action.status | transloco }}</span>
         </div>
         <div class="card-body">
           <div class="card-header">
@@ -25,7 +24,7 @@
                   </mat-icon>
                   {{ getAssetCategory(action.category).label }}
                 </span>
-                <span class="tag type-tag">{{ t('home.action_types.' + action.type) }}</span>
+                <span class="tag type-tag">{{ 'home.action_types.' + action.type | transloco }}</span>
               </div>
             </div>
           </div>
@@ -36,7 +35,7 @@
                 <mat-icon>{{ action.impactValue && action.impactValue > 0 ? 'trending_up' : 'insights' }}</mat-icon>
               </div>
               <div class="impact-details">
-                <span class="impact-title">{{ t('home.impact_label') }}</span>
+                <span class="impact-title">{{ 'home.impact_label' | transloco }}</span>
                 <p class="impact-description">{{ action.impact }}</p>
                 @if (action.impactValue && action.impactValue > 0) {
                   <div class="impact-amount">
@@ -51,28 +50,27 @@
       </mat-card>
     </ng-template>
 
-    <!-- Header condensé -->
     <div class="timeline-header-compact">
       <div class="header-left">
         <div class="header-badge">
           <mat-icon>workspace_premium</mat-icon>
         </div>
         <div class="header-text">
-          <h1>{{ t('actions.year_review_title') }}</h1>
-          <span class="header-meta">{{ completedCount() }} {{ t('home.actions_completed') }}</span>
+          <h1>{{ 'actions.year_review_title' | transloco }}</h1>
+          <span class="header-meta">{{ completedCount() }} {{ 'home.actions_completed' | transloco }}</span>
         </div>
       </div>
 
       <div class="header-stats-compact">
         <div class="stat-main">
           <span class="stat-value">{{ formatCurrency(totalImpact()) }}</span>
-          <span class="stat-label">{{ t('actions.total_value_created') }}</span>
+          <span class="stat-label">{{ 'actions.total_value_created' | transloco }}</span>
         </div>
         <div class="stat-divider"></div>
         <div class="stat-breakdown">
           <div
             class="mini-stat"
-            [matTooltip]="t('actions.tooltip_tax_savings')"
+            [matTooltip]="'actions.tooltip_tax_savings' | transloco"
             matTooltipClass="premium-tooltip"
             matTooltipPosition="below"
           >
@@ -81,7 +79,7 @@
           </div>
           <div
             class="mini-stat"
-            [matTooltip]="t('actions.tooltip_realized_gains')"
+            [matTooltip]="'actions.tooltip_realized_gains' | transloco"
             matTooltipClass="premium-tooltip"
             matTooltipPosition="below"
           >
@@ -90,7 +88,7 @@
           </div>
           <div
             class="mini-stat"
-            [matTooltip]="t('actions.tooltip_transmission')"
+            [matTooltip]="'actions.tooltip_transmission' | transloco"
             matTooltipClass="premium-tooltip"
             matTooltipPosition="below"
           >
@@ -101,30 +99,30 @@
       </div>
 
       <div class="header-legend">
-        <div class="legend-item"><span class="dot completed"></span>{{ t('home.action_status.completed') }}</div>
-        <div class="legend-item"><span class="dot in_progress"></span>{{ t('home.action_status.in_progress') }}</div>
-        <div class="legend-item"><span class="dot planned"></span>{{ t('home.action_status.planned') }}</div>
+        <div class="legend-item">
+          <span class="dot completed"></span>{{ 'home.action_status.completed' | transloco }}
+        </div>
+        <div class="legend-item">
+          <span class="dot in_progress"></span>{{ 'home.action_status.in_progress' | transloco }}
+        </div>
+        <div class="legend-item"><span class="dot planned"></span>{{ 'home.action_status.planned' | transloco }}</div>
       </div>
     </div>
 
-    <!-- Timeline pleine largeur - grille unique -->
     <div class="journey-timeline">
       <div class="timeline-spine"></div>
 
       @for (action of recentActions(); track action.id; let i = $index; let isEven = $even) {
-        <!-- Entrée de timeline : 3 colonnes sur une même ligne -->
         <div class="timeline-entry" [class.left]="isEven" [class.right]="!isEven">
-          <!-- Colonne gauche -->
           <div class="entry-col entry-col-left">
             @if (isEven) {
               <div class="card-wrapper">
-                <ng-container *ngTemplateOutlet="actionCard; context: { action: action, t: t }"></ng-container>
+                <ng-container *ngTemplateOutlet="actionCard; context: { action: action }"></ng-container>
                 <div class="card-connector" [class]="'status-' + action.status"></div>
               </div>
             }
           </div>
 
-          <!-- Colonne centrale : marker -->
           <div class="entry-col entry-col-center">
             <div class="timeline-marker" [class]="'status-' + action.status">
               <div class="marker-icon-ring">
@@ -138,19 +136,17 @@
             </div>
           </div>
 
-          <!-- Colonne droite -->
           <div class="entry-col entry-col-right">
             @if (!isEven) {
               <div class="card-wrapper">
                 <div class="card-connector" [class]="'status-' + action.status"></div>
-                <ng-container *ngTemplateOutlet="actionCard; context: { action: action, t: t }"></ng-container>
+                <ng-container *ngTemplateOutlet="actionCard; context: { action: action }"></ng-container>
               </div>
             }
           </div>
         </div>
       }
 
-      <!-- Footer -->
       <div class="timeline-entry timeline-footer-entry">
         <div class="entry-col entry-col-left"></div>
         <div class="entry-col entry-col-center">
@@ -162,18 +158,16 @@
       </div>
     </div>
 
-    <!-- Footer message -->
     <div class="timeline-footer-message">
-      <p>{{ t('home.journey_continues') }}</p>
+      <p>{{ 'home.journey_continues' | transloco }}</p>
     </div>
   </section>
 } @else {
-  <!-- Empty state quand aucune action -->
-  <div class="empty-state" *transloco="let t">
+  <div class="empty-state">
     <div class="empty-state-icon">
       <mat-icon>event_note</mat-icon>
     </div>
-    <h2>{{ t('actions.empty_state_title') }}</h2>
-    <p>{{ t('actions.empty_state_description') }}</p>
+    <h2>{{ 'actions.empty_state_title' | transloco }}</h2>
+    <p>{{ 'actions.empty_state_description' | transloco }}</p>
   </div>
 }

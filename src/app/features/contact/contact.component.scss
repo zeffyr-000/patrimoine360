@@ -4,6 +4,10 @@
   @include content-page;
 }
 
+.loading-container {
+  @include loading-container(200px);
+}
+
 .page-header {
   @include simple-page-header;
 }

@@ -1,17 +1,17 @@
-<section class="client-header-vip" *transloco="let t">
+<section class="client-header-vip">
   <div class="header-line">
     <div class="client-identity">
       <h1 class="client-name">{{ client().firstName }} {{ client().lastName }}</h1>
       <div class="client-meta">
         <span class="client-badge">
           <mat-icon class="badge-icon">diamond</mat-icon>
-          <span>{{ t('home.client_premium') }}</span>
+          <span>{{ 'home.client_premium' | transloco }}</span>
         </span>
         <span class="client-profession">{{ client().profession }}</span>
       </div>
     </div>
     <div class="banker-block">
-      <span class="banker-label">{{ t('home.managed_by_label') }}</span>
+      <span class="banker-label">{{ 'home.managed_by_label' | transloco }}</span>
       <span class="banker-name">{{ client().bankerName }}</span>
     </div>
   </div>

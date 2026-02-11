@@ -1,3 +1,4 @@
+import { ApplicationRef } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
@@ -8,6 +9,7 @@ import { getTranslocoTestingModule } from '../testing/transloco-testing.module';
 describe('PatrimoineService', () => {
   let service: PatrimoineService;
   let httpMock: HttpTestingController;
+  let appRef: ApplicationRef;
 
   const mockClientData = {
     client: {
@@ -16,12 +18,10 @@ describe('PatrimoineService', () => {
       lastName: 'Dupont',
       age: 52,
       profession: "Chef d'entreprise",
-      riskProfile: 'equilibre',
-      banker: {
-        name: 'Marie Laurent',
-        email: 'marie.laurent@bank.com',
-        phone: '+33 1 23 45 67 89',
-      },
+      riskProfile: 'équilibré' as const,
+      bankerName: 'Marie Laurent',
+      bankerEmail: 'marie.laurent@banqueprivee.fr',
+      clientSince: '2020-01-15',
     },
   };
 
@@ -43,8 +43,8 @@ describe('PatrimoineService', () => {
     evolution: 333000,
     evolutionPercent: 6.14,
     breakdown: [
-      { category: 'Immobilier', value: 2600000, percent: 45.2, color: '#1a3e5c' },
-      { category: 'Assurance vie', value: 1450000, percent: 25.2, color: '#c9a55c' },
+      { type: 'real_estate' as const, label: 'Immobilier', value: 2600000, percent: 45.2, color: '#1a3e5c' },
+      { type: 'life_insurance' as const, label: 'Assurance vie', value: 1450000, percent: 25.2, color: '#c9a55c' },
     ],
   };
 
@@ -70,8 +70,6 @@ describe('PatrimoineService', () => {
   };
 
   beforeEach(() => {
-    vi.useFakeTimers();
-
     TestBed.configureTestingModule({
       imports: [getTranslocoTestingModule()],
       providers: [PatrimoineService, provideHttpClient(), provideHttpClientTesting()],
@@ -79,92 +77,132 @@ describe('PatrimoineService', () => {
 
     service = TestBed.inject(PatrimoineService);
     httpMock = TestBed.inject(HttpTestingController);
+    appRef = TestBed.inject(ApplicationRef);
   });
 
   afterEach(() => {
+    flushAllPending();
+    httpMock.verify();
     vi.restoreAllMocks();
-    vi.useRealTimers();
   });
+
+  // Helper: flush all pending resource requests so whenStable() can resolve
+  function flushAllPending() {
+    for (const url of ['client.json', 'overview.json', 'performance.json', 'actions.json', 'assets.json']) {
+      for (const req of httpMock.match(`data/${url}`)) {
+        req.flush(null);
+      }
+    }
+  }
 
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should load client data', async () => {
-    service.loadClient().subscribe();
+  it('should load client data via httpResource', async () => {
+    service.loadClient();
+    TestBed.tick();
 
     const req = httpMock.expectOne('data/client.json');
     expect(req.request.method).toBe('GET');
     req.flush(mockClientData);
 
-    // Advance timer to account for simulated delay
-    await vi.advanceTimersByTimeAsync(300);
+    flushAllPending();
+    await appRef.whenStable();
 
     expect(service.client()).toBeTruthy();
     expect(service.client()?.firstName).toBe('Jean');
   });
 
   it('should load overview data and compute summary and header values', async () => {
-    service.loadOverview().subscribe();
+    service.loadOverview();
+    TestBed.tick();
 
     const req = httpMock.expectOne('data/overview.json');
     req.flush(mockOverviewData);
 
-    // Advance timer to account for simulated delay
-    await vi.advanceTimersByTimeAsync(500);
+    flushAllPending();
+    await appRef.whenStable();
 
     const summary = service.summary();
     expect(summary.totalValue).toBe(5753000);
     expect(summary.breakdown.length).toBe(2);
 
-    // Check header values from merged data
-    expect(service.totalValue()).toBe(5753000);
-    expect(service.netValue()).toBe(5753000);
-    expect(service.grossValue()).toBe(6150000);
-    expect(service.headerPerformance()?.gain).toBe(333000);
-    expect(service.headerPerformance()?.gainPercent).toBe(6.14);
-    expect(service.valuationDate()).toBe('2026-01-25');
+    const overview = service.overview();
+    expect(overview?.netValue).toBe(5753000);
+    expect(overview?.grossValue).toBe(6150000);
+    expect(overview?.performance?.gain).toBe(333000);
+    expect(overview?.performance?.gainPercent).toBe(6.14);
+    expect(overview?.valuationDate).toBe('2026-01-25');
   });
 
-  it('should load assets data', async () => {
-    service.loadAssets().subscribe();
+  it('should load assets data via httpResource', async () => {
+    service.loadAssets();
+    TestBed.tick();
 
     const req = httpMock.expectOne('data/assets.json');
     req.flush(mockAssetsData);
 
-    // Advance timer to account for simulated delay
-    await vi.advanceTimersByTimeAsync(550);
+    flushAllPending();
+    await appRef.whenStable();
 
     expect(service.assets().length).toBe(2);
     expect(service.getAssetById('1')?.name).toBe('Test Asset');
   });
 
-  it('should handle error gracefully for overview', async () => {
-    service.loadOverview().subscribe();
-
-    const req = httpMock.expectOne('data/overview.json');
-    req.error(new ProgressEvent('error'), { status: 500, statusText: 'Server Error' });
-
-    // Advance timer to account for simulated delay
-    await vi.advanceTimersByTimeAsync(500);
-
-    expect(service.errorOverview()).toBeTruthy();
-    expect(service.totalValue()).toBe(0);
+  it('should not fire HTTP until loadX() is called', () => {
+    // No loadX() called — no requests should be pending
+    httpMock.expectNone('data/client.json');
+    httpMock.expectNone('data/overview.json');
+    httpMock.expectNone('data/assets.json');
   });
 
-  it('should reload data on each call (no cache)', async () => {
-    // First call
-    service.loadOverview().subscribe();
-    const req1 = httpMock.expectOne('data/overview.json');
-    req1.flush(mockOverviewData);
-    await vi.advanceTimersByTimeAsync(500);
+  it('should expose loading state from httpResource', async () => {
+    service.loadClient();
+    TestBed.tick();
 
-    // Second call should make a new HTTP request (no cache)
-    service.loadOverview().subscribe();
-    const req2 = httpMock.expectOne('data/overview.json');
-    req2.flush(mockOverviewData);
-    await vi.advanceTimersByTimeAsync(500);
+    // After trigger, resource is loading
+    expect(service.clientResource.isLoading()).toBe(true);
 
-    expect(service.netValue()).toBe(5753000);
+    // Flush client request
+    httpMock.expectOne('data/client.json').flush(mockClientData);
+
+    flushAllPending();
+    await appRef.whenStable();
+
+    expect(service.clientResource.isLoading()).toBe(false);
+  });
+
+  it('should reload on second loadClient() call and send a new HTTP request', async () => {
+    // First call activates the resource
+    service.loadClient();
+    TestBed.tick();
+    httpMock.expectOne('data/client.json').flush(mockClientData);
+    flushAllPending();
+    await appRef.whenStable();
+    expect(service.client()?.firstName).toBe('Jean');
+
+    // Second call should trigger reload (new HTTP request)
+    service.loadClient();
+    TestBed.tick();
+    const reloadReq = httpMock.expectOne('data/client.json');
+    reloadReq.flush({
+      client: { ...mockClientData.client, firstName: 'Pierre' },
+    });
+    flushAllPending();
+    await appRef.whenStable();
+    expect(service.client()?.firstName).toBe('Pierre');
+  });
+
+  it('should populate error signal on HTTP failure', async () => {
+    service.loadClient();
+    TestBed.tick();
+
+    httpMock.expectOne('data/client.json').flush('Server Error', { status: 500, statusText: 'Error' });
+    flushAllPending();
+    await appRef.whenStable();
+
+    expect(service.clientResource.error()).toBeTruthy();
+    expect(service.error()).toBeTruthy();
   });
 });

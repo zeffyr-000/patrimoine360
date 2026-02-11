@@ -5,7 +5,7 @@
 }
 
 .loading-container {
-  @include flex-center;
+  @include loading-container(200px);
   padding: 3rem 0;
 }
 

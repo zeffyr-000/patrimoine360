@@ -5,7 +5,6 @@
     </div>
 
     <mat-nav-list>
-      <!-- Navigation principale -->
       <a mat-list-item routerLink="/overview" [class.active]="isPatrimoineActive()" (click)="sidenav.close()">
         <mat-icon matListItemIcon>account_balance</mat-icon>
         <span matListItemTitle>{{ 'nav.home' | transloco }}</span>

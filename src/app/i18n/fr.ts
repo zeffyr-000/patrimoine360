@@ -36,6 +36,10 @@ export const frTranslations: Translation = {
     subtitle: 'Retrouvez tous vos documents patrimoniaux',
     download: 'Télécharger',
     poc_notice: 'Page de démonstration - Le téléchargement sera disponible dans une version ultérieure.',
+    type_report: 'Rapport',
+    type_statement: 'Relevé',
+    type_tax: 'Fiscal',
+    type_contract: 'Contrat',
   },
   home: {
     title: 'Compte rendu patrimonial',
@@ -152,6 +156,13 @@ export const frTranslations: Translation = {
     alert_diversified_desc: "Votre patrimoine est bien réparti entre les différentes classes d'actifs.",
     alert_real_estate_title: 'Exposition immobilière',
     alert_real_estate_desc: "L'immobilier représente {value} de votre patrimoine, au-dessus de la moyenne.",
+    risk_labels: {
+      very_conservative: 'Très prudent',
+      conservative: 'Prudent',
+      balanced: 'Équilibré',
+      dynamic: 'Dynamique',
+      aggressive: 'Offensif',
+    },
   },
   assets: {
     title: 'Inventaire de vos actifs',
@@ -213,6 +224,10 @@ export const frTranslations: Translation = {
     watch_list: 'Points de vigilance',
     loss_explanation:
       "Certains placements affichent une performance négative. C'est normal sur les marchés volatils. Votre conseiller peut vous accompagner pour ajuster votre stratégie.",
+    msg_excellent: 'Excellent ! Bien au-dessus du marché',
+    msg_good: 'Bonne performance, supérieure au marché',
+    msg_close: 'Performance proche du marché',
+    msg_below: 'En dessous du marché, à surveiller',
   },
   errors: {
     load_client: 'Impossible de charger les données client',
@@ -221,8 +236,11 @@ export const frTranslations: Translation = {
     load_performance: 'Impossible de charger les performances',
     load_actions: 'Impossible de charger les actions',
     load_assets: 'Impossible de charger les actifs',
+    load_contact: 'Impossible de charger les informations de contact',
+    load_documents: 'Impossible de charger les documents',
     load_ai_analysis: "Erreur lors du chargement de l'analyse IA",
     ai_unavailable_title: 'Analyse indisponible',
     ai_unavailable_content: "Désolé, l'analyse IA est temporairement indisponible. Veuillez réessayer plus tard.",
+    generic_load: 'Une erreur est survenue lors du chargement des données. Veuillez réessayer.',
   },
 };

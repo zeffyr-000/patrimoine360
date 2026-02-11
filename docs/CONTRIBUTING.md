@@ -5,14 +5,13 @@
 - Node.js 18.19+ or 20.9+
 - npm 9+
 
-## 🚀 Development Workflow
+## 🔄 Development Workflow
 
 ```bash
-# Install and start
 npm install
 npm start
 
-# Before committing
+# Before each commit
 npm run lint
 ng test --no-watch
 ```
@@ -22,6 +21,7 @@ ng test --no-watch
 ### Components
 
 ```typescript
+// ✅ CORRECT — Modern Angular 21 component
 @Component({
   selector: 'app-example',
   imports: [TranslocoModule, MatCardModule],
@@ -36,47 +36,84 @@ export class ExampleComponent {
 }
 ```
 
-### Services
+**Rules**:
+
+- Do NOT set `standalone: true` (default in Angular 21)
+- ALWAYS separate template/styles into external files
+- Use `input()`, `output()`, `computed()` (not decorators)
+- `ChangeDetectionStrategy.OnPush` is mandatory
+
+### Services — httpResource / lazyHttpResource
 
 ```typescript
+// ✅ CORRECT — lazyHttpResource pattern
 @Injectable({ providedIn: 'root' })
 export class ExampleService {
-  private readonly _state = signal<State>({ items: [] }); // _private naming
-  readonly state = this._state.asReadonly();
-  readonly itemCount = computed(() => this._state().items.length);
+  private readonly _data = lazyHttpResource<DataType>(DATA_URLS.data);
+  readonly dataResource = this._data.resource;
+
+  load(): void {
+    this._data.load();
+  }
+
+  readonly items = computed(() => this.dataResource.value()?.items ?? []);
+  readonly loading = computed(() => this.dataResource.isLoading());
 }
 ```
 
-### Templates
+### Error Handling — ResourceErrorHandler
 
-Use `@if`, `@for`, `@switch` (NOT `*ngIf`, `*ngFor`):
+Each component wires its resources to the handler in the constructor:
+
+```typescript
+constructor() {
+  this.service.load();
+  this.errorHandler.watchResource(this.service.dataResource, 'errors.load_data', this.injector);
+}
+```
+
+### Templates — Modern Control Flow
 
 ```html
+<!-- ✅ CORRECT — New Angular 21 syntax -->
 @if (loading()) {
 <mat-spinner />
 } @else { @for (item of items(); track item.id) {
 <app-item [item]="item" />
 } }
+
+<!-- ❌ INCORRECT — Old syntax -->
+<div *ngIf="loading">
+  <div *ngFor="let item of items">...</div>
+</div>
+```
+
+Use `@if`, `@for`, `@switch` — never `*ngIf`, `*ngFor`.
+
+### Translations
+
+All user-facing text uses Transloco with the `| transloco` pipe:
+
+```html
+<!-- ✅ CORRECT — Pipe syntax -->
+<h1>{{ 'home.title' | transloco }}</h1>
+<p>{{ 'home.items' | transloco: { count: items().length } }}</p>
+
+<!-- ❌ INCORRECT — Structural directive -->
+<div *transloco="let t">{{ t('home.title') }}</div>
 ```
 
 ### TypeScript
 
-- Avoid `any`, use `unknown` when type is uncertain
-- Use simple `//` comments in English, NOT JSDoc `/** */`
-- Use `console.error()` in error handlers, NOT empty functions
+- `any` is forbidden — use `unknown` when type is uncertain
+- Simple `//` comments in English only, NOT JSDoc `/** */`
+- `console.error()` in error handlers, never empty functions
 
-### Translations
-
-All user-facing text MUST use translation keys:
-
-```html
-<h1>{{ 'home.title' | transloco }}</h1>
-```
-
-## 🧪 Testing (Vitest)
+## 🧪 Testing (Vitest 4.0)
 
 ```bash
-ng test --no-watch          # Avant commit
+ng test --no-watch          # Before commit
+ng test --code-coverage     # With coverage
 ```
 
 ```typescript
@@ -87,12 +124,23 @@ const mock = vi.fn().mockReturnValue(of(data));
 afterEach(() => vi.restoreAllMocks());
 ```
 
-Assert against translation **keys**, NOT translated strings.
+Always assert against **translation keys**, NOT translated strings:
 
-## ✅ Commit Convention
+```typescript
+// ✅ CORRECT
+expect(element.textContent).toContain('home.title');
+
+// ❌ INCORRECT
+expect(element.textContent).toBe('Mon Patrimoine');
+```
+
+See [TESTING.md](TESTING.md) for detailed patterns.
+
+## 📦 Commit Convention
 
 ```bash
 feat(home): add asset category filter
 fix(service): handle empty response
 docs(readme): update installation guide
+refactor(core): extract lazyHttpResource factory
 ```

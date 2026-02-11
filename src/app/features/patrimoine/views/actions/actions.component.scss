@@ -4,7 +4,6 @@
   @include loading-container(300px, var(--surface));
 }
 
-// ========== EMPTY STATE ==========
 .empty-state {
   @include empty-state;
 
@@ -19,7 +18,6 @@
   min-height: 100vh;
 }
 
-// ========== HEADER COMPACT ==========
 .timeline-header-compact {
   @include navy-header-compact;
   @include gold-border-bottom;
@@ -144,9 +142,6 @@
   }
 }
 
-// ========== TIMELINE ==========
-
-// ========== TIMELINE PRINCIPALE ==========
 .journey-timeline {
   @include flex-column;
   gap: 1.5rem;
@@ -156,7 +151,7 @@
   position: relative;
 }
 
-// Ligne verticale centrale
+// Central vertical line
 .timeline-spine {
   position: absolute;
   left: 50%;
@@ -175,7 +170,7 @@
   z-index: 1;
 }
 
-// Chaque entrée = une ligne avec 3 colonnes
+// Each entry = one row with 3 columns
 .timeline-entry {
   display: grid;
   grid-template-columns: 1fr 120px 1fr;
@@ -206,7 +201,7 @@
   z-index: 5;
 }
 
-// Card wrapper avec connecteur
+// Card wrapper with connector
 .card-wrapper {
   display: flex;
   align-items: flex-start;
@@ -222,12 +217,12 @@
   flex-direction: row;
 }
 
-// Connecteur horizontal
+// Horizontal connector
 .card-connector {
   width: 24px;
   height: 3px;
   border-radius: 2px;
-  margin-top: 24px; // Aligné avec le centre du marker
+  margin-top: 24px; // Aligned with marker center
   flex-shrink: 0;
 
   &.status-completed {
@@ -243,7 +238,6 @@
   }
 }
 
-// ========== MARQUEUR CENTRAL ==========
 .timeline-marker {
   display: flex;
   flex-direction: column;
@@ -262,26 +256,11 @@
   .status-in_progress & {
     background: linear-gradient(135deg, var(--gold-400), var(--gold-600));
     color: var(--gold-500);
-    animation: pulseGold 2.5s ease-in-out infinite;
   }
 
   .status-planned & {
     background: linear-gradient(135deg, var(--navy-400), var(--navy-600));
     color: var(--navy-500);
-  }
-}
-
-@keyframes pulseGold {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.08);
-    box-shadow:
-      0 0 0 4px var(--surface),
-      0 0 0 6px currentColor,
-      0 0 24px rgba(201, 169, 97, 0.5);
   }
 }
 
@@ -317,11 +296,10 @@
   }
 }
 
-// ========== CARTES ACTION ==========
 .action-card {
   @include action-card-base;
 
-  // Barre latérale colorée
+  // Colored side bar
   &::before {
     content: '';
     position: absolute;
@@ -365,7 +343,6 @@
   }
 }
 
-// Badge statut
 .status-ribbon {
   position: absolute;
   top: 12px;
@@ -408,7 +385,7 @@
 
 .card-body {
   padding: 1.25rem;
-  padding-top: 2.75rem; // Espace pour le ribbon
+  padding-top: 2.75rem; // Space for the ribbon
 }
 
 .card-header {
@@ -471,7 +448,6 @@
   margin: 0 0 1rem;
 }
 
-// Section impact
 .impact-box {
   background: linear-gradient(135deg, rgba(13, 20, 32, 0.03), rgba(13, 20, 32, 0.06));
   border-radius: var(--radius-md);
@@ -546,7 +522,6 @@
   }
 }
 
-// ========== FOOTER ==========
 .timeline-footer-entry {
   .entry-col-center {
     padding-top: 0;

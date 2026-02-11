@@ -1,7 +1,7 @@
-<div class="contact-page" *transloco="let t">
+<div class="contact-page">
   <header class="page-header">
-    <h1>{{ t('contact.title') }}</h1>
-    <p class="subtitle">{{ t('contact.subtitle') }}</p>
+    <h1>{{ 'contact.title' | transloco }}</h1>
+    <p class="subtitle">{{ 'contact.subtitle' | transloco }}</p>
   </header>
 
   @if (loading()) {
@@ -10,7 +10,6 @@
     </div>
   } @else if (advisor(); as advisorData) {
     <div class="contact-grid">
-      <!-- Carte conseiller -->
       <mat-card class="advisor-card">
         <mat-card-header>
           <div mat-card-avatar class="advisor-avatar">
@@ -40,22 +39,21 @@
         <mat-card-actions>
           <button mat-flat-button color="primary" disabled>
             <mat-icon>videocam</mat-icon>
-            {{ t('contact.schedule_call') }}
+            {{ 'contact.schedule_call' | transloco }}
           </button>
           <button mat-stroked-button disabled>
             <mat-icon>mail</mat-icon>
-            {{ t('contact.send_message') }}
+            {{ 'contact.send_message' | transloco }}
           </button>
         </mat-card-actions>
       </mat-card>
 
-      <!-- Carte agence -->
       @if (agency(); as agencyData) {
         <mat-card class="agency-card">
           <mat-card-header>
             <mat-icon mat-card-avatar>location_on</mat-icon>
             <mat-card-title>{{ agencyData.name }}</mat-card-title>
-            <mat-card-subtitle>{{ t('contact.agency_subtitle') }}</mat-card-subtitle>
+            <mat-card-subtitle>{{ 'contact.agency_subtitle' | transloco }}</mat-card-subtitle>
           </mat-card-header>
 
           <mat-card-content>
@@ -77,6 +75,6 @@
 
   <p class="poc-notice">
     <mat-icon>info</mat-icon>
-    {{ t('contact.poc_notice') }}
+    {{ 'contact.poc_notice' | transloco }}
   </p>
 </div>
