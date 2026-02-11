@@ -1,10 +1,10 @@
-# 🎯 Présentation POC - Patrimoine360
+# 🎯 POC Presentation — Patrimoine360
 
-## Objectif du POC
+## Objective
 
-Démontrer une application moderne de **compte rendu patrimonial pour la Banque Privée**, avec une interface graphique adaptée aux clients non experts, suivant les meilleures pratiques UX du secteur bancaire.
+Demonstrate a modern **patrimony report application for Private Banking**, with a graphical interface adapted for non-expert clients, following best UX practices in the banking sector.
 
-## 🎬 Démo
+## 🎬 Demo
 
 ### URL
 
@@ -12,88 +12,88 @@ Démontrer une application moderne de **compte rendu patrimonial pour la Banque 
 http://localhost:4200
 ```
 
-ou
+or
 
 ```
 https://zeffyr-000.github.io/patrimoine360/
 ```
 
-### Lancer l'application
+### Start the Application
 
 ```bash
 cd patrimoine360
 npm start
 ```
 
-## 💡 Points forts du POC
+## 💡 POC Highlights
 
-### 1. Interface très visuelle et accessible
+### 1. Highly Visual and Accessible Interface
 
-- ✅ **Hero card** imposante avec patrimoine total en grand format
-- ✅ **Cartes colorées** par catégorie d'actifs (12 types)
-- ✅ **Timeline visuelle** des actions du gestionnaire
-- ✅ **Indicateurs de performance** clairs avec icônes et couleurs
-- ✅ **Animations subtiles** au survol
+- ✅ **Hero card** with large total wealth display
+- ✅ **Colored cards** by asset category (12 types)
+- ✅ **Visual timeline** of manager actions
+- ✅ **Clear performance indicators** with icons and colors
+- ✅ **Subtle hover animations**
 
-### 2. Données réalistes
+### 2. Realistic Data
 
-- ✅ **Client type** : Entrepreneur 52 ans, patrimoine 5,75M€
-- ✅ **12 actifs** variés (immobilier, société, placements, art, vin, crypto)
-- ✅ **Performance annuelle** : +6,14% (+333k€)
-- ✅ **7 actions gestionnaire** (réalisées, en cours, planifiées)
+- ✅ **Typical client**: 52-year-old entrepreneur, €5.75M portfolio
+- ✅ **12 varied assets** (real estate, company, investments, art, wine, crypto)
+- ✅ **Annual performance**: +6.14% (+€333k)
+- ✅ **7 manager actions** (completed, in progress, planned)
 
-### 3. Informations complètes
+### 3. Comprehensive Information
 
-#### Profil client
+#### Client Profile
 
-- Nom, âge, profession
-- Gestionnaire assigné
-- Date début relation
-- Profil de risque
+- Name, age, occupation
+- Assigned manager
+- Relationship start date
+- Risk profile
 
-#### Performance détaillée
+#### Detailed Performance
 
-- Performance globale (+333k€, +6,14%)
-- Performance par catégorie (9 catégories)
-- Comparaison valeur/coût acquisition
-- Plus-values latentes
+- Overall performance (+€333k, +6.14%)
+- Performance by category (9 categories)
+- Value vs acquisition cost comparison
+- Unrealized capital gains
 
-#### Actions du gestionnaire
+#### Manager Actions
 
-- Chronologie complète
-- Statut (✅ réalisée / 🔄 en cours / 📅 planifiée)
-- Description détaillée
-- Impact financier chiffré
-- Type d'action (achat, vente, rééquilibrage, conseil, fiscalité)
+- Complete timeline
+- Status (✅ completed / 🔄 in progress / 📅 planned)
+- Detailed description
+- Quantified financial impact
+- Action type (purchase, sale, rebalancing, advisory, tax)
 
-#### Détail des actifs
+#### Asset Details
 
-- 12 actifs avec informations complètes
-- Localisation (pour immobilier)
-- Rendement locatif
-- Parts détenues (société)
-- Coût acquisition vs valeur actuelle
-- Plus-value latente calculée
+- 12 assets with complete information
+- Location (for real estate)
+- Rental yield
+- Shares held (company)
+- Acquisition cost vs current value
+- Calculated unrealized capital gain
 
-### 4. Design Modern Private Banking 2026
+### 4. Modern Private Banking 2026 Design
 
-#### Style visuel
+#### Visual Style
 
-- **Palette élégante** : Navy, bleu profond, gold accents
-- **Typographie** : Roboto (clean, professionnelle)
-- **Cards design** : Design Private Banking élégant
-- **Espaces généreux** : Respiration visuelle
-- **Ombres subtiles** : Profondeur moderne
+- **Elegant palette**: Navy, deep blue, gold accents
+- **Typography**: Roboto (clean, professional)
+- **Card design**: Elegant Private Banking style
+- **Generous spacing**: Visual breathing room
+- **Subtle shadows**: Modern depth
 
-#### UX/Accessibilité
+#### UX / Accessibility
 
 - **Desktop only** (1280px+)
-- **Navigation claire** : Sections bien distinctes
-- **Lisibilité** : Hiérarchie typographique forte
-- **Feedback visuel** : Hover effects, transitions
-- **Accessibilité** : WCAG AA ready
+- **Clear navigation**: Well-defined sections
+- **Readability**: Strong typographic hierarchy
+- **Visual feedback**: Hover effects, transitions
+- **Accessibility**: WCAG AA ready
 
-### 5. Stack technique moderne
+### 5. Modern Technical Stack
 
 #### Frontend
 
@@ -103,122 +103,116 @@ npm start
 - **Signals** (reactive state)
 - **Standalone components**
 
-#### Qualité code
+#### Code Quality
 
-- ✅ ESLint : Tous les fichiers passent
-- ✅ Build : Compile sans erreur
-- ✅ Tests : Vitest ready
-- ✅ Types : 100% TypeScript strict
+- ✅ ESLint: All files pass
+- ✅ Build: Compiles without errors
+- ✅ Tests: Vitest ready
+- ✅ Types: 100% strict TypeScript
 
-## 📊 Scénarios de démonstration
+## 📊 Demo Scenarios
 
-### Scénario 1 : Vue d'ensemble patrimoine
+### Scenario 1: Wealth Overview
 
-1. **Landing** → Hero card avec total 5,75M€
-2. **Performance** → Badge +333k€ (+6,14%)
-3. **Profil client** → Pierre Dubois, entrepreneur
+1. **Landing** → Hero card with €5.75M total
+2. **Performance** → Badge +€333k (+6.14%)
+3. **Client profile** → Pierre Dubois, entrepreneur
 
-### Scénario 2 : Performance détaillée
+### Scenario 2: Detailed Performance
 
-1. **Section performances** → 9 cartes par catégorie
-2. **Meilleure performance** → Vin +12,5%, Art +11,76%
-3. **Moins bonne** → Crypto -20% (mais contrôlé)
-4. **Principale** → Société non cotée +7,69% (2,8M€)
+1. **Performance section** → 9 cards by category
+2. **Best performance** → Wine +12.5%, Art +11.76%
+3. **Worst performance** → Crypto -20% (but controlled)
+4. **Main holding** → Unlisted company +7.69% (€2.8M)
 
-### Scénario 3 : Actions gestionnaire
+### Scenario 3: Manager Actions
 
-1. **Timeline** → 7 actions tracées
-2. **Réalisées** → 5 actions avec impacts chiffrés
-   - Optimisation fiscale : 9k€ économisés
-   - Vente crypto : 8k€ sécurisés
-   - Conseil transmission : 25k€ future économie
-3. **En cours** → Analyse investissement locatif
-4. **Planifiées** → Révision assurance-vie
+1. **Timeline** → 7 tracked actions
+2. **Completed** → 5 actions with quantified impacts
+   - Tax optimization: €9k saved
+   - Crypto sale: €8k secured
+   - Estate planning: €25k future savings
+3. **In progress** → Rental investment analysis
+4. **Planned** → Life insurance review
 
-### Scénario 4 : Détail actifs
+### Scenario 4: Asset Details
 
-1. **12 actifs** affichés en grille
-2. **Société non cotée** → 2,8M€ (75% parts)
-3. **Immobilier** → Résidence + locatif (1,67M€)
-4. **Collection art** → +46% de plus-value
-5. **Cave vin** → +29% de plus-value
+1. **12 assets** displayed in grid
+2. **Unlisted company** → €2.8M (75% shares)
+3. **Real estate** → Primary + rental (€1.67M)
+4. **Art collection** → +46% capital gain
+5. **Wine cellar** → +29% capital gain
 
-## 🎨 Captures visuelles (Points clés)
+## 🎨 Visual Highlights
 
-### Hero card
+### Hero Card
 
-- **Grande carte bleue** en dégradé
-- **Montant total** en très grand format (3.5rem)
-- **Badge performance** à droite avec +/- coloré
-- **Icône wallet** imposante
+- **Large blue gradient card**
+- **Total amount** in large format (3.5rem)
+- **Performance badge** on the right with colored +/-
+- **Prominent wallet icon**
 
-### Cartes performances
+### Performance Cards
 
-- **Icônes colorées** par catégorie
-- **Valeur actuelle** + **Gain** en double ligne
-- **Pourcentage** avec flèche ↑/↓
-- **Fond coloré** pour les gains (vert/rouge)
+- **Colored icons** by category
+- **Current value** + **Gain** in two lines
+- **Percentage** with ↑/↓ arrow
+- **Colored background** for gains (green/red)
 
-### Timeline actions
+### Action Timeline
 
-- **Bordure gauche colorée** selon statut
-- **Icône** dans rond (achat, vente, conseil, fiscalité)
-- **Chips** pour statut et type
-- **Impact financier** en encadré bleu
+- **Colored left border** by status
+- **Icon** in circle (purchase, sale, advisory, tax)
+- **Chips** for status and type
+- **Financial impact** in blue box
 
-### Cartes actifs
+### Asset Cards
 
-- **Icône colorée** en avatar
-- **Localisation** avec pin (immobilier)
-- **3 lignes valeur** : actuelle / acquisition / gain
-- **Gain en encadré** vert/rouge
+- **Colored icon** as avatar
+- **Location** with pin (real estate)
+- **3 value lines**: current / acquisition / gain
+- **Gain in colored box** green/red
 
-## 🚀 Démonstration live
+## 🚀 Live Demo
 
-### Points à mentionner
+### Key Points to Mention
 
-1. **"Interface très graphique et accessible"**
-   → Montrer les grandes cartes, les couleurs, les icônes
+1. **"Highly graphical and accessible interface"**
+   → Show large cards, colors, icons
 
-2. **"Adapté aux clients non experts"**
-   → Expliquer la clarté des chiffres, les codes couleur intuitifs
+2. **"Adapted for non-expert clients"**
+   → Explain clear figures, intuitive color coding
 
-3. **"Compte rendu des performances"**
-   → Montrer la section performances détaillées
+3. **"Performance report"**
+   → Show detailed performance section
 
-4. **"Actions des gestionnaires"**
-   → Parcourir la timeline, montrer les impacts chiffrés
+4. **"Manager actions tracking"**
+   → Browse timeline, show quantified impacts
 
-5. **"Client type réaliste"**
-   → Profil entrepreneur, patrimoine diversifié
+5. **"Realistic client profile"**
+   → Diversified entrepreneur portfolio
 
-## 📋 Checklist présentation
+## 📋 Presentation Checklist
 
-- [ ] URL ouverte dans navigateur
-- [ ] Vue desktop (1280px+)
-- [ ] Scroll fluide préparé
-- [ ] Sections clés identifiées
-- [ ] Chiffres clés en tête (5,75M€, +6,14%, 12 actifs, 7 actions)
-- [ ] Prêt à expliquer le design Private Banking 2026
+- [ ] URL open in browser
+- [ ] Desktop view (1280px+)
+- [ ] Smooth scroll prepared
+- [ ] Key sections identified
+- [ ] Key figures memorized (€5.75M, +6.14%, 12 assets, 7 actions)
+- [ ] Ready to explain Private Banking 2026 design
 
-## 🎯 Messages clés
+## 🎯 Key Messages
 
-1. **"Interface moderne et accessible pour clients non experts"**
-2. **"Visualisation complète : patrimoine, performances, actions"**
-3. **"Design suivant les meilleures pratiques UX du secteur bancaire"**
-4. **"Stack technique moderne : Angular 21, TypeScript, Material Design 3"**
-5. **"POC fonctionnel et extensible vers une vraie application"**
+1. **"Modern and accessible interface for non-expert clients"**
+2. **"Complete visualization: wealth, performance, actions"**
+3. **"Design following banking sector UX best practices"**
+4. **"Modern tech stack: Angular 21, TypeScript, Material Design 3"**
+5. **"Functional and extensible POC toward a real application"**
 
-## 🔮 Évolutions possibles
+## 🔮 Possible Evolutions
 
-Pour impressionner :
-
-1. **"Connexion API en temps réel"** → Backend REST
-2. **"Graphiques interactifs"** → Charts.js, évolution temporelle
-3. **"Export PDF du compte rendu"** → Génération documents
-4. **"Dashboard multi-clients"** → Vue gestionnaire
-5. **"Simulations et projections"** → Outils de conseil avancés
-
----
-
-**Prêt pour la démo ! 🎉**
+1. **"Real-time API connection"** → REST Backend
+2. **"Interactive charts"** → Chart.js, temporal evolution
+3. **"PDF report export"** → Document generation
+4. **"Multi-client dashboard"** → Manager view
+5. **"Simulations and projections"** → Advanced advisory tools

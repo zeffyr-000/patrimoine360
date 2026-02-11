@@ -1,7 +1,7 @@
-<div class="documents-page" *transloco="let t">
+<div class="documents-page">
   <header class="page-header">
-    <h1>{{ t('documents.title') }}</h1>
-    <p class="subtitle">{{ t('documents.subtitle') }}</p>
+    <h1>{{ 'documents.title' | transloco }}</h1>
+    <p class="subtitle">{{ 'documents.subtitle' | transloco }}</p>
   </header>
 
   @if (loading()) {
@@ -18,11 +18,11 @@
           <div class="document-info">
             <h3>{{ doc.title }}</h3>
             <div class="document-meta">
-              <span class="doc-type">{{ getTypeLabel(doc.type) }}</span>
+              <span class="doc-type">{{ 'documents.type_' + doc.type | transloco }}</span>
               <span class="doc-date">{{ doc.date | date: 'dd/MM/yyyy' }}</span>
             </div>
           </div>
-          <button mat-icon-button disabled [attr.aria-label]="t('documents.download')">
+          <button mat-icon-button disabled [attr.aria-label]="'documents.download' | transloco">
             <mat-icon>download</mat-icon>
           </button>
         </mat-card>
@@ -31,7 +31,7 @@
 
     <p class="poc-notice">
       <mat-icon>info</mat-icon>
-      {{ t('documents.poc_notice') }}
+      {{ 'documents.poc_notice' | transloco }}
     </p>
   }
 </div>

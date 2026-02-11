@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Injector } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
 
@@ -9,6 +9,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 
 import { PatrimoineService } from '../services/patrimoine.service';
 import { ClientHeaderComponent } from '../features/patrimoine';
+import { ResourceErrorHandler } from '../core/resource-error-handler';
 
 @Component({
   selector: 'app-home',
@@ -27,16 +28,17 @@ import { ClientHeaderComponent } from '../features/patrimoine';
   styleUrl: './home.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
   protected readonly patrimoineService = inject(PatrimoineService);
+  private readonly errorHandler = inject(ResourceErrorHandler);
+  private readonly injector = inject(Injector);
 
-  // Expose les computed du service
-  protected readonly loadingClient = this.patrimoineService.loadingClient;
+  constructor() {
+    this.patrimoineService.loadClient();
+    this.errorHandler.watchResource(this.patrimoineService.clientResource, 'errors.load_client', this.injector);
+  }
+
+  protected readonly loadingClient = this.patrimoineService.clientResource.isLoading;
   protected readonly error = this.patrimoineService.error;
   protected readonly client = this.patrimoineService.client;
-
-  ngOnInit(): void {
-    // Load client data for the home page
-    this.patrimoineService.loadClient().subscribe();
-  }
 }

@@ -1,21 +1,32 @@
-import { ChangeDetectionStrategy, Component, computed, inject, OnInit, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  DestroyRef,
+  effect,
+  inject,
+  Injector,
+  signal,
+} from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DecimalPipe } from '@angular/common';
-import { TranslocoModule } from '@jsverse/transloco';
+import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
 import { BaseChartDirective } from 'ng2-charts';
 import { Chart, ChartConfiguration, ChartData, DoughnutController, ArcElement, Tooltip, Legend } from 'chart.js';
+import { Subject, concatMap, delay, of, range, scan, takeUntil, tap } from 'rxjs';
 
-// Register Chart.js components
+// Required for Chart.js tree-shaking
 Chart.register(DoughnutController, ArcElement, Tooltip, Legend);
 
 import { PatrimoineService } from '../../../../services/patrimoine.service';
-import { getAssetCategory, AssetBreakdown } from '../../../../models/patrimoine.model';
+import { getAssetCategory, AssetBreakdown } from '../../../../models';
 import { formatCurrency, MarkdownPipe } from '../../../../core';
+import { ResourceErrorHandler } from '../../../../core/resource-error-handler';
 
-// Strategic alert type
 interface StrategicAlert {
   type: 'warning' | 'info' | 'success';
   icon: string;
@@ -40,31 +51,42 @@ interface StrategicAlert {
   styleUrl: './overview.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class OverviewComponent implements OnInit {
+export class OverviewComponent {
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly transloco = inject(TranslocoService);
   protected readonly patrimoineService = inject(PatrimoineService);
+  private readonly errorHandler = inject(ResourceErrorHandler);
+  private readonly injector = inject(Injector);
+
+  private readonly cancelStream$ = new Subject<void>();
+
+  constructor() {
+    this.patrimoineService.loadOverview();
+    this.errorHandler.watchResource(this.patrimoineService.overviewResource, 'errors.load_overview', this.injector);
+
+    // Stream AI content when resource delivers a value
+    effect(() => {
+      const analysis = this.patrimoineService.aiAnalysisResource.value();
+      if (analysis) {
+        this.cancelStreaming();
+        this.streamText(analysis.content);
+      }
+    });
+  }
+
   protected readonly summary = this.patrimoineService.summary;
-  protected readonly loading = this.patrimoineService.loadingOverview;
+  protected readonly overview = this.patrimoineService.overview;
+  protected readonly loading = this.patrimoineService.overviewResource.isLoading;
   protected readonly formatCurrency = formatCurrency;
   protected readonly getAssetCategory = getAssetCategory;
 
-  // Hero summary data
-  protected readonly grossValue = this.patrimoineService.grossValue;
-  protected readonly liabilities = this.patrimoineService.liabilities;
-  protected readonly netValue = this.patrimoineService.netValue;
-  protected readonly diversificationScore = this.patrimoineService.diversificationScore;
-  protected readonly riskLevel = this.patrimoineService.riskLevel;
-  protected readonly headerPerformance = this.patrimoineService.headerPerformance;
-
-  // Selected category for hover/click interaction
   protected readonly selectedCategory = signal<AssetBreakdown | null>(null);
 
-  // AI Analysis state
   protected readonly aiPanelOpen = signal(false);
   protected readonly aiAnalyzing = signal(false);
   protected readonly aiContent = signal('');
   protected readonly aiComplete = signal(false);
 
-  // Chart configuration
   protected readonly chartData = computed<ChartData<'doughnut'>>(() => {
     const breakdown = this.summary().breakdown;
     return {
@@ -117,13 +139,12 @@ export class OverviewComponent implements OnInit {
     },
   };
 
-  // KPIs computed from breakdown
   protected readonly calculatedDiversificationScore = computed(() => {
     const breakdown = this.summary().breakdown;
     if (breakdown.length === 0) return 0;
-    // Herfindahl-Hirschman Index inverted (higher = more diversified)
+    // HHI inverted: higher = more diversified
     const hhi = breakdown.reduce((sum, b) => sum + Math.pow(b.percent / 100, 2), 0);
-    // Score from 0-100 (1 = fully concentrated, 0 = fully diversified)
+    // 0 = fully concentrated, 100 = fully diversified
     return Math.round((1 - hhi) * 100);
   });
 
@@ -155,14 +176,12 @@ export class OverviewComponent implements OnInit {
     return (realEstateValue / total) * 100;
   });
 
-  // Strategic alerts
   protected readonly alerts = computed<StrategicAlert[]>(() => {
     const alerts: StrategicAlert[] = [];
     const maxConc = this.maxConcentration();
     const liquidity = this.liquidityRatio();
     const diversification = this.calculatedDiversificationScore();
 
-    // Alert: High concentration
     if (maxConc.percent > 40) {
       alerts.push({
         type: 'warning',
@@ -173,7 +192,6 @@ export class OverviewComponent implements OnInit {
       });
     }
 
-    // Alert: Low liquidity
     if (liquidity < 15) {
       alerts.push({
         type: 'warning',
@@ -184,7 +202,6 @@ export class OverviewComponent implements OnInit {
       });
     }
 
-    // Success: Good diversification
     if (diversification >= 70 && maxConc.percent <= 30) {
       alerts.push({
         type: 'success',
@@ -194,7 +211,6 @@ export class OverviewComponent implements OnInit {
       });
     }
 
-    // Info: Real estate heavy
     const realEstate = this.realEstateRatio();
     if (realEstate > 35) {
       alerts.push({
@@ -209,11 +225,6 @@ export class OverviewComponent implements OnInit {
     return alerts;
   });
 
-  ngOnInit(): void {
-    this.patrimoineService.loadOverview().subscribe();
-  }
-
-  // Handle legend item click
   protected onLegendClick(item: AssetBreakdown): void {
     if (this.selectedCategory()?.type === item.type) {
       this.selectedCategory.set(null);
@@ -222,10 +233,10 @@ export class OverviewComponent implements OnInit {
     }
   }
 
-  // Hero summary helpers
   protected getRiskLabel(level: number): string {
-    const labels = ['Très prudent', 'Prudent', 'Équilibré', 'Dynamique', 'Offensif'];
-    return labels[level - 1] || 'Équilibré';
+    const keys = ['very_conservative', 'conservative', 'balanced', 'dynamic', 'aggressive'];
+    const key = keys[level - 1] || 'balanced';
+    return this.transloco.translate(`overview.risk_labels.${key}`);
   }
 
   protected getRiskClass(level: number): string {
@@ -240,48 +251,58 @@ export class OverviewComponent implements OnInit {
     return 'score-low';
   }
 
-  // AI Analysis methods
   protected launchAiAnalysis(): void {
+    this.cancelStreaming();
+
     this.aiPanelOpen.set(true);
     this.aiAnalyzing.set(true);
     this.aiContent.set('');
     this.aiComplete.set(false);
 
-    this.patrimoineService.loadAiAnalysis().subscribe(analysis => {
-      this.streamText(analysis.content);
-    });
+    this.patrimoineService.triggerAiAnalysis();
   }
 
   protected closeAiPanel(): void {
+    this.cancelStreaming();
     this.aiPanelOpen.set(false);
     this.aiAnalyzing.set(false);
+    this.aiContent.set('');
+    this.aiComplete.set(false);
+  }
+
+  private cancelStreaming(): void {
+    this.cancelStream$.next();
   }
 
   private streamText(fullText: string): void {
-    let currentIndex = 0;
     const baseDelay = 35;
+    const chars = fullText.split('');
 
-    const streamNext = () => {
-      if (currentIndex >= fullText.length) {
-        this.aiAnalyzing.set(false);
-        this.aiComplete.set(true);
-        return;
-      }
-
-      const chunkSize = Math.random() > 0.7 ? 2 : 1;
-      currentIndex += chunkSize;
-      this.aiContent.set(fullText.slice(0, currentIndex));
-
-      let delay = baseDelay + Math.random() * 25;
-      const lastChar = fullText[currentIndex - 1];
-      if (lastChar === '.' || lastChar === ':') delay += 150;
-      else if (lastChar === ',') delay += 60;
-      else if (lastChar === '\n') delay += 100;
-      else if (lastChar === '#') delay += 200;
-
-      setTimeout(streamNext, delay);
-    };
-
-    streamNext();
+    // Emit characters one-by-one with variable delay
+    range(0, chars.length)
+      .pipe(
+        concatMap(i => {
+          let ms = baseDelay + Math.random() * 25;
+          const ch = chars[i];
+          if (ch === '.' || ch === ':') ms += 150;
+          else if (ch === ',') ms += 60;
+          else if (ch === '\n') ms += 100;
+          else if (ch === '#') ms += 200;
+          return of(i).pipe(delay(ms));
+        }),
+        scan((acc, i) => acc + chars[i], ''),
+        tap(text => this.aiContent.set(text)),
+        takeUntil(this.cancelStream$),
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe({
+        complete: () => {
+          // Only mark complete if the full text was streamed (not cancelled)
+          if (this.aiContent() === fullText) {
+            this.aiAnalyzing.set(false);
+            this.aiComplete.set(true);
+          }
+        },
+      });
   }
 }

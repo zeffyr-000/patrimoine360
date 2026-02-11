@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, Injector } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { TranslocoModule } from '@jsverse/transloco';
 import { MatCardModule } from '@angular/material/card';
@@ -7,8 +7,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { PatrimoineService } from '../../../../services/patrimoine.service';
-import { getAssetCategory, CategoryPerformance } from '../../../../models/patrimoine.model';
+import { getAssetCategory, CategoryPerformance } from '../../../../models';
 import { formatCurrency } from '../../../../core';
+import { ResourceErrorHandler } from '../../../../core/resource-error-handler';
 
 @Component({
   selector: 'app-performance',
@@ -17,23 +18,32 @@ import { formatCurrency } from '../../../../core';
   styleUrl: './performance.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PerformanceComponent implements OnInit {
+export class PerformanceComponent {
   protected readonly patrimoineService = inject(PatrimoineService);
+  private readonly errorHandler = inject(ResourceErrorHandler);
+  private readonly injector = inject(Injector);
+
+  constructor() {
+    this.patrimoineService.loadPerformance();
+    this.errorHandler.watchResource(
+      this.patrimoineService.performanceResource,
+      'errors.load_performance',
+      this.injector
+    );
+  }
+
   protected readonly performance = this.patrimoineService.performance;
-  protected readonly loading = this.patrimoineService.loadingPerformance;
+  protected readonly loading = this.patrimoineService.performanceResource.isLoading;
   protected readonly formatCurrency = formatCurrency;
   protected readonly getAssetCategory = getAssetCategory;
 
-  // Formater les dates en français (mois année)
   protected formatPeriod(dateStr: string): string {
     const date = new Date(dateStr);
     return date.toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' });
   }
 
-  // Référence de marché pour comparaison
-  protected readonly marketBenchmark = 4.5; // CAC 40 / Euro Stoxx approximatif
+  protected readonly marketBenchmark = 4.5; // CAC 40 / Euro Stoxx approximate
 
-  // Top et flop performers
   protected readonly topPerformers = computed(() => {
     const perf = this.performance();
     if (!perf) return [];
@@ -46,13 +56,11 @@ export class PerformanceComponent implements OnInit {
     return [...perf.byCategory].filter(c => c.gainPercent < 0).sort((a, b) => a.gainPercent - b.gainPercent);
   });
 
-  // Calcul de la barre de progression (normalisation)
   protected getProgressWidth(gainPercent: number): number {
-    const maxGain = 15; // Normalisation sur 15%
+    const maxGain = 15; // Normalization cap at 15%
     return Math.min((Math.abs(gainPercent) / maxGain) * 100, 100);
   }
 
-  // Emoji selon la performance
   protected getPerformanceEmoji(gainPercent: number): string {
     if (gainPercent >= 10) return '🚀';
     if (gainPercent >= 5) return '📈';
@@ -61,16 +69,11 @@ export class PerformanceComponent implements OnInit {
     return '⚠️';
   }
 
-  // Message explicatif selon la performance
-  protected getPerformanceMessage(category: CategoryPerformance): string {
+  protected getPerformanceMessageKey(category: CategoryPerformance): string {
     const diff = category.gainPercent - this.marketBenchmark;
-    if (diff >= 5) return 'Excellent ! Bien au-dessus du marché';
-    if (diff >= 0) return 'Bonne performance, supérieure au marché';
-    if (diff >= -3) return 'Performance proche du marché';
-    return 'En dessous du marché, à surveiller';
-  }
-
-  ngOnInit(): void {
-    this.patrimoineService.loadPerformance().subscribe();
+    if (diff >= 5) return 'performance.msg_excellent';
+    if (diff >= 0) return 'performance.msg_good';
+    if (diff >= -3) return 'performance.msg_close';
+    return 'performance.msg_below';
   }
 }

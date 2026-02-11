@@ -1,9 +1,5 @@
 @use '../../../../_mixins' as *;
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// ASSETS - Style Rapport Banque Privée
-// ═══════════════════════════════════════════════════════════════════════════════
-
 .loading-container {
   @include loading-container(400px);
 }
@@ -12,7 +8,6 @@
   @include full-page;
 }
 
-// ========== HEADER ==========
 .assets-header {
   @include navy-header;
 }
@@ -62,7 +57,6 @@
   @include stat-divider;
 }
 
-// ========== TABLE SECTION ==========
 .assets-table-section {
   padding: 2rem 2.5rem;
   overflow-x: auto;
@@ -115,7 +109,6 @@
   }
 }
 
-// Asset info
 .asset-info {
   display: flex;
   align-items: flex-start;
@@ -172,7 +165,6 @@
   }
 }
 
-// Category badge
 .category-badge {
   display: inline-block;
   padding: 0.375rem 0.75rem;
@@ -186,7 +178,6 @@
   border-left: 3px solid;
 }
 
-// Acquisition info
 .acquisition-info {
   display: flex;
   flex-direction: column;
@@ -204,14 +195,12 @@
   color: var(--on-surface-muted);
 }
 
-// Current value
 .current-value {
   font-size: 1rem;
   font-weight: var(--font-weight-semibold);
   color: var(--navy-800);
 }
 
-// Gain info
 .gain-info {
   display: flex;
   flex-direction: column;
@@ -252,7 +241,6 @@
   color: var(--on-surface-muted);
 }
 
-// Weight info
 .weight-info {
   display: flex;
   flex-direction: column;
@@ -278,7 +266,6 @@
   transition: width 0.6s ease;
 }
 
-// Totals row
 .totals-row {
   background: var(--surface-variant);
 
@@ -299,7 +286,6 @@
   }
 }
 
-// Asset row hover
 .asset-row {
   transition: background 0.2s ease;
 
@@ -308,7 +294,6 @@
   }
 }
 
-// ========== FOOTER ==========
 .assets-footer {
   padding: 1.5rem 2.5rem;
   border-top: 1px solid var(--outline-subtle);

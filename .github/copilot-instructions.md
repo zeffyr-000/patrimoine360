@@ -22,29 +22,51 @@ following Angular and TypeScript best practices.
 Patrimoine360 is an Angular 21 POC for patrimony visualization. The app uses a
 zoneless architecture with signals.
 
-### Key Service Patterns
+### Key Patterns
 
-- PatrimoineService (`services/patrimoine.service.ts`): Loads mock data from static JSON files, provides reactive state via signals
+- **lazyHttpResource**: Factory wrapping `httpResource` with lazy activation and `reload()` support
+- **rxResource**: For complex/parameterized streams (e.g., AI analysis with trigger signal)
+- **ResourceErrorHandler**: Centralized error handling via MatSnackBar + Transloco
+- **DATA_URLS**: Single source of truth for all data endpoint URLs
+- **retryInterceptor**: Retries failed GET requests (2 retries, 1s delay)
 
 ### Data Flow
 
 ```
-Static JSON files → PatrimoineService → Signals → Components
+Static JSON files → httpResource/rxResource → Services → Signals → Components
 ```
 
-### HTTP Error Handling Pattern
+### Service Pattern — lazyHttpResource
 
-All HTTP calls follow this pattern - return empty/default value on error, notify user:
+Services use `lazyHttpResource` factory from `core/lazy-http-resource.ts`. NO `.subscribe()` calls:
 
 ```typescript
-return this.http.get<Response>(`${environment.dataPath}/file.json`).pipe(
-  tap(data => this._state.set(data)),
-  catchError(err => {
-    console.error('Error loading data:', err);
-    this._error.set('Error message');
-    return of(defaultValue);
-  })
-);
+import { lazyHttpResource } from '../core/lazy-http-resource';
+import { DATA_URLS } from '../core/data-urls';
+
+@Injectable({ providedIn: 'root' })
+export class ExampleService {
+  private readonly _data = lazyHttpResource<DataType>(DATA_URLS.endpoint);
+  readonly dataResource = this._data.resource;
+
+  load(): void {
+    this._data.load();
+  }
+
+  readonly items = computed(() => this.dataResource.value()?.items ?? []);
+  readonly loading = computed(() => this.dataResource.isLoading());
+}
+```
+
+### Error Handling in Components
+
+Components wire resources to `ResourceErrorHandler` in constructor:
+
+```typescript
+constructor() {
+  this.service.load();
+  this.errorHandler.watchResource(this.service.dataResource, 'errors.load_data', this.injector);
+}
 ```
 
 ## Developer Commands
@@ -69,6 +91,24 @@ import { vi, expect } from 'vitest';
 // Timers: vi.useFakeTimers(), vi.advanceTimersByTime(1000)
 // Inspect: mockMethod.mock.calls, mockMethod.mockClear()
 // Cleanup: vi.restoreAllMocks() in afterEach()
+```
+
+### httpResource Test Pattern
+
+```typescript
+// 1. Activate the resource
+service.loadClient();
+TestBed.tick();
+
+// 2. Flush the HTTP request
+httpMock.expectOne('data/client.json').flush(mockData);
+
+// 3. Wait for stabilization
+flushAllPending();
+await appRef.whenStable();
+
+// 4. Assert signal value
+expect(service.clientResource.value()).toEqual(mockData);
 ```
 
 ### Test Setup with Mocks
@@ -135,7 +175,8 @@ export class ExampleComponent {
 ### Services
 
 - Use `providedIn: 'root'` for singletons, `inject()` instead of constructor injection
-- Use signals with `_private` pattern: `private readonly _state = signal<T>()` / `readonly state = this._state.asReadonly()`
+- Use `lazyHttpResource` factory + `DATA_URLS` for data loading
+- Use `computed()` for derived state from resource values
 - Use `set()` or `update()` on signals, NOT `mutate()`
 
 ## Material Design Integration
@@ -153,6 +194,23 @@ French only - translations in `i18n/fr.ts` with MessageFormat:
 ```
 
 All user-facing text MUST use translation keys via `TranslocoModule`.
+
+### Template usage: ALWAYS use the `| transloco` pipe
+
+```html
+<!-- GOOD: pipe syntax -->
+<h1>{{ 'home.title' | transloco }}</h1>
+<p>{{ 'home.items' | transloco: { count: items().length } }}</p>
+
+<!-- BAD: structural directive *transloco="let t" + t() -->
+<div *transloco="let t">
+  <h1>{{ t('home.title') }}</h1>
+</div>
+```
+
+The `*transloco="let t"` directive wraps the entire block in an `<ng-container>`,
+adds an unnecessary template variable, and is harder to tree-shake. Prefer the
+pipe which is simpler, composable, and works directly in any binding.
 
 ## Templates
 
@@ -175,8 +233,13 @@ All user-facing text MUST use translation keys via `TranslocoModule`.
 
 ## Key Files
 
-- `app.config.ts`: Providers (zoneless, router, HTTP, Transloco)
+- `core/lazy-http-resource.ts`: Factory for lazy httpResource with activate/reload
+- `core/data-urls.ts`: Centralized data endpoint URLs
+- `core/resource-error-handler.ts`: Snackbar error handler for resources
+- `core/interceptors/retry.interceptor.ts`: HTTP retry for GET requests
+- `core/interceptors/simulated-delay.interceptor.ts`: Simulated network latency
+- `app.config.ts`: Providers (zoneless, router, HTTP interceptors, Transloco)
 - `app.routes.ts`: Lazy-loaded routes
 - `testing/transloco-testing.module.ts`: Transloco test helper
-- `models/`: TypeScript interfaces
-- `public/data/`: Static JSON mock data
+- `models/`: TypeScript interfaces (8 domain model files)
+- `public/data/`: Static JSON mock data (8 files)

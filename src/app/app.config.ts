@@ -6,7 +6,9 @@ import {
   Injectable,
 } from '@angular/core';
 import { provideRouter, withPreloading, PreloadAllModules, TitleStrategy } from '@angular/router';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { simulatedDelayInterceptor } from './core/interceptors/simulated-delay.interceptor';
+import { retryInterceptor } from './core/interceptors/retry.interceptor';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideTransloco, TranslocoLoader, Translation } from '@jsverse/transloco';
 import { provideTranslocoMessageformat } from '@jsverse/transloco-messageformat';
@@ -31,7 +33,7 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
     provideRouter(routes, withPreloading(PreloadAllModules)),
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([retryInterceptor, simulatedDelayInterceptor])),
     // eslint-disable-next-line @typescript-eslint/no-deprecated
     provideAnimations(),
     provideTransloco({

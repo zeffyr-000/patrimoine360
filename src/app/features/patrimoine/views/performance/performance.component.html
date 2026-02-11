@@ -3,56 +3,57 @@
     <mat-spinner diameter="40"></mat-spinner>
   </div>
 } @else if (performance(); as perf) {
-  <div class="performance-page" *transloco="let t">
-    <!-- Hero Section -->
+  <div class="performance-page">
     <header class="performance-hero">
       <div class="hero-content">
         <div class="hero-icon">
           <mat-icon>trending_up</mat-icon>
         </div>
         <div class="hero-text">
-          <h1>{{ t('performance.hero_title') }}</h1>
+          <h1>{{ 'performance.hero_title' | transloco }}</h1>
           <p class="hero-period">{{ formatPeriod(perf.startDate) }} → {{ formatPeriod(perf.endDate) }}</p>
         </div>
       </div>
       <div class="hero-stats">
         <div class="hero-stat main">
           <span class="stat-value positive">+{{ formatCurrency(perf.gain) }}</span>
-          <span class="stat-label">{{ t('performance.total_gain') }}</span>
+          <span class="stat-label">{{ 'performance.total_gain' | transloco }}</span>
         </div>
         <div class="hero-stat">
           <span class="stat-value" [class.positive]="perf.gainPercent >= 0"
             >+{{ perf.gainPercent | number: '1.1-1' }}%</span
           >
           <span class="stat-label">
-            {{ t('performance.return_rate') }}
-            <mat-icon class="hint-icon" [matTooltip]="t('hints.return_rate')" matTooltipClass="premium-tooltip"
+            {{ 'performance.return_rate' | transloco }}
+            <mat-icon class="hint-icon" [matTooltip]="'hints.return_rate' | transloco" matTooltipClass="premium-tooltip"
               >help_outline</mat-icon
             >
           </span>
         </div>
         <div class="hero-stat">
           <span class="stat-value">{{ formatCurrency(perf.endValue) }}</span>
-          <span class="stat-label">{{ t('performance.current_total') }}</span>
+          <span class="stat-label">{{ 'performance.current_total' | transloco }}</span>
         </div>
       </div>
     </header>
 
-    <!-- Explication pédagogique -->
     <section class="explanation-card">
       <mat-icon class="explanation-icon">lightbulb</mat-icon>
       <div class="explanation-content">
-        <h3>{{ t('performance.what_it_means') }}</h3>
-        <p>{{ t('performance.explanation_text', { gain: formatCurrency(perf.gain), percent: perf.gainPercent }) }}</p>
+        <h3>{{ 'performance.what_it_means' | transloco }}</h3>
+        <p>
+          {{
+            'performance.explanation_text' | transloco: { gain: formatCurrency(perf.gain), percent: perf.gainPercent }
+          }}
+        </p>
       </div>
     </section>
 
-    <!-- Comparaison marché -->
     <section class="benchmark-section">
       <h2 class="section-title">
         <mat-icon>compare_arrows</mat-icon>
-        {{ t('performance.vs_market') }}
-        <mat-icon class="hint-icon" [matTooltip]="t('hints.benchmark')" matTooltipClass="premium-tooltip"
+        {{ 'performance.vs_market' | transloco }}
+        <mat-icon class="hint-icon" [matTooltip]="'hints.benchmark' | transloco" matTooltipClass="premium-tooltip"
           >help_outline</mat-icon
         >
       </h2>
@@ -62,7 +63,7 @@
             <div class="benchmark-bar" [style.width.%]="(perf.gainPercent / 15) * 100"></div>
           </div>
           <div class="benchmark-info">
-            <span class="benchmark-label">{{ t('performance.your_portfolio') }}</span>
+            <span class="benchmark-label">{{ 'performance.your_portfolio' | transloco }}</span>
             <span class="benchmark-value positive">+{{ perf.gainPercent | number: '1.1-1' }}%</span>
           </div>
         </div>
@@ -71,7 +72,7 @@
             <div class="benchmark-bar" [style.width.%]="(marketBenchmark / 15) * 100"></div>
           </div>
           <div class="benchmark-info">
-            <span class="benchmark-label">{{ t('performance.market_avg') }}</span>
+            <span class="benchmark-label">{{ 'performance.market_avg' | transloco }}</span>
             <span class="benchmark-value">+{{ marketBenchmark }}%</span>
           </div>
         </div>
@@ -79,21 +80,20 @@
           @if (perf.gainPercent > marketBenchmark) {
             <mat-icon>emoji_events</mat-icon>
             <span>{{
-              t('performance.beating_market', { diff: perf.gainPercent - marketBenchmark | number: '1.1-1' })
+              'performance.beating_market' | transloco: { diff: perf.gainPercent - marketBenchmark | number: '1.1-1' }
             }}</span>
           } @else {
             <mat-icon>info</mat-icon>
-            <span>{{ t('performance.below_market') }}</span>
+            <span>{{ 'performance.below_market' | transloco }}</span>
           }
         </div>
       </div>
     </section>
 
-    <!-- Top performers -->
     <section class="performers-section">
       <h2 class="section-title">
         <mat-icon>star</mat-icon>
-        {{ t('performance.top_performers') }}
+        {{ 'performance.top_performers' | transloco }}
       </h2>
       <div class="performers-grid">
         @for (category of topPerformers(); track category.type; let i = $index) {
@@ -112,11 +112,10 @@
       </div>
     </section>
 
-    <!-- Détail par catégorie -->
     <section class="categories-section">
       <h2 class="section-title">
         <mat-icon>pie_chart</mat-icon>
-        {{ t('performance.by_category') }}
+        {{ 'performance.by_category' | transloco }}
       </h2>
       <div class="categories-list">
         @for (category of perf.byCategory; track category.type) {
@@ -141,7 +140,7 @@
                   [style.width.%]="getProgressWidth(category.gainPercent)"
                 ></div>
               </div>
-              <span class="category-emoji" [matTooltip]="getPerformanceMessage(category)">
+              <span class="category-emoji" [matTooltip]="getPerformanceMessageKey(category) | transloco">
                 {{ getPerformanceEmoji(category.gainPercent) }}
               </span>
             </div>
@@ -158,15 +157,14 @@
       </div>
     </section>
 
-    <!-- Alertes si pertes -->
     @if (flopPerformers().length > 0) {
       <section class="alerts-section">
         <h2 class="section-title warning">
           <mat-icon>warning</mat-icon>
-          {{ t('performance.watch_list') }}
+          {{ 'performance.watch_list' | transloco }}
         </h2>
         <div class="alert-card">
-          <p>{{ t('performance.loss_explanation') }}</p>
+          <p>{{ 'performance.loss_explanation' | transloco }}</p>
           <ul>
             @for (flop of flopPerformers(); track flop.type) {
               <li>

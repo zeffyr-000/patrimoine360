@@ -1,6 +1,3 @@
-// Icon mappings for patrimoine application
-// Centralized constants for consistent icon usage across components
-
 export const ACTION_STATUS_ICONS: Record<string, string> = {
   completed: 'check_circle',
   in_progress: 'schedule',
@@ -15,5 +12,4 @@ export const ACTION_TYPE_ICONS: Record<string, string> = {
   tax_optimization: 'savings',
 } as const;
 
-// Default icon when status/type is unknown
 export const DEFAULT_ICON = 'help';

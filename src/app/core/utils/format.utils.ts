@@ -1,7 +1,5 @@
-// Formatting utilities for display
 import { PATRIMOINE_CONFIG } from '../constants/patrimoine.constants';
 
-// Format number as currency with premium spacing (€)
 export function formatCurrency(value: number): string {
   const formatted = new Intl.NumberFormat(PATRIMOINE_CONFIG.currency.locale, {
     style: 'currency',
@@ -10,11 +8,10 @@ export function formatCurrency(value: number): string {
     maximumFractionDigits: 0,
   }).format(value);
 
-  // Remplace les espaces fines insécables par des espaces insécables normales pour meilleure lisibilité
+  // Replace thin non-breaking spaces with regular non-breaking spaces for better readability
   return formatted.replace(/\s/g, '\u00A0');
 }
 
-// Format number with French locale (without currency symbol)
 export function formatNumber(value: number): string {
   return new Intl.NumberFormat(PATRIMOINE_CONFIG.currency.locale, {
     minimumFractionDigits: 0,
@@ -22,7 +19,6 @@ export function formatNumber(value: number): string {
   }).format(value);
 }
 
-// Format currency avec style compact pour petits montants
 export function formatCurrencyCompact(value: number): string {
   if (value >= 1000000) {
     return `${(value / 1000000).toFixed(2).replace('.', ',')}M€`;
@@ -33,12 +29,10 @@ export function formatCurrencyCompact(value: number): string {
   return formatCurrency(value);
 }
 
-// Format percentage with specified decimals
 export function formatPercent(value: number, decimals = 2): string {
   return `${value.toFixed(decimals)}%`;
 }
 
-// Format date with French locale
 export function formatDate(date: Date | string): string {
   const dateObj = typeof date === 'string' ? new Date(date) : date;
   return new Intl.DateTimeFormat(PATRIMOINE_CONFIG.date.locale, {

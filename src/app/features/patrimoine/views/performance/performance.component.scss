@@ -8,7 +8,6 @@
   @include padded-page;
 }
 
-// ========== HERO SECTION ==========
 .performance-hero {
   @include navy-header(2rem);
   border-radius: var(--radius-xl);
@@ -63,7 +62,6 @@
   }
 }
 
-// ========== EXPLANATION CARD ==========
 .explanation-card {
   @include flex-start;
   gap: 1rem;
@@ -96,7 +94,6 @@
   }
 }
 
-// ========== BENCHMARK SECTION ==========
 .benchmark-section {
   margin-bottom: 2rem;
 }
@@ -192,7 +189,6 @@
   }
 }
 
-// ========== TOP PERFORMERS ==========
 .performers-section {
   margin-bottom: 2rem;
 }
@@ -281,7 +277,6 @@
   font-weight: var(--font-weight-medium);
 }
 
-// ========== CATEGORIES LIST ==========
 .categories-section {
   margin-bottom: 2rem;
 }
@@ -407,7 +402,6 @@
   }
 }
 
-// ========== ALERTS SECTION ==========
 .alerts-section {
   margin-bottom: 2rem;
 }

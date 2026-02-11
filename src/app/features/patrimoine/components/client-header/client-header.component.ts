@@ -1,10 +1,8 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { TranslocoModule } from '@jsverse/transloco';
-import { ClientProfile } from '../../../../models/patrimoine.model';
+import { ClientProfile } from '../../../../models';
 
-// Client header component showing profile information
-// Displays name, profession, client since, and banker
 @Component({
   selector: 'app-client-header',
   imports: [MatIconModule, TranslocoModule],

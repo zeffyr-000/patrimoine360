@@ -1,58 +1,117 @@
 You are an expert in TypeScript, Angular, and scalable web application development. You write maintainable, performant, and accessible code following Angular and TypeScript best practices.
 
-## TypeScript Best Practices
+## Project Context
 
-- Use strict type checking
-- Prefer type inference when the type is obvious
-- Avoid the `any` type; use `unknown` when type is uncertain
+Angular 21 POC for Private Banking patrimony visualization. French only, desktop only (1280px+), zoneless architecture with signals.
 
-## Angular Best Practices
+## TypeScript
 
-- Always use standalone components over NgModules (default in Angular 21.1, no need to set `standalone: true`)
-- Use signals for state management
-- Implement lazy loading for feature routes
-- Use `NgOptimizedImage` for all static images.
+- Strict type checking; prefer type inference when obvious
+- Avoid `any`; use `unknown` when type is uncertain
+- Simple `//` comments in English, NOT JSDoc `/** */`
+- `console.error()` in error handlers, NOT empty functions
 
-## Components
+## Angular Components
 
-- Keep components small and focused on a single responsibility
-- Use `input()` and `output()` functions instead of decorators
-- Use `computed()` for derived state
-- Set `changeDetection: ChangeDetectionStrategy.OnPush` in `@Component` decorator
-- Prefer inline templates for small components
-- Prefer Reactive forms instead of Template-driven ones
-- Do NOT use `ngClass`, use `class` bindings instead
-- DO NOT use `ngStyle`, use `style` bindings instead
+- Standalone by default (do NOT set `standalone: true`)
+- `input()`, `output()` functions instead of decorators; `computed()` for derived state
+- ALWAYS separate files for templates/styles — never inline
+- `changeDetection: ChangeDetectionStrategy.OnPush`
+- Use `host` in decorator instead of `@HostBinding`/`@HostListener`
+- Use `@if`, `@for`, `@switch` (NOT `*ngIf`, `*ngFor`)
+- Use `class` bindings (NOT `ngClass`), `style` bindings (NOT `ngStyle`)
 
-## State Management
+## Data Loading — httpResource / rxResource
 
-- Use signals for local component state
-- Use computed() for derived values
-- Use effect() sparingly and only for side effects
-- Prefer services with signals for shared state
+This project uses Angular 21's `httpResource` and `rxResource` APIs. There are NO `.subscribe()` calls.
+
+### lazyHttpResource pattern (preferred for data loading)
+
+```typescript
+import { lazyHttpResource } from '../core/lazy-http-resource';
+import { DATA_URLS } from '../core/data-urls';
+
+@Injectable({ providedIn: 'root' })
+export class ExampleService {
+  private readonly _data = lazyHttpResource<DataType>(DATA_URLS.endpoint);
+  readonly dataResource = this._data.resource;
+
+  load(): void { this._data.load(); }
+
+  readonly items = computed(() => this.dataResource.value()?.items ?? []);
+  readonly loading = computed(() => this.dataResource.isLoading());
+}
+```
+
+### rxResource pattern (for complex/parameterized streams)
+
+```typescript
+private readonly _trigger = signal(0);
+readonly resource = rxResource({
+  params: () => {
+    const t = this._trigger();
+    return t === 0 ? undefined : t;  // undefined = idle
+  },
+  stream: () => this.http.get<T>(url).pipe(catchError(...)),
+});
+```
+
+### Error handling in components
+
+```typescript
+constructor() {
+  this.service.load();
+  this.errorHandler.watchResource(this.service.dataResource, 'errors.load_data', this.injector);
+}
+```
 
 ## Services
 
-- Use `inject()` function instead of constructor injection
-- Mark services as `providedIn: 'root'` when they should be singletons
-- Use `readonly` for injected dependencies
+- `providedIn: 'root'` for singletons
+- `inject()` instead of constructor injection
+- Use `lazyHttpResource` factory + `DATA_URLS` for data loading
+- `computed()` for derived state from resource values
 
-## Testing
+## State Management
 
-- Write unit tests with Vitest
-- Use `describe` and `it` blocks
-- Mock external dependencies
-- Test component behavior, not implementation
+- `httpResource` / `rxResource` for server state
+- `signal()` for local component state
+- `computed()` for derived values
+- `effect()` sparingly and only for side effects
+
+## Testing (Vitest 4.0)
+
+- Use Vitest API: `vi.fn()`, `vi.spyOn()`, `vi.useFakeTimers()`
+- httpResource test pattern: `TestBed.tick()` → `req.flush()` → `await appRef.whenStable()`
+- Use `getTranslocoTestingModule()` from `testing/`
+- Assert translation **keys**, NOT translated strings
+- Cleanup: `vi.restoreAllMocks()` in `afterEach()`
+
+## Transloco i18n
+
+French only — translations in `i18n/fr.ts` with MessageFormat.
+
+```html
+<!-- ALWAYS use pipe syntax -->
+<h1>{{ 'home.title' | transloco }}</h1>
+<!-- NEVER use *transloco="let t" directive -->
+```
+
+## Key Files
+
+- `core/lazy-http-resource.ts`: Factory for lazy httpResource with activate/reload
+- `core/data-urls.ts`: Centralized data endpoint URLs
+- `core/resource-error-handler.ts`: Snackbar error handler for resources
+- `core/interceptors/retry.interceptor.ts`: HTTP retry for GET requests
+- `core/interceptors/simulated-delay.interceptor.ts`: Simulated network latency
+- `app.config.ts`: Providers (zoneless, router, HTTP interceptors, Transloco)
+- `app.routes.ts`: Lazy-loaded routes
+- `models/`: TypeScript interfaces (8 domain model files)
+- `public/data/`: Static JSON mock data (8 files)
 
 ## Naming Conventions
 
-- Use PascalCase for classes and interfaces
-- Use camelCase for variables, functions, and methods
-- Use UPPER_SNAKE_CASE for constants
-- Prefix interfaces with descriptive names (not `I`)
-
-## Project Structure
-
-- Group by feature, not by type
-- Keep related files close together
-- Use barrel exports (index.ts) for public APIs
+- PascalCase for classes and interfaces
+- camelCase for variables, functions, methods
+- UPPER_SNAKE_CASE for constants
+- `_privateSignal` pattern for service internal signals

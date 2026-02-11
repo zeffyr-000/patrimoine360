@@ -1,13 +1,12 @@
-<div class="home-container" *transloco="let t">
+<div class="home-container">
   @if (error()) {
     <mat-card class="error-card">
       <mat-card-content>
         <mat-icon>error</mat-icon>
-        <p>{{ error() }}</p>
+        <p>{{ 'errors.generic_load' | transloco }}</p>
       </mat-card-content>
     </mat-card>
   } @else {
-    <!-- En-tête client avec son propre loading -->
     @if (loadingClient()) {
       <div class="header-loading">
         <mat-spinner diameter="32"></mat-spinner>
@@ -16,23 +15,22 @@
       <app-client-header [client]="clientData" />
     }
 
-    <!-- Navigation par onglets avec routing -->
     <nav mat-tab-nav-bar class="content-tabs" [tabPanel]="tabPanel">
       <a mat-tab-link routerLink="/overview" routerLinkActive #rla1="routerLinkActive" [active]="rla1.isActive">
         <mat-icon class="tab-icon">dashboard</mat-icon>
-        {{ t('home.tab_overview') }}
+        {{ 'home.tab_overview' | transloco }}
       </a>
       <a mat-tab-link routerLink="/performance" routerLinkActive #rla2="routerLinkActive" [active]="rla2.isActive">
         <mat-icon class="tab-icon">show_chart</mat-icon>
-        {{ t('home.tab_performance') }}
+        {{ 'home.tab_performance' | transloco }}
       </a>
       <a mat-tab-link routerLink="/assets" routerLinkActive #rla3="routerLinkActive" [active]="rla3.isActive">
         <mat-icon class="tab-icon">folder_open</mat-icon>
-        {{ t('home.tab_assets') }}
+        {{ 'home.tab_assets' | transloco }}
       </a>
       <a mat-tab-link routerLink="/actions" routerLinkActive #rla4="routerLinkActive" [active]="rla4.isActive">
         <mat-icon class="tab-icon">history</mat-icon>
-        {{ t('home.tab_actions') }}
+        {{ 'home.tab_actions' | transloco }}
       </a>
     </nav>
     <mat-tab-nav-panel #tabPanel>

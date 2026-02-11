@@ -3,59 +3,63 @@
     <mat-spinner diameter="40"></mat-spinner>
   </div>
 } @else {
-  <div class="assets-page" *transloco="let t">
-    <!-- Header avec synthèse -->
+  <div class="assets-page">
     <header class="assets-header">
       <div class="header-content">
         <div class="header-icon">
           <mat-icon>account_balance_wallet</mat-icon>
         </div>
         <div class="header-text">
-          <h1>{{ t('assets.title') }}</h1>
-          <p class="header-subtitle">{{ t('assets.subtitle') }}</p>
+          <h1>{{ 'assets.title' | transloco }}</h1>
+          <p class="header-subtitle">{{ 'assets.subtitle' | transloco }}</p>
         </div>
       </div>
       <div class="header-summary">
         <div class="summary-stat">
           <span class="summary-value">{{ assets().length }}</span>
-          <span class="summary-label">{{ t('assets.total_assets') }}</span>
+          <span class="summary-label">{{ 'assets.total_assets' | transloco }}</span>
         </div>
         <div class="summary-divider"></div>
         <div class="summary-stat highlight">
           <span class="summary-value">{{ formatCurrency(totalValue()) }}</span>
-          <span class="summary-label">{{ t('assets.total_value') }}</span>
+          <span class="summary-label">{{ 'assets.total_value' | transloco }}</span>
         </div>
         <div class="summary-divider"></div>
         <div class="summary-stat" [class.positive]="totalGain() >= 0" [class.negative]="totalGain() < 0">
           <span class="summary-value">{{ totalGain() >= 0 ? '+' : '' }}{{ formatCurrency(totalGain()) }}</span>
-          <span class="summary-label">{{ t('assets.latent_gains') }}</span>
+          <span class="summary-label">{{ 'assets.latent_gains' | transloco }}</span>
         </div>
       </div>
     </header>
 
-    <!-- Table des actifs style rapport -->
     <section class="assets-table-section">
       <table class="assets-table">
         <thead>
           <tr>
-            <th class="col-asset">{{ t('assets.col_asset') }}</th>
-            <th class="col-category">{{ t('assets.col_category') }}</th>
+            <th class="col-asset">{{ 'assets.col_asset' | transloco }}</th>
+            <th class="col-category">{{ 'assets.col_category' | transloco }}</th>
             <th class="col-acquisition">
-              {{ t('assets.col_acquisition') }}
-              <mat-icon class="hint-icon" [matTooltip]="t('hints.acquisition_cost')" matTooltipClass="premium-tooltip"
+              {{ 'assets.col_acquisition' | transloco }}
+              <mat-icon
+                class="hint-icon"
+                [matTooltip]="'hints.acquisition_cost' | transloco"
+                matTooltipClass="premium-tooltip"
                 >help_outline</mat-icon
               >
             </th>
-            <th class="col-value">{{ t('assets.col_current_value') }}</th>
+            <th class="col-value">{{ 'assets.col_current_value' | transloco }}</th>
             <th class="col-gain">
-              {{ t('assets.col_performance') }}
-              <mat-icon class="hint-icon" [matTooltip]="t('hints.latent_gain')" matTooltipClass="premium-tooltip"
+              {{ 'assets.col_performance' | transloco }}
+              <mat-icon
+                class="hint-icon"
+                [matTooltip]="'hints.latent_gain' | transloco"
+                matTooltipClass="premium-tooltip"
                 >help_outline</mat-icon
               >
             </th>
             <th class="col-weight">
-              {{ t('assets.col_weight') }}
-              <mat-icon class="hint-icon" [matTooltip]="t('hints.weight')" matTooltipClass="premium-tooltip"
+              {{ 'assets.col_weight' | transloco }}
+              <mat-icon class="hint-icon" [matTooltip]="'hints.weight' | transloco" matTooltipClass="premium-tooltip"
                 >help_outline</mat-icon
               >
             </th>
@@ -64,7 +68,6 @@
         <tbody>
           @for (asset of assets(); track asset.id) {
             <tr class="asset-row">
-              <!-- Actif -->
               <td class="col-asset">
                 <div class="asset-info">
                   <div class="asset-icon" [style.background-color]="getAssetCategory(asset.type).color">
@@ -83,7 +86,6 @@
                 </div>
               </td>
 
-              <!-- Catégorie -->
               <td class="col-category">
                 <span class="category-badge" [style.border-color]="getAssetCategory(asset.type).color">
                   {{ getAssetCategory(asset.type).label }}
@@ -98,12 +100,10 @@
                 </div>
               </td>
 
-              <!-- Valeur actuelle -->
               <td class="col-value">
                 <span class="current-value">{{ formatCurrency(asset.value) }}</span>
               </td>
 
-              <!-- Performance -->
               <td class="col-gain">
                 @if (asset.acquisitionCost && asset.acquisitionCost !== asset.value) {
                   <div
@@ -125,7 +125,6 @@
                 }
               </td>
 
-              <!-- Poids -->
               <td class="col-weight">
                 <div class="weight-info">
                   <span class="weight-percent">{{ (asset.value / totalValue()) * 100 | number: '1.1-1' }}%</span>
@@ -144,7 +143,7 @@
         <tfoot>
           <tr class="totals-row">
             <td class="col-asset">
-              <strong>{{ t('assets.total') }}</strong>
+              <strong>{{ 'assets.total' | transloco }}</strong>
             </td>
             <td class="col-category"></td>
             <td class="col-acquisition">
@@ -169,11 +168,10 @@
       </table>
     </section>
 
-    <!-- Note de bas de page -->
     <footer class="assets-footer">
       <p>
         <mat-icon>info</mat-icon>
-        {{ t('assets.footer_note', { date: formattedValuationDate() }) }}
+        {{ 'assets.footer_note' | transloco: { date: formattedValuationDate() } }}
       </p>
     </footer>
   </div>
